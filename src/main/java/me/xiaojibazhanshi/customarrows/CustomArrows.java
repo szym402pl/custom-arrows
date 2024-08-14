@@ -20,7 +20,8 @@ public final class CustomArrows extends JavaPlugin {
         that GUI will have incremental elements to let you choose
         how many arrows you want to grab for further usage                   */
 
-    @Getter private static CustomArrows instance;
+    @Getter
+    private static CustomArrows instance;
 
     @Override
     public void onEnable() {

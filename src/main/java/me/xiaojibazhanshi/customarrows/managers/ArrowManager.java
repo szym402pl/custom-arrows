@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ArrowManager {
-    @Getter private final Map<NamespacedKey, CustomArrow> customArrows = new HashMap<>();
+    @Getter
+    private final Map<NamespacedKey, CustomArrow> customArrows = new HashMap<>();
 
     public ArrowManager() {
         registerCustomArrow("ender_arrow", new EnderArrow());
@@ -48,15 +49,6 @@ public class ArrowManager {
             if (dataContainer.has(key)) {
                 return customArrows.get(key);
             }
-        }
-
-        return null;
-    }
-
-    public CustomArrow getCustomArrow(ItemStack item) {
-        for (CustomArrow arrow : customArrows.values()) {
-            if (arrow.getArrowItem().isSimilar(item))
-                return arrow;
         }
 
         return null;

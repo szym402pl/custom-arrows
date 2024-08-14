@@ -61,7 +61,7 @@ public class GuiHelper {
 
     protected List<GuiItem> getArrowsAsGuiItems(List<ItemStack> arrowList, Player player) {
         return arrowList.stream()
-                .map(item -> ItemBuilder.from(item).asGuiItem(event ->  {
+                .map(item -> ItemBuilder.from(item).asGuiItem(event -> {
                     event.setCancelled(true);
                     ArrowAmountGui.openGui(player, item, 1); // default arrow amount
                 }))
@@ -72,7 +72,7 @@ public class GuiHelper {
         boolean isAmountNegative = amountToAdd < 0;
 
         ItemStack amountSetter = new ItemStack
-                (isAmountNegative ? Material.RED_STAINED_GLASS_PANE : Material.GREEN_STAINED_GLASS_PANE);
+                (isAmountNegative ? Material.RED_WOOL : Material.GREEN_WOOL, amountToAdd);
 
         int targetAmount = Math.max(1, Math.min(64, currentAmount + amountToAdd));
         String displayName = Util.color((isAmountNegative ? "&c&l-" : "&a&l-") + amountToAdd);
@@ -124,5 +124,13 @@ public class GuiHelper {
             player.sendMessage(Util.color("&7&oInventory full, dropping the item(s)..."));
         }
     }
+
+    protected static List<String> getArrowInfo(int arrowAmount) {
+        return List.of("",
+                Util.color("&aClick me to get this arrow!"),
+                Util.color("&aCurrently selected amount: &b&l" + arrowAmount));
+    }
+
+
 
 }

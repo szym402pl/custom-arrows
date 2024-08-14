@@ -8,6 +8,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArrowAmountGui extends GuiHelper {
@@ -21,11 +22,18 @@ public class ArrowAmountGui extends GuiHelper {
                 .rows(3)
                 .create();
 
-        ItemStack nLDesiredArrow = Util.setLore(desiredArrow, List.of("",
-                                Util.color("&aClick me to get this arrow!"),
-                                Util.color("&aSelected amount: &b" + arrowAmount)));
+        List<String> newLore = new ArrayList<>();
 
-        for (int i = 0; i < setterSlotsInOrder.length -1; i++) {
+        try {
+            newLore = new ArrayList<>(List.copyOf(desiredArrow.getItemMeta().getLore()));
+        } catch (NullPointerException ignored) {}
+
+        newLore.addAll(getArrowInfo(arrowAmount));
+
+        desiredArrow.setAmount(arrowAmount);
+        ItemStack nLDesiredArrow = Util.setLore(desiredArrow, newLore);
+
+        for (int i = 0; i < setterSlotsInOrder.length; i++) {
             gui.setItem(2,
                     setterSlotsInOrder[i],
                     getAmountSetterButton(setterAmountsInOrder[i], arrowAmount, desiredArrow, player));

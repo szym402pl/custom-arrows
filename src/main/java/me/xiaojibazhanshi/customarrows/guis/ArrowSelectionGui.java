@@ -26,13 +26,14 @@ public class ArrowSelectionGui extends GuiHelper {
                 .rows(4)
                 .create();
 
-        gui.setItem(1, CLOSE_BUTTON_SLOT, getGuiCloseButton());
+        gui.setItem(4, CLOSE_BUTTON_SLOT, getGuiCloseButton());
 
         for (int slot : BOTTOM_FRAME_SLOTS) {
             gui.setItem(4, slot, getASGFrameFiller());
         }
 
-        List<GuiItem> arrowList = getArrowsAsGuiItems(arrowManager.getItemStacks(), player);
+        List<GuiItem> arrowList = getArrowsAsGuiItems
+                (Util.sortAlphabeticallyByNames(arrowManager.getItemStacks()), player);
 
         for (GuiItem arrow : arrowList) {
             gui.addItem(arrow);
