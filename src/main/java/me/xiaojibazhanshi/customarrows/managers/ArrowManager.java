@@ -9,7 +9,9 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ArrowManager {
@@ -21,6 +23,16 @@ public class ArrowManager {
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
         customArrows.put(Util.createStringNSKey(id), customArrow);
+    }
+
+    public List<ItemStack> getItemStacks() {
+        List<ItemStack> items = new ArrayList<>();
+
+        for (CustomArrow customArrow : customArrows.values()) {
+            items.add(customArrow.getArrowItem());
+        }
+
+        return items;
     }
 
     public CustomArrow getCustomArrow(Arrow arrow) {

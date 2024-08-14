@@ -20,6 +20,7 @@ public class ArrowHitGroundListener implements Listener {
     public void onArrowHitGround(ProjectileHitEvent event) {
         if (!(event.getEntity() instanceof Arrow arrow)) return;
         if (!(arrow.getShooter() instanceof Player player)) return;
+        if (event.getHitEntity() != null) return;
 
         CustomArrow customArrow = arrowManager.getCustomArrow(arrow);
         if (customArrow == null) return;

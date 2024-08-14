@@ -1,7 +1,10 @@
 package me.xiaojibazhanshi.customarrows.arrows;
 
+import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
+import me.xiaojibazhanshi.customarrows.util.Util;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -15,7 +18,7 @@ public class EnderArrow extends CustomArrow {
     public EnderArrow() {
         super(ArrowFactory.changeTippedEffect
                 (ArrowFactory.createArrowItemStack(Material.TIPPED_ARROW, "&0Ender arrow", "ender_arrow"),
-                        PotionType.SLOWNESS));
+                        PotionType.WEAKNESS));
     }
 
     @Override
@@ -25,8 +28,12 @@ public class EnderArrow extends CustomArrow {
 
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
-        ((LivingEntity) event.getEntity()).removePotionEffect(PotionEffectType.SLOWNESS);
+        // Doesn't work if I do it instantly
+        Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
+            ((LivingEntity) event.getEntity()).removePotionEffect(PotionEffectType.WEAKNESS);
+        } , 10);
 
-        shooter.teleport(event.getDamager().getLocation());
+        shooter.sendMessage(Util.color("&7Whoosh...!"));
+        shooter.teleport(event.getDamager().getLocation().setDirection(shooter.getLocation().getDirection()));
     }
 }
