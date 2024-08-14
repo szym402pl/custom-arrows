@@ -1,0 +1,6 @@
+name: CustomArrows
+version: '1'
+main: me.xiaojibazhanshi.customarrows.CustomArrows
+api-version: '1.21'
+authors: [ XiaoJibaZhanshi ]
+description: A custom arrow plugin
