@@ -9,25 +9,35 @@ import org.bukkit.util.Vector;
 
 public class HomingArrowRunnable extends BukkitRunnable {
 
-    private final int MAX_DEGREES = 60;
-
+    private Vector initialSpeed;
     private LivingEntity target;
     private Entity homingEntity;
 
     @Override
     public void run() {
-        if (target.isDead()) return;
-        if (target == null) return;
+        if ((homingEntity == null || homingEntity.isDead()) || (target == null || target.isDead())) {
+            cancel();
+            return;
+        }
+
+        int MAX_DEGREES = 60;
         if (!ArrowSpecificUtil.isTargetWithinDegrees(homingEntity, target, MAX_DEGREES)) return;
 
+        int MAX_DISTANCE = 100;
+        if (ArrowSpecificUtil.isDistanceGreaterThan(homingEntity, target, MAX_DISTANCE)) return;
 
+        Vector directionToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(homingEntity, target);
+        Vector finalVelocity =  directionToTarget.multiply(initialSpeed.length());
+
+        homingEntity.setVelocity(finalVelocity);
     }
 
     public void start(Entity homingEntity, LivingEntity target, Vector initialSpeed) {
+        this.initialSpeed = initialSpeed;
         this.homingEntity = homingEntity;
         this.target = target;
 
-        runTaskTimer(CustomArrows.getInstance(), 10, 5);
+        runTaskTimer(CustomArrows.getInstance(), 4, 6);
     }
 
     public void stop() {

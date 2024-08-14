@@ -16,7 +16,8 @@ public class ArrowSpecificUtil {
         Vector direction = eyeLocation.getDirection();
 
         RayTraceResult target = player.getWorld().rayTraceEntities
-                (eyeLocation, direction, maxDistance, entity -> entity instanceof LivingEntity && entity != player);
+                        (eyeLocation, direction, maxDistance,
+                        entity -> (entity instanceof LivingEntity && entity != player));
 
         if (target != null) {
             return (LivingEntity) target.getHitEntity();
@@ -25,9 +26,9 @@ public class ArrowSpecificUtil {
         return null;
     }
 
-    public static boolean isTargetWithinDegrees(Entity homingEntity, LivingEntity target, int maxDegrees) {
-        Vector homingDirection = homingEntity.getLocation().getDirection();
-        Vector toTarget = target.getLocation().toVector().subtract(homingEntity.getLocation().toVector());
+    public static boolean isTargetWithinDegrees(Entity entity, LivingEntity target, int maxDegrees) {
+        Vector homingDirection = entity.getVelocity().normalize();
+        Vector toTarget = target.getLocation().toVector().subtract(entity.getLocation().toVector());
 
         double angle = homingDirection.angle(toTarget);
         double angleDegrees = Math.toDegrees(angle);
@@ -35,7 +36,23 @@ public class ArrowSpecificUtil {
         return angleDegrees <= maxDegrees;
     }
 
-    
+    public static Vector getDirectionFromEntityToTarget(Entity entity, LivingEntity target) {
+        Vector entityLocation = entity.getLocation().toVector();
+        Vector targetLocation = target.getEyeLocation().toVector();
+
+        Vector direction = targetLocation.subtract(entityLocation);
+
+        return direction.normalize();
+    }
+
+    public static boolean isDistanceGreaterThan(Entity entity1, Entity entity2, double distance) {
+        Vector location1 = entity1.getLocation().toVector();
+        Vector location2 = entity2.getLocation().toVector();
+
+        double squaredDistance = location1.distanceSquared(location2);
+
+        return squaredDistance > distance * distance;
+    }
 
     /* OTHER ARROW */
 
