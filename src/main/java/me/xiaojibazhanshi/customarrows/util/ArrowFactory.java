@@ -1,6 +1,7 @@
 package me.xiaojibazhanshi.customarrows.util;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -10,7 +11,6 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionType;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class ArrowFactory {
@@ -40,6 +40,18 @@ public class ArrowFactory {
         assert arrowMeta != null;
 
         arrowMeta.setBasePotionType(effect);
+        arrow.setItemMeta(arrowMeta);
+
+        return arrow;
+    }
+
+    public static ItemStack changeTippedColor(ItemStack arrow, Color color) {
+        if (arrow.getType() != Material.TIPPED_ARROW) return arrow;
+
+        PotionMeta arrowMeta = (PotionMeta) arrow.getItemMeta();
+        assert arrowMeta != null;
+
+        arrowMeta.setColor(color);
         arrow.setItemMeta(arrowMeta);
 
         return arrow;

@@ -26,7 +26,7 @@ public class ArrowSelectionGui extends GuiHelper {
                 .rows(4)
                 .create();
 
-        gui.setItem(4, CLOSE_BUTTON_SLOT, getGuiCloseButton());
+        gui.setItem(4, CLOSE_BUTTON_SLOT, getGuiCloseButton(player));
 
         for (int slot : BOTTOM_FRAME_SLOTS) {
             gui.setItem(4, slot, getASGFrameFiller());

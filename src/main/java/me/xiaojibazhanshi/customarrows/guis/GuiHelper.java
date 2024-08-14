@@ -44,7 +44,7 @@ public class GuiHelper {
         return ItemBuilder.from(filler).asGuiItem(event -> event.setCancelled(true));
     }
 
-    protected GuiItem getGuiCloseButton() {
+    protected GuiItem getGuiCloseButton(Player player) {
         ItemStack closeButton = new ItemStack(Material.NETHER_STAR);
         ItemMeta closeButtonMeta = closeButton.getItemMeta();
         assert closeButtonMeta != null;
@@ -54,7 +54,10 @@ public class GuiHelper {
 
         closeButton.setItemMeta(closeButtonMeta);
 
-        return ItemBuilder.from(closeButton).asGuiItem(event -> event.setCancelled(true));
+        return ItemBuilder.from(closeButton).asGuiItem(event -> {
+            event.setCancelled(true);
+            player.closeInventory();
+        });
     }
 
     /* Arrow Amount Gui */
@@ -72,10 +75,10 @@ public class GuiHelper {
         boolean isAmountNegative = amountToAdd < 0;
 
         ItemStack amountSetter = new ItemStack
-                (isAmountNegative ? Material.RED_WOOL : Material.GREEN_WOOL, amountToAdd);
+                (isAmountNegative ? Material.RED_WOOL : Material.GREEN_WOOL, Math.abs(amountToAdd));
 
         int targetAmount = Math.max(1, Math.min(64, currentAmount + amountToAdd));
-        String displayName = Util.color((isAmountNegative ? "&c&l-" : "&a&l-") + amountToAdd);
+        String displayName = Util.color((isAmountNegative ? "&c&l-" : "&a&l+") + Math.abs(amountToAdd));
 
         ItemMeta aSMeta = amountSetter.getItemMeta();
         assert aSMeta != null;
@@ -117,7 +120,7 @@ public class GuiHelper {
         player.sendMessage(Util.color
                 ("&aYou've received " + arrowDisplayName + " &ax&b" + arrow.getAmount() + "&a!"));
 
-        if (Util.isInventoryFull(playerInventory)) {
+        if (!Util.isInventoryFull(playerInventory)) {
             playerInventory.addItem(arrow);
         } else {
             player.getWorld().dropItem(player.getLocation(), arrow);
@@ -130,7 +133,6 @@ public class GuiHelper {
                 Util.color("&aClick me to get this arrow!"),
                 Util.color("&aCurrently selected amount: &b&l" + arrowAmount));
     }
-
 
 
 }

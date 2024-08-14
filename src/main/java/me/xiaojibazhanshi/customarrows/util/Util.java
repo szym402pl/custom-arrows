@@ -8,7 +8,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -26,16 +25,17 @@ public class Util {
         return inventory.firstEmpty() == -1;
     }
 
-    public static ItemStack setLore(ItemStack item, List<String> lore) {
+    public static ItemStack getItemCopyWithNewLore(ItemStack item, List<String> lore) {
         if (!item.hasItemMeta()) return item;
 
-        ItemMeta meta = item.getItemMeta();
+        ItemStack copy = item.clone();
+        ItemMeta meta = copy.getItemMeta();
+
         assert meta != null;
-
         meta.setLore(lore);
-        item.setItemMeta(meta);
+        copy.setItemMeta(meta);
 
-        return item;
+        return copy;
     }
 
     public static List<ItemStack> sortAlphabeticallyByNames(List<ItemStack> unsortedList) {
@@ -48,5 +48,13 @@ public class Util {
         }));
 
         return sortedList;
+    }
+
+    public static List<String> extractLore(ItemStack item) {
+        try {
+            return new ArrayList<>(List.copyOf(item.getItemMeta().getLore()));
+        } catch (NullPointerException ignored) {
+            return new ArrayList<>();
+        }
     }
 }
