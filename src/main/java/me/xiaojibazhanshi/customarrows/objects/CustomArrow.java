@@ -1,7 +1,6 @@
 package me.xiaojibazhanshi.customarrows.objects;
 
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -25,17 +24,12 @@ public class CustomArrow {
     // event listeners themselves will take care of
     // checking if it was the custom arrow that was shot
 
-    public void onHitGround(ProjectileHitEvent event) {
-        try {
-            ((Player) event.getEntity().getShooter()).sendMessage(ChatColor.GREEN + "You missed, haha!");
-        } catch(NullPointerException npe) { }
+    public void onHitGround(ProjectileHitEvent event, Player shooter) {
+        shooter.sendMessage(ChatColor.GREEN + "You missed, haha!");
     }
 
-    public void onHitEntity(EntityDamageByEntityEvent event) {
-        try {
-            ((Player) ((Arrow) event.getDamager()).getShooter()).sendMessage(ChatColor.GREEN + "Nice aim!");
-        } catch(NullPointerException npe) { }
-
+    public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
+        shooter.sendMessage(ChatColor.GREEN + "Nice aim!");
     }
 
 }
