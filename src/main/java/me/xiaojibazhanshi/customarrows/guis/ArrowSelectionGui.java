@@ -3,7 +3,7 @@ package me.xiaojibazhanshi.customarrows.guis;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import me.xiaojibazhanshi.customarrows.managers.ArrowManager;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 
@@ -22,7 +22,7 @@ public class ArrowSelectionGui extends GuiHelper {
 
     public void openGui(Player player) {
         Gui gui = Gui.gui()
-                .title(Component.text(Util.color("&aChoose a custom arrow")))
+                .title(Component.text(GeneralUtil.color("&aChoose a custom arrow")))
                 .rows(4)
                 .create();
 
@@ -33,7 +33,7 @@ public class ArrowSelectionGui extends GuiHelper {
         }
 
         List<GuiItem> arrowList = getArrowsAsGuiItems
-                (Util.sortAlphabeticallyByNames(arrowManager.getItemStacks()), player);
+                (GeneralUtil.sortAlphabeticallyByNames(arrowManager.getItemStacks()), player);
 
         for (GuiItem arrow : arrowList) {
             gui.addItem(arrow);

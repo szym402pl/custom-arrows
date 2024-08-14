@@ -2,7 +2,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -37,7 +37,7 @@ public class EnderArrow extends CustomArrow {
     }
 
     private void handleTeleport(Player player, Location location) {
-        player.sendMessage(Util.color("&7Whoosh...!"));
+        player.sendMessage(GeneralUtil.color("&7Whoosh...!"));
         player.teleport(location.setDirection(player.getLocation().getDirection()));
     }
 }

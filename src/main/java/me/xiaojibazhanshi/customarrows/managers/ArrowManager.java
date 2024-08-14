@@ -2,8 +2,9 @@ package me.xiaojibazhanshi.customarrows.managers;
 
 import lombok.Getter;
 import me.xiaojibazhanshi.customarrows.arrows.EnderArrow;
+import me.xiaojibazhanshi.customarrows.arrows.HomingArrow;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Arrow;
 import org.bukkit.inventory.ItemStack;
@@ -20,10 +21,11 @@ public class ArrowManager {
 
     public ArrowManager() {
         registerCustomArrow("ender_arrow", new EnderArrow());
+        registerCustomArrow("homing_arrow", new HomingArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
-        customArrows.put(Util.createStringNSKey(id), customArrow);
+        customArrows.put(GeneralUtil.createStringNSKey(id), customArrow);
     }
 
     public List<ItemStack> getItemStacks() {
