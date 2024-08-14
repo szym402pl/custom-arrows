@@ -2,6 +2,7 @@ package me.xiaojibazhanshi.customarrows.util;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.RayTraceResult;
@@ -39,6 +40,9 @@ public class ArrowSpecificUtil {
     public static Vector getDirectionFromEntityToTarget(Entity entity, LivingEntity target) {
         Vector entityLocation = entity.getLocation().toVector();
         Vector targetLocation = target.getEyeLocation().toVector();
+
+        if (target.getType() == EntityType.ENDER_DRAGON)
+            targetLocation.add(new Vector(0, -2, 0));
 
         Vector direction = targetLocation.subtract(entityLocation);
 

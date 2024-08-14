@@ -20,7 +20,7 @@ public class HomingArrowRunnable extends BukkitRunnable {
             return;
         }
 
-        int MAX_DEGREES = 60;
+        int MAX_DEGREES = 90;
         if (!ArrowSpecificUtil.isTargetWithinDegrees(homingEntity, target, MAX_DEGREES)) return;
 
         int MAX_DISTANCE = 100;
@@ -37,7 +37,7 @@ public class HomingArrowRunnable extends BukkitRunnable {
         this.homingEntity = homingEntity;
         this.target = target;
 
-        runTaskTimer(CustomArrows.getInstance(), 4, 6);
+        runTaskTimer(CustomArrows.getInstance(), 2, 3);
     }
 
     public void stop() {
