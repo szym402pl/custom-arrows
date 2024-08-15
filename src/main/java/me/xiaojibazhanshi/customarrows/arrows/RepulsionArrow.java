@@ -4,6 +4,7 @@ import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -34,7 +35,7 @@ public class RepulsionArrow extends CustomArrow {
     }
 
     private void handleArrowHit(Location arrowLocation) {
-        ArrowSpecificUtil.detonateRepulsionFirework(arrowLocation);
+        ArrowSpecificUtil.detonateFirework(arrowLocation, FireworkEffect.Type.BALL_LARGE, Color.AQUA);
         ArrowSpecificUtil.repelEntitiesNearby(arrowLocation);
     }
 }

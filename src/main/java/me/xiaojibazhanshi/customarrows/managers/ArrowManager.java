@@ -8,7 +8,6 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Arrow;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +31,7 @@ public class ArrowManager {
         registerCustomArrow("aim_assist_arrow", new AimAssistArrow());
         registerCustomArrow("seeker_arrow", new SeekerArrow());
         registerCustomArrow("necromancer_arrow", new NecromancerArrow());
+        registerCustomArrow("flashbang_arrow", new FlashbangArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

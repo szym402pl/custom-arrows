@@ -4,11 +4,18 @@ import me.xiaojibazhanshi.customarrows.CustomArrows;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
+import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -190,7 +197,7 @@ public class ArrowSpecificUtil {
         vector.setZ(z);
     }
 
-    public static void detonateRepulsionFirework(Location location) {
+    public static void detonateFirework(Location location, FireworkEffect.Type type, Color color) {
         World world = location.getWorld();
         if (world == null) return;
 
@@ -198,8 +205,8 @@ public class ArrowSpecificUtil {
         FireworkMeta meta = firework.getFireworkMeta();
 
         FireworkEffect effect = FireworkEffect.builder()
-                .withColor(Color.AQUA)
-                .with(FireworkEffect.Type.BALL_LARGE)
+                .withColor(color)
+                .with(type)
                 .build();
 
         meta.addEffect(effect);
@@ -278,5 +285,69 @@ public class ArrowSpecificUtil {
 
         zombieVillager.setVillagerProfession(villager.getProfession());
         if (villager.isAdult()) zombieVillager.setAdult();
+    }
+
+
+    /* Flashbang Arrow */
+
+
+    public static void applyFlashbangEffect(Entity entity) {
+        if (!(entity instanceof LivingEntity livingEntity)) return;
+
+        Random randomInstance = new Random();
+        int flashbangDuration = (randomInstance.nextInt(4, 9) + 1) * 20;
+
+        ArrayList<PotionEffect> flashbangEffects = new ArrayList<>(List.of
+                (new PotionEffect(PotionEffectType.NAUSEA, flashbangDuration, 2, true),
+                 new PotionEffect(PotionEffectType.SLOWNESS, flashbangDuration, 2, true),
+                 new PotionEffect(PotionEffectType.BLINDNESS, flashbangDuration, 2, true)));
+
+        for (PotionEffect effect : flashbangEffects) {
+            livingEntity.addPotionEffect(effect);
+        }
+    }
+
+    public static List<Entity> getEntitiesLookingAt(Entity targetEntity, int maxRadius) {
+        return targetEntity.getNearbyEntities(maxRadius, maxRadius, maxRadius)
+                .stream()
+                .filter(entity -> entity instanceof LivingEntity)
+                .filter(livingEntity -> ((LivingEntity) livingEntity).hasLineOfSight(targetEntity))
+                .filter(livingEntity -> isLookingAt((LivingEntity) livingEntity, targetEntity.getLocation()))
+                .toList();
+    }
+
+    public static Entity spawnDisplayItem(Material material, Location location, @Nullable String displayName) {
+        if (material == null || location == null) return null;
+
+        World world = location.getWorld();
+        if (world == null) return null;
+
+        ItemStack item = new ItemStack(material);
+        ItemDisplay itemDisplay = location.getWorld().spawn(location, ItemDisplay.class);
+
+        itemDisplay.setItemStack(item);
+        itemDisplay.setInvulnerable(true);
+
+        if (displayName != null) {
+            itemDisplay.setCustomName(GeneralUtil.color(displayName));
+            itemDisplay.setCustomNameVisible(true);
+        }
+
+        return itemDisplay;
+    }
+
+    public static boolean isLookingAt(LivingEntity checkedEntity, Location targetLocation) {
+        if (checkedEntity == null || targetLocation == null) return false;
+
+        Location eyeLocation = checkedEntity.getEyeLocation();
+
+        Vector directionToLocation = targetLocation.toVector().subtract(eyeLocation.toVector()).normalize();
+        Vector entityDirection = eyeLocation.getDirection().normalize();
+
+        double angle = entityDirection.angle(directionToLocation);
+        double angleDegrees = Math.toDegrees(angle);
+        double maxAngle = 85.0;
+
+        return angleDegrees <= maxAngle;
     }
 }
