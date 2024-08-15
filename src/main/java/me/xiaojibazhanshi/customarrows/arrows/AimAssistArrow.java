@@ -20,8 +20,6 @@ import java.util.List;
 
 public class AimAssistArrow extends CustomArrow {
 
-    private HomingArrowRunnable homingArrowRunnable;
-
     public AimAssistArrow() {
         super(ArrowFactory.changeTippedColor // Or you can use #changeTippedEffect if you need the effect
                 (ArrowFactory.createArrowItemStack(
