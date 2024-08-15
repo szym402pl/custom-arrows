@@ -31,6 +31,7 @@ public class ArrowManager {
         registerCustomArrow("chained_arrow", new ChainedArrow());
         registerCustomArrow("aim_assist_arrow", new AimAssistArrow());
         registerCustomArrow("seeker_arrow", new SeekerArrow());
+        registerCustomArrow("necromancer_arrow", new NecromancerArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

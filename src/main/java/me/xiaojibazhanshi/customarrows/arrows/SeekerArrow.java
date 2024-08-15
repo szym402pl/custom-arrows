@@ -22,7 +22,7 @@ public class SeekerArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&9Seeker Arrow", "seeker_arrow",
                                 List.of("", "This arrow, whilst flying,", "will seek for targets below",
-                                      "", "Note: It won't work on targets, that", "are too close to the flying path!")),
+                             "", "Note: It doesn't work on targets that", "are too close to the arrow's flying path!")),
                         Color.NAVY));
     }
 
@@ -38,7 +38,7 @@ public class SeekerArrow extends CustomArrow {
         Entity arrow = event.getDamager();
 
         arrow.remove();
-        arrow.getWorld().createExplosion(arrow.getLocation(), 2.0F);
+        arrow.getWorld().createExplosion(arrow.getLocation(), 2.0F, false, true);
     }
 
     @Override

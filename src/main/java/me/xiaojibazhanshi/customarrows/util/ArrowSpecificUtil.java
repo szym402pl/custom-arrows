@@ -9,6 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
+import java.util.List;
 import java.util.Random;
 
 public class ArrowSpecificUtil {
@@ -252,5 +253,30 @@ public class ArrowSpecificUtil {
                 .filter(entityNearby -> entityNearby instanceof LivingEntity)
                 .findFirst()
                 .orElse(null);
+    }
+
+
+    /* Necromancer Arrow */
+
+
+    public static void spawnOneOfSelected(List<EntityType> selectedEntities, Location location) {
+        if (location.getWorld() == null) return;
+
+        Random randomInstance = new Random();
+        int random = randomInstance.nextInt(selectedEntities.size());
+
+        location.getWorld().spawnEntity(location, selectedEntities.get(random));
+    }
+
+    public static void convertToUndead(Villager villager) {
+        Location location = villager.getLocation();
+        World world = villager.getWorld();
+
+        villager.remove();
+
+        ZombieVillager zombieVillager = (ZombieVillager) world.spawnEntity(location, EntityType.ZOMBIE_VILLAGER);
+
+        zombieVillager.setVillagerProfession(villager.getProfession());
+        if (villager.isAdult()) zombieVillager.setAdult();
     }
 }

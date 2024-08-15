@@ -2,9 +2,7 @@ package me.xiaojibazhanshi.customarrows.runnables;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -21,17 +19,16 @@ public class SeekerArrowRunnable extends BukkitRunnable {
             return;
         }
 
-        LivingEntity target = ArrowSpecificUtil.findFirstEntityBelow(projectile, 4, 50);
+        LivingEntity target = ArrowSpecificUtil.findFirstEntityBelow(projectile, 4, 100);
         if (target == null || !target.hasLineOfSight(projectile) || target.equals(shooter)) return;
-        if (!(ArrowSpecificUtil.isDistanceGreaterThan(projectile, target, 20.0))) return;
+        if (!(ArrowSpecificUtil.isDistanceGreaterThan(projectile, target, 12.5))) return;
+        if (target.getType() == EntityType.ENDERMAN || target instanceof Fish) return;
 
         Vector directionToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(projectile, target);
         Vector finalVelocity =  directionToTarget.multiply(initialSpeed.length());
 
-        projectile.setVelocity(finalVelocity.multiply(0.55));
-
+        projectile.setVelocity(finalVelocity.multiply(0.75));
         projectile.setGlowing(true);
-        target.setGlowing(true);
 
         cancel();
     }
