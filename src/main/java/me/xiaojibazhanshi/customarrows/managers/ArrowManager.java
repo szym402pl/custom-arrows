@@ -1,10 +1,7 @@
 package me.xiaojibazhanshi.customarrows.managers;
 
 import lombok.Getter;
-import me.xiaojibazhanshi.customarrows.arrows.EnderArrow;
-import me.xiaojibazhanshi.customarrows.arrows.HomingArrow;
-import me.xiaojibazhanshi.customarrows.arrows.SplitArrow;
-import me.xiaojibazhanshi.customarrows.arrows.TNTArrow;
+import me.xiaojibazhanshi.customarrows.arrows.*;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.NamespacedKey;
@@ -26,6 +23,7 @@ public class ArrowManager {
         registerCustomArrow("homing_arrow", new HomingArrow());
         registerCustomArrow("tnt_arrow", new TNTArrow());
         registerCustomArrow("split_arrow", new SplitArrow());
+        registerCustomArrow("lightweight_arrow", new LightweightArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
