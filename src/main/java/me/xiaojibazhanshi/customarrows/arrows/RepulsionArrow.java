@@ -18,7 +18,8 @@ public class RepulsionArrow extends CustomArrow {
         super(ArrowFactory.changeTippedColor // Or you can use #changeTippedEffect if you need the effect
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&bRepulsion Arrow", "repulsion_arrow",
-                                List.of("", "This arrow repels all nearby", "players from it's landing spot")),
+                                List.of("", "This arrow repels all nearby", "players from it's landing spot",
+                                        "", "It additionally deals a bit of damage")),
                         Color.AQUA));
     }
 

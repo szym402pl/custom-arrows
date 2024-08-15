@@ -2,15 +2,20 @@ package me.xiaojibazhanshi.customarrows.util;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
+import java.util.Random;
+
 public class ArrowSpecificUtil {
 
+
     /* HOMING ARROW */
+
 
     public static LivingEntity findEntityInSight(Player player, int maxDistance) {
         Location eyeLocation = player.getEyeLocation();
@@ -58,7 +63,9 @@ public class ArrowSpecificUtil {
         return squaredDistance > distance * distance;
     }
 
+
     /* SPLIT ARROW */
+
 
     public static void initiateFourWayArrowsOn(LivingEntity target) {
         Vector[] directions = {
@@ -130,7 +137,9 @@ public class ArrowSpecificUtil {
         }, 10);
     }
 
+
     /* Repulsion Arrow */
+
 
     public static void repelEntitiesNearby(Location center) {
         World world = center.getWorld();
@@ -138,7 +147,7 @@ public class ArrowSpecificUtil {
 
         center.setY(center.getY() - 0.1); // so it's not on ground level
 
-        for (Entity entity : world.getNearbyEntities(center, 3.5, 3.5, 3.5)) {
+        for (Entity entity : world.getNearbyEntities(center, 3, 3, 3)) {
             // some complex calculations that took me fucking ages
             if (entity.isDead() || !(entity instanceof LivingEntity livingEntity)) continue;
 
@@ -152,7 +161,7 @@ public class ArrowSpecificUtil {
 
             Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
                 livingEntity.setVelocity(livingEntity.isOnGround()
-                                ? repulsionForce.multiply(2.25) : repulsionForce.multiply(1.25));
+                                ? repulsionForce.multiply(2.3) : repulsionForce.multiply(1.4));
             }, 4); // simulate actual repulsion
         }
     }
@@ -196,10 +205,47 @@ public class ArrowSpecificUtil {
                 .build();
 
         meta.addEffect(effect);
-        meta.setPower(1);
+        meta.setPower(0);
 
         firework.setFireworkMeta(meta);
         firework.detonate();
     }
 
+
+    /* Molotov Arrow */
+
+
+    public static void setFiresAround(Block centerBlock, int radius) {
+        World world = centerBlock.getWorld();
+
+        int centerX = centerBlock.getX();
+        int centerZ = centerBlock.getZ();
+
+        for (int x = centerX - radius; x <= centerX + radius; x++) {
+
+            for (int z = centerZ - radius; z <= centerZ + radius; z++) {
+
+                Block highestBlock = world.getHighestBlockAt(x, z);
+                // This makes sure it won't just fire up something 50 blocks above/below
+                if (highestBlock.getY() > centerBlock.getY() + 3) continue;
+                if (highestBlock.getY() < centerBlock.getY() - 3) continue;
+
+                Block blockAbove = highestBlock.getRelative(0, 1, 0);
+
+                int randomNumber = new Random().nextInt(3) + 1;
+
+                if (blockAbove.getType() != Material.WATER && blockAbove.getType() != Material.LAVA
+                        && randomNumber != 3) {
+                    blockAbove.setType(Material.FIRE);
+                }
+            }
+
+        }
+    }
+
+
+    /* Other Arrow */
+
+
+    //
 }

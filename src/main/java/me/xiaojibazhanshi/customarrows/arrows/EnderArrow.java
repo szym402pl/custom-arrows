@@ -17,7 +17,7 @@ public class EnderArrow extends CustomArrow {
     public EnderArrow() {
         super(ArrowFactory.changeTippedColor // Or you can use #changeTippedEffect if you need the effect
                 (ArrowFactory.createArrowItemStack(
-                                Material.TIPPED_ARROW, "&0Ender arrow", "ender_arrow",
+                                Material.TIPPED_ARROW, "&0Ender Arrow", "ender_arrow",
                                 List.of("", "This arrow will teleport", "you to wherever it lands")),
                         Color.BLACK));
     }
@@ -36,6 +36,7 @@ public class EnderArrow extends CustomArrow {
         handleTeleport(shooter, arrowLocation);
     }
 
+    // This method is pretty simple, so I didn't put it in the ArrowSpecificUtil class
     private void handleTeleport(Player player, Location location) {
         player.sendMessage(GeneralUtil.color("&7Whoosh...!"));
         player.teleport(location.setDirection(player.getLocation().getDirection()));
