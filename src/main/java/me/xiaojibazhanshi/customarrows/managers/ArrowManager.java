@@ -24,6 +24,7 @@ public class ArrowManager {
         registerCustomArrow("tnt_arrow", new TNTArrow());
         registerCustomArrow("split_arrow", new SplitArrow());
         registerCustomArrow("lightweight_arrow", new LightweightArrow());
+        registerCustomArrow("repulsion_arrow", new RepulsionArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

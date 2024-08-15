@@ -34,16 +34,15 @@ public class LightweightArrow extends CustomArrow {
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
         if (!(event.getEntity() instanceof LivingEntity)) return;
 
-        event.setDamage(event.getDamage() * 0.75);
+        // * 0.72 cuts it down to default value and * 0.75 brings it to 25% less than normal
+        event.setDamage(event.getDamage() * 0.72 * 0.75);
     }
 
     @Override
     public void onShoot(EntityShootBowEvent event, Player shooter) {
-        Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
-            Entity projectile = event.getProjectile();
-            Vector doubledVelocity = projectile.getVelocity().clone().multiply(2.0);
+        Entity projectile = event.getProjectile();
+        Vector doubledVelocity = projectile.getVelocity().clone().multiply(2.0);
 
-            event.getProjectile().setVelocity(doubledVelocity);
-        }, 2); // This ensures that the velocity is set correctly
+        event.getProjectile().setVelocity(doubledVelocity);
     }
 }

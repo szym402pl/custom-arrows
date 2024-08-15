@@ -1,9 +1,9 @@
 package me.xiaojibazhanshi.customarrows.util;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
+import org.bukkit.*;
 import org.bukkit.entity.*;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
@@ -128,6 +128,78 @@ public class ArrowSpecificUtil {
         Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
             arrow.setVelocity(directionToTarget.multiply(0.05));
         }, 10);
+    }
+
+    /* Repulsion Arrow */
+
+    public static void repelEntitiesNearby(Location center) {
+        World world = center.getWorld();
+        if (world == null) return;
+
+        center.setY(center.getY() - 0.1); // so it's not on ground level
+
+        for (Entity entity : world.getNearbyEntities(center, 3.5, 3.5, 3.5)) {
+            // some complex calculations that took me fucking ages
+            if (entity.isDead() || !(entity instanceof LivingEntity livingEntity)) continue;
+
+            Vector toEntity = livingEntity.getLocation().toVector().subtract(center.toVector());
+            double distance = toEntity.length();
+
+            double forceMagnitude = 1 / (distance + 0.05);
+            Vector repulsionForce = toEntity.normalize().multiply(forceMagnitude);
+
+            clampVector(repulsionForce, 0.8, 0.2);
+
+            Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
+                livingEntity.setVelocity(livingEntity.isOnGround()
+                                ? repulsionForce.multiply(2.25) : repulsionForce.multiply(1.25));
+            }, 4); // simulate actual repulsion
+        }
+    }
+
+    private static void clampVector(Vector vector, double maxMagnitude, double minYSpeed) {
+        // some other complex calculations that took me fucking ages
+        double x = vector.getX();
+        double y = vector.getY();
+        double z = vector.getZ();
+
+        double magnitudeXZ = Math.sqrt(x * x + z * z);
+
+        if (magnitudeXZ > maxMagnitude) {
+            double scale = maxMagnitude / magnitudeXZ;
+            x *= scale;
+            z *= scale;
+        }
+
+        y = Math.max(minYSpeed, Math.min(maxMagnitude, y));
+
+        if (x == 0 && z == 0) {
+            x = 0.2;
+            z = 0.2;
+        }
+
+        vector.setX(x);
+        vector.setY(y);
+        vector.setZ(z);
+    }
+
+    public static void detonateRepulsionFirework(Location location) {
+        World world = location.getWorld();
+        if (world == null) return;
+
+        Firework firework = world.spawn(location, Firework.class);
+        FireworkMeta meta = firework.getFireworkMeta();
+
+        FireworkEffect effect = FireworkEffect.builder()
+                .withColor(Color.AQUA)
+                .with(FireworkEffect.Type.BALL_LARGE)
+                .build();
+
+        meta.addEffect(effect);
+        meta.setPower(1);
+
+        firework.setFireworkMeta(meta);
+        firework.detonate();
     }
 
 }
