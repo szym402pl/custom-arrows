@@ -25,16 +25,15 @@ public class RepulsionArrow extends CustomArrow {
 
     @Override
     public void onHitGround(ProjectileHitEvent event, Player shooter) {
-        Location arrowLocation = event.getEntity().getLocation();
-
-        ArrowSpecificUtil.detonateRepulsionFirework(arrowLocation);
-        ArrowSpecificUtil.repelEntitiesNearby(arrowLocation);
+        handleArrowHit(event.getEntity().getLocation());
     }
 
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
-        Location arrowLocation = event.getDamager().getLocation();
+        handleArrowHit(event.getDamager().getLocation());
+    }
 
+    private void handleArrowHit(Location arrowLocation) {
         ArrowSpecificUtil.detonateRepulsionFirework(arrowLocation);
         ArrowSpecificUtil.repelEntitiesNearby(arrowLocation);
     }

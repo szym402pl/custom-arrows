@@ -3,9 +3,11 @@ package me.xiaojibazhanshi.customarrows.util;
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Arrow;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -56,5 +58,14 @@ public class GeneralUtil {
         } catch (NullPointerException ignored) {
             return new ArrayList<>();
         }
+    }
+
+    public static void removeArrowAfter(Arrow arrow, long delay) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                arrow.remove();
+            }
+        }.runTaskLater(CustomArrows.getInstance(), delay);
     }
 }

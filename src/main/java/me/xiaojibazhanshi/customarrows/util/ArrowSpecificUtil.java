@@ -95,12 +95,7 @@ public class ArrowSpecificUtil {
                 }
             }.runTaskLater(CustomArrows.getInstance(), 15L * (i + 1));
 
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    arrows[index].remove();
-                }
-            }.runTaskLater(CustomArrows.getInstance(), 30L * (i + 1));
+            GeneralUtil.removeArrowAfter(arrows[index], 30L * (i + 1));
         }
     }
 
