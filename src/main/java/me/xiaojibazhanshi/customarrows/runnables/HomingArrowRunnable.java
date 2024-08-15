@@ -12,6 +12,7 @@ public class HomingArrowRunnable extends BukkitRunnable {
     private Vector initialSpeed;
     private LivingEntity target;
     private Entity homingEntity;
+    private int maxDistance;
 
     @Override
     public void run() {
@@ -20,11 +21,10 @@ public class HomingArrowRunnable extends BukkitRunnable {
             return;
         }
 
-        int MAX_DEGREES = 120;
-        if (!ArrowSpecificUtil.isTargetWithinDegrees(homingEntity, target, MAX_DEGREES)) return;
+        int MAX_TURN_DEGREES = 120;
 
-        int MAX_DISTANCE = 100;
-        if (ArrowSpecificUtil.isDistanceGreaterThan(homingEntity, target, MAX_DISTANCE)) return;
+        if (!ArrowSpecificUtil.isTargetWithinDegrees(homingEntity, target, MAX_TURN_DEGREES)) return;
+        if (ArrowSpecificUtil.isDistanceGreaterThan(homingEntity, target, maxDistance)) return;
 
         Vector directionToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(homingEntity, target);
         Vector finalVelocity =  directionToTarget.multiply(initialSpeed.length());
@@ -32,10 +32,11 @@ public class HomingArrowRunnable extends BukkitRunnable {
         homingEntity.setVelocity(finalVelocity);
     }
 
-    public void start(Entity homingEntity, LivingEntity target, Vector initialSpeed) {
+    public void start(Entity homingEntity, LivingEntity target, Vector initialSpeed, int maxDistance) {
         this.initialSpeed = initialSpeed;
         this.homingEntity = homingEntity;
         this.target = target;
+        this.maxDistance = maxDistance;
 
         runTaskTimer(CustomArrows.getInstance(), 4, 6);
     }

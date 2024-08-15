@@ -28,21 +28,22 @@ public class HomingArrow extends CustomArrow {
         super(ArrowFactory.changeTippedColor // Or you can use #changeTippedEffect if you need the effect
                 (ArrowFactory.createArrowItemStack(
                                Material.TIPPED_ARROW, "&4Homing Arrow", "homing_arrow",
-                               List.of("", "This arrow chases your enemy down", "as long as they aren't too far",
-                                       "", "Make sure to aim DIRECTLY at the target!")),
+                               List.of("", "This arrow chases your enemy down", "as long as they aren't too far")),
                         Color.RED));
     }
 
     @Override
     public void onShoot(EntityShootBowEvent event, Player shooter) {
-        LivingEntity target = ArrowSpecificUtil.findEntityInSight(shooter, 100);
-        if (target == null) return;
+        final int MAX_DISTANCE = 75;
+
+        LivingEntity target = ArrowSpecificUtil.findEntityInSight(shooter, MAX_DISTANCE, 2.5);
+        if (target == null || target.isDead()) return;
 
         Entity projectile = event.getProjectile();
         projectile.setGlowing(true);
 
         homingArrowRunnable = new HomingArrowRunnable();
-        homingArrowRunnable.start(projectile, target, projectile.getVelocity());
+        homingArrowRunnable.start(projectile, target, projectile.getVelocity(), MAX_DISTANCE);
     }
 
     @Override

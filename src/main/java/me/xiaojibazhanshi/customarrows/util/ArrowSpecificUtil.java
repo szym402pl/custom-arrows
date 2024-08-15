@@ -17,12 +17,12 @@ public class ArrowSpecificUtil {
     /* HOMING ARROW */
 
 
-    public static LivingEntity findEntityInSight(Player player, int maxDistance) {
+    public static LivingEntity findEntityInSight(Player player, int maxDistance, double rayTraceSize) {
         Location eyeLocation = player.getEyeLocation();
         Vector direction = eyeLocation.getDirection();
 
         RayTraceResult target = player.getWorld().rayTraceEntities
-                        (eyeLocation, direction, maxDistance,
+                        (eyeLocation, direction, maxDistance, rayTraceSize,
                         entity -> (entity instanceof LivingEntity && entity != player));
 
         if (target != null) {
@@ -43,7 +43,9 @@ public class ArrowSpecificUtil {
     }
 
     public static Vector getDirectionFromEntityToTarget(Entity entity, LivingEntity target) {
-        Vector entityLocation = entity.getLocation().toVector();
+        Vector entityLocation = entity instanceof LivingEntity livingEntity
+                ? livingEntity.getEyeLocation().toVector() : entity.getLocation().toVector();
+
         Vector targetLocation = target.getEyeLocation().toVector();
 
         if (target.getType() == EntityType.ENDER_DRAGON)
@@ -91,7 +93,7 @@ public class ArrowSpecificUtil {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    directArrowTowardsEntity(arrows[index], target);
+                    directFWArrowTowardsEntity(arrows[index], target);
                 }
             }.runTaskLater(CustomArrows.getInstance(), 15L * (i + 1));
 
@@ -99,7 +101,7 @@ public class ArrowSpecificUtil {
         }
     }
 
-    private static void directArrowTowardsEntity(Arrow arrow, LivingEntity target) {
+    private static void directFWArrowTowardsEntity(Arrow arrow, LivingEntity target) {
         if (target == null || target.isDead()) {
             arrow.remove();
             return;
@@ -221,7 +223,8 @@ public class ArrowSpecificUtil {
             for (int z = centerZ - radius; z <= centerZ + radius; z++) {
 
                 Block highestBlock = world.getHighestBlockAt(x, z);
-                // This makes sure it won't just fire up something 50 blocks above/below
+
+                // this makes sure it won't just fire up something 50 blocks above/below
                 if (highestBlock.getY() > centerBlock.getY() + 3) continue;
                 if (highestBlock.getY() < centerBlock.getY() - 3) continue;
 
