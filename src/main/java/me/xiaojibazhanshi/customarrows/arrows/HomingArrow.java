@@ -57,6 +57,5 @@ public class HomingArrow extends CustomArrow {
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
         if (homingArrowRunnable != null)
             homingArrowRunnable.stop();
-
     }
 }

@@ -1,10 +1,10 @@
 package me.xiaojibazhanshi.customarrows.util;
 
+import me.xiaojibazhanshi.customarrows.CustomArrows;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
@@ -58,6 +58,57 @@ public class ArrowSpecificUtil {
         return squaredDistance > distance * distance;
     }
 
-    /* OTHER ARROW */
+    /* SPLIT ARROW */
+
+    public static void initiateFourWayArrowsOn(LivingEntity target) {
+        Vector[] directions = {
+                new Vector(0, 0, -3.0),
+                new Vector(0, 0, 3.0),
+                new Vector(3.0, 0, 0),
+                new Vector(-3.0, 0, 0)
+        };
+
+        Arrow[] arrows = new Arrow[4];
+        Location targetLocation = target.getEyeLocation();
+
+        for (int i = 0; i < directions.length; i++) {
+            arrows[i] = spawnNoGravityArrow(targetLocation.add(directions[i]));
+        }
+
+        for (int i = 0; i < arrows.length; i++) {
+            final int index = i;
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    directArrowTowardsPlayer(arrows[index], target);
+                }
+            }.runTaskLater(CustomArrows.getInstance(), 15L * (i + 1));
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    arrows[index].remove();
+                }
+            }.runTaskLater(CustomArrows.getInstance(), 30L * (i + 1));
+        }
+    }
+
+    private static void directArrowTowardsPlayer(Arrow arrow, LivingEntity target) {
+        Location targetLocation = target.getLocation();
+        Vector directionToPlayer = targetLocation.toVector().subtract(arrow.getLocation().toVector()).normalize();
+
+        arrow.setVelocity(directionToPlayer.multiply(2));
+    }
+
+    private static Arrow spawnNoGravityArrow(Location location) {
+        assert location.getWorld() != null;
+        Arrow arrow = location.getWorld().spawn(location, Arrow.class);
+
+        arrow.setGravity(false);
+        arrow.setCritical(false);
+
+        return arrow;
+    }
 
 }
