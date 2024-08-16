@@ -12,14 +12,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 
@@ -409,5 +408,56 @@ public class ArrowSpecificUtil {
         LightningStrikeTask task = new LightningStrikeTask(thunderAmount, location, maxOffset);
 
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 0, strikePeriod);
+    }
+
+
+    /* Honey Trap Arrow */
+
+
+    public static void placeTemporaryBlocks(Map<Location, Material> blockLocations, int deleteAfter, Material material) {
+        if (blockLocations.isEmpty()) return;
+
+        for (Location location : blockLocations.keySet()) {
+            location.getBlock().setType(material);
+        }
+
+        Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
+            for (Location location : blockLocations.keySet()) {
+
+                location.getBlock().setType(blockLocations.get(location));
+            }
+        }, deleteAfter * 20L);
+    }
+
+    public static Map<Location, Material> getAHollowSphereAround(Location center, int radius) {
+        Map<Location, Material> sphere = new HashMap<>();
+        World world = center.getWorld();
+
+        double pi = Math.PI;
+        double doublePi = 2 * pi;
+
+        for (double theta = 0; theta <= pi; theta += pi / (radius * 3)) {
+            double sinTheta = Math.sin(theta);
+            double cosTheta = Math.cos(theta);
+
+            for (double phi = 0; phi <= doublePi; phi += pi / (radius * 3)) {
+                double sinPhi = Math.sin(phi);
+                double cosPhi = Math.cos(phi);
+
+                int x = (int) Math.round(center.getX() + radius * sinTheta * cosPhi);
+                int y = (int) Math.round(center.getY() + radius * cosTheta);
+                int z = (int) Math.round(center.getZ() + radius * sinTheta * sinPhi);
+
+                Location loc = new Location(world, x, y, z);
+
+                Material material = loc.getBlock().getType();
+
+                if (material == Material.AIR) {
+                    sphere.put(loc, material);
+                }
+            }
+        }
+
+        return sphere;
     }
 }
