@@ -1,8 +1,12 @@
 package me.xiaojibazhanshi.customarrows.arrows;
 
+import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
+import me.xiaojibazhanshi.customarrows.runnables.GhostArrowTrackingTask;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -24,27 +28,19 @@ public class GhostArrow extends CustomArrow {
         super(ArrowFactory.changeTippedColor // Or you can use #changeTippedEffect if you need the effect
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&7Ghost Arrow", "ghost_arrow",
-                                List.of("", "This arrow is able to phase", "through a single block layer")),
+                                List.of("", "This arrow is able to phase", "through a single block layer",
+                                "", "Note: This arrow can only", "be shot using a crossbow!")),
                         Color.GRAY));
     }
 
     @Override
-    public void onHitBlock(ProjectileHitEvent event, Player shooter) {
-        event.setCancelled(true);
-
-        Entity arrow = event.getEntity();
-        Location currentLocation = arrow.getLocation();
-
-        Block hitBlock = event.getHitBlock();
-        Block nextBlock = currentLocation.add(arrow.getVelocity().normalize().multiply(0.5)).getBlock();
-
-        if (nextBlock.getType() != Material.AIR || hitBlock == null) return;
-
-        ArrowSpecificUtil.temporarilyConvertToDisplayItem(hitBlock);
-    }
-
-    @Override
     public void onShoot(EntityShootBowEvent event, Player shooter) {
+        GeneralUtil.restrictUseIfWeaponIsNot(event, shooter, Material.CROSSBOW);
+        event.getProjectile().setPersistent(true);
+        event.getProjectile().setGravity(false);
+        final long delay = 2;
 
+        GhostArrowTrackingTask task = new GhostArrowTrackingTask(event.getProjectile(), 6, delay);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 6, delay);
     }
 }
