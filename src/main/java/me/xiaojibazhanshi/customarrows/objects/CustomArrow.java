@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class CustomArrow {
@@ -35,5 +36,9 @@ public class CustomArrow {
 
     public void onShoot(EntityShootBowEvent event, Player shooter) {
         // Here you can check if it's bow, crossbow, whatever
+    }
+
+    public void onPlayerLeave(PlayerQuitEvent event, Player player) {
+        // Do whatever
     }
 }

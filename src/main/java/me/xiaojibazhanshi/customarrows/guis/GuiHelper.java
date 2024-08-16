@@ -1,16 +1,20 @@
 package me.xiaojibazhanshi.customarrows.guis;
 
 import dev.triumphteam.gui.builder.item.ItemBuilder;
+import dev.triumphteam.gui.components.GuiAction;
 import dev.triumphteam.gui.guis.GuiItem;
 import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class GuiHelper {
@@ -58,6 +62,17 @@ public class GuiHelper {
             event.setCancelled(true);
             player.closeInventory();
         });
+    }
+
+    protected GuiItem getCustomButton(Material material, String name, GuiAction<InventoryClickEvent> action) {
+        ItemStack item = new ItemStack(material);
+        ItemMeta meta = item.getItemMeta();
+
+        assert meta != null;
+        meta.setDisplayName(GeneralUtil.color(name));
+        item.setItemMeta(meta);
+
+        return ItemBuilder.from(item).asGuiItem(action);
     }
 
     /* Arrow Amount Gui */
