@@ -1,6 +1,5 @@
 package me.xiaojibazhanshi.customarrows.guis;
 
-import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import dev.triumphteam.gui.guis.PaginatedGui;
@@ -28,30 +27,42 @@ public class ArrowSelectionGui extends GuiHelper {
     public void openGui(Player player) {
         PaginatedGui gui = Gui.paginated()
                 .title(Component.text(GeneralUtil.color("&aChoose a custom arrow")))
-                .rows(2)
-                .pageSize(9)
+                .rows(4)
+                .pageSize(27)
                 .create();
 
-        gui.setItem(2, CLOSE_BUTTON_SLOT, getGuiCloseButton(player));
+        gui.setItem(4, CLOSE_BUTTON_SLOT, getGuiCloseButton(player));
 
-        gui.setItem(2, PREVIOUS_PAGE_SLOT, getCustomButton(Material.PAPER, "&cPrevious", event -> {
+        gui.setItem(4, PREVIOUS_PAGE_SLOT, getCustomButton(Material.PAPER, "&cPrevious", event -> {
             event.setCancelled(true);
             gui.previous();
         }));
 
-        gui.setItem(2, NEXT_PAGE_SLOT, getCustomButton(Material.PAPER, "&cNext", event -> {
+        gui.setItem(4, NEXT_PAGE_SLOT, getCustomButton(Material.PAPER, "&cNext", event -> {
             event.setCancelled(true);
             gui.next();
         }));
 
         for (int slot : BOTTOM_FRAME_SLOTS) {
-            gui.setItem(2, slot, getASGFrameFiller());
+            gui.setItem(4, slot, getASGFrameFiller());
         }
 
         List<GuiItem> arrowList = getArrowsAsGuiItems
                 (GeneralUtil.sortAlphabeticallyByNames(arrowManager.getItemStacks()), player);
 
+        int itemAmount = 0;
 
+        for (GuiItem arrow : arrowList) {
+            itemAmount++;
+            gui.addItem(arrow);
+        }
+
+        GuiItem filler = getNoMoreArrowsFiller();
+        int maxSlot = gui.getPagesNum() * (gui.getRows() -1) * 9; // Rows -1 since there's 1 frame row
+
+        for (int i = itemAmount; i < maxSlot; i++) {
+           gui.addItem(filler);
+        }
 
         gui.open(player);
     }

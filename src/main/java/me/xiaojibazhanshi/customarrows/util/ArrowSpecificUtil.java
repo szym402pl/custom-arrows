@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
@@ -18,6 +19,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Consumer;
 
 public class ArrowSpecificUtil {
 
@@ -349,5 +351,44 @@ public class ArrowSpecificUtil {
         double maxAngle = 85.0;
 
         return angleDegrees <= maxAngle;
+    }
+
+
+    /* Thunder Arrow */
+
+
+    public static Location randomizeLocation(Location location, int maxOffset) {
+        Random randomInstance = new Random();
+
+        Vector[] directions = {
+                new Vector(0, 0, randomInstance.nextDouble(-1 * maxOffset, maxOffset)),
+                new Vector(randomInstance.nextDouble(-1 * maxOffset, maxOffset), 0, 0) };
+
+        Location offsetLocation = location.clone();
+
+        for (Vector direction : directions) {
+            offsetLocation.add(direction);
+        }
+
+        return offsetLocation;
+    }
+
+    public static void createThunderStrike(Location location, int thunderAmount, int maxOffset, long strikePeriod) {
+        World world = location.getWorld();
+        assert world != null;
+
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), new Consumer<>() {
+            int counter = 0;
+
+            @Override
+            public void accept(BukkitTask bukkitTask) {
+                if (counter == thunderAmount) bukkitTask.cancel();
+
+                world.spawn(randomizeLocation(location.clone(), maxOffset), LightningStrike.class);
+
+                counter++;
+            }
+
+        }, 0, strikePeriod);
     }
 }
