@@ -27,7 +27,7 @@ public class InvisibleArrow extends CustomArrow {
     }
 
     @Override
-    public void onHitGround(ProjectileHitEvent event, Player shooter) {
+    public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         event.getEntity().remove();
     }
 

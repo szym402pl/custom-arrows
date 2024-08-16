@@ -26,7 +26,7 @@ public class MolotovArrow extends CustomArrow {
     }
 
     @Override
-    public void onHitGround(ProjectileHitEvent event, Player shooter) {
+    public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         Block arrowLocationBlock = event.getEntity().getLocation().getBlock();
 
         ArrowSpecificUtil.setFiresAround(arrowLocationBlock, 3);

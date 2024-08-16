@@ -5,8 +5,10 @@ import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -82,5 +84,32 @@ public class GeneralUtil {
                 new Particle.DustOptions(Color.GRAY, 1.25F));
 
         arrow.setVelocity(arrow.getVelocity().multiply(3.5));
+    }
+
+    public static void damageWeapon(ItemStack weapon, int damage) {
+        if (!(weapon instanceof Damageable)) return;
+
+        Damageable meta = (Damageable) weapon.getItemMeta();
+        assert meta != null;
+
+        meta.setDamage(meta.getDamage() - damage);
+
+        weapon.setItemMeta(meta);
+    }
+
+    /**
+     * @return true if the use was restricted
+     */
+    public static boolean restrictUseIfWeaponIsNot(EntityShootBowEvent event, Player shooter, Material crossbowOrBow) {
+        assert event.getBow() != null;
+
+        if (event.getBow().getType() != crossbowOrBow) {
+            shooter.playSound(shooter, Sound.ENTITY_VILLAGER_NO, 1.0F ,1.0F);
+            shooter.getInventory().addItem(event.getConsumable());
+            event.setCancelled(true);
+            return true;
+        }
+
+        return false;
     }
 }

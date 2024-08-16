@@ -40,7 +40,7 @@ public class HoneyPotArrow extends CustomArrow {
     }
 
     @Override
-    public void onHitGround(ProjectileHitEvent event, Player shooter) {
+    public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         event.getEntity().remove();
 
         Block hitBlock = event.getHitBlock();

@@ -24,7 +24,7 @@ public class TNTArrow extends CustomArrow {
     }
 
     @Override
-    public void onHitGround(ProjectileHitEvent event, Player shooter) {
+    public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         Location arrowLocation = event.getEntity().getLocation();
 
         shooter.getWorld().spawn(arrowLocation, TNTPrimed.class);

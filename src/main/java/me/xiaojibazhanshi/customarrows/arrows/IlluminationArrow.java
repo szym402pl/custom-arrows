@@ -33,7 +33,7 @@ public class IlluminationArrow extends CustomArrow {
     }
 
     @Override
-    public void onHitGround(ProjectileHitEvent event, Player shooter) {
+    public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         Arrow arrow = (Arrow) event.getEntity();
 
         Block hitBlock = event.getHitBlock();

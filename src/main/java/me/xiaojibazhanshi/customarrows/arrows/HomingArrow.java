@@ -47,7 +47,7 @@ public class HomingArrow extends CustomArrow {
     }
 
     @Override
-    public void onHitGround(ProjectileHitEvent event, Player shooter) {
+    public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         if (homingArrowRunnable != null)
             homingArrowRunnable.stop();
 

@@ -4,16 +4,13 @@ import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.runnables.LightningStrikeTask;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.FireworkMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
@@ -490,5 +487,30 @@ public class ArrowSpecificUtil {
 
         shooter.addPotionEffect(blindness);
         shooter.damage(damage);
+    }
+
+
+    /* Ghost Arrow */
+
+    public static void temporarilyConvertToDisplayItem(Block block) {
+        BlockData originalBlockData = block.getBlockData();
+        Location blockLocation = block.getLocation();
+        assert blockLocation.getWorld() != null;
+
+        block.setType(Material.AIR);
+
+        BlockDisplay blockDisplay = blockLocation.getWorld().spawn(blockLocation, BlockDisplay.class, (display) -> {
+            display.setBlock(originalBlockData);
+            display.setInvulnerable(true);
+            display.setGravity(false);
+        });
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                blockDisplay.remove();
+                block.setBlockData(originalBlockData);
+            }
+        }.runTaskLater(CustomArrows.getInstance(), 6);
     }
 }

@@ -37,6 +37,7 @@ public class ArrowManager {
         registerCustomArrow("invisible_arrow", new InvisibleArrow());
         registerCustomArrow("honey_trap_arrow", new HoneyPotArrow());
         registerCustomArrow("fifty_cal_arrow", new FiftyCalArrow());
+        registerCustomArrow("ghost_arrow", new GhostArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

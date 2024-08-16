@@ -26,7 +26,7 @@ public class FlashbangArrow extends CustomArrow {
     }
 
     @Override
-    public void onHitGround(ProjectileHitEvent event, Player shooter) {
+    public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         Location arrowLocation = event.getEntity().getLocation();
         event.getEntity().remove();
 

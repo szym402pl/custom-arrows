@@ -3,7 +3,7 @@ package me.xiaojibazhanshi.customarrows;
 import lombok.Getter;
 import me.xiaojibazhanshi.customarrows.commands.CustomArrowCommand;
 import me.xiaojibazhanshi.customarrows.listeners.ArrowHitEntityListener;
-import me.xiaojibazhanshi.customarrows.listeners.ArrowHitGroundListener;
+import me.xiaojibazhanshi.customarrows.listeners.ArrowHitBlockListener;
 import me.xiaojibazhanshi.customarrows.listeners.ArrowFireListener;
 import me.xiaojibazhanshi.customarrows.managers.ArrowManager;
 import org.bukkit.Bukkit;
@@ -32,7 +32,7 @@ public final class CustomArrows extends JavaPlugin {
         ArrowManager arrowManager = new ArrowManager();
 
         Bukkit.getPluginManager().registerEvents(new ArrowHitEntityListener(arrowManager), this);
-        Bukkit.getPluginManager().registerEvents(new ArrowHitGroundListener(arrowManager), this);
+        Bukkit.getPluginManager().registerEvents(new ArrowHitBlockListener(arrowManager), this);
         Bukkit.getPluginManager().registerEvents(new ArrowFireListener(arrowManager), this);
 
         getCommand("customarrows").setExecutor(new CustomArrowCommand(arrowManager));

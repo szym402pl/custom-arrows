@@ -8,16 +8,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
-public class ArrowHitGroundListener implements Listener {
+public class ArrowHitBlockListener implements Listener {
 
     private final ArrowManager arrowManager;
 
-    public ArrowHitGroundListener(ArrowManager arrowManager) {
+    public ArrowHitBlockListener(ArrowManager arrowManager) {
         this.arrowManager = arrowManager;
     }
 
     @EventHandler
-    public void onArrowHitGround(ProjectileHitEvent event) {
+    public void onArrowHitBlock(ProjectileHitEvent event) {
         if (!(event.getEntity() instanceof Arrow arrow)) return;
         if (!(arrow.getShooter() instanceof Player player)) return;
         if (event.getHitEntity() != null) return;
@@ -25,7 +25,7 @@ public class ArrowHitGroundListener implements Listener {
         CustomArrow customArrow = arrowManager.getCustomArrow(arrow);
         if (customArrow == null) return;
 
-        customArrow.onHitGround(event, player);
+        customArrow.onHitBlock(event, player);
     }
 
 }

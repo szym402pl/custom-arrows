@@ -28,7 +28,7 @@ public class NecromancerArrow extends CustomArrow {
     }
 
     @Override
-    public void onHitGround(ProjectileHitEvent event, Player shooter) {
+    public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         Location hitLocation = event.getEntity().getLocation();
         event.getEntity().remove();
 

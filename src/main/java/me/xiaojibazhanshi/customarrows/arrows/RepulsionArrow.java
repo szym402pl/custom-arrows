@@ -25,7 +25,7 @@ public class RepulsionArrow extends CustomArrow {
     }
 
     @Override
-    public void onHitGround(ProjectileHitEvent event, Player shooter) {
+    public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         handleArrowHit(event.getEntity().getLocation());
         event.getEntity().remove();
     }
