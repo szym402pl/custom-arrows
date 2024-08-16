@@ -73,18 +73,14 @@ public class GeneralUtil {
 
     public static void shootLikeABullet(Entity arrow, double dustOffset) {
         Location location = arrow.getLocation();
-        arrow.setPersistent(true);
-        arrow.setGravity(false);
-        arrow.setGlowing(true);
-
         assert location.getWorld() != null;
 
         location.getWorld().spawnParticle(Particle.DUST,
                 location,
-                10,
+                15,
                 dustOffset, dustOffset, dustOffset,
-                new Particle.DustOptions(Color.GRAY, 1.0F));
+                new Particle.DustOptions(Color.GRAY, 1.25F));
 
-        arrow.setVelocity(location.getDirection().multiply(5.0));
+        arrow.setVelocity(arrow.getVelocity().multiply(3.5));
     }
 }

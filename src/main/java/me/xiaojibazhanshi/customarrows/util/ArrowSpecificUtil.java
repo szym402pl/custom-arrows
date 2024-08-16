@@ -328,6 +328,17 @@ public class ArrowSpecificUtil {
 
     /* Flashbang Arrow */
 
+    public static void detonateFlashbang(Entity itemDisplay, long delay) {
+        Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
+            itemDisplay.remove();
+            ArrowSpecificUtil.detonateFirework(itemDisplay.getLocation(), FireworkEffect.Type.BALL, Color.WHITE);
+
+            for (Entity onLooker : ArrowSpecificUtil.getEntitiesLookingAt(itemDisplay, 8)) {
+                ArrowSpecificUtil.applyFlashbangEffect(onLooker);
+            }
+        }, delay);
+    }
+
 
     public static void applyFlashbangEffect(Entity entity) {
         if (!(entity instanceof LivingEntity livingEntity)) return;
@@ -460,5 +471,24 @@ public class ArrowSpecificUtil {
         }
 
         return sphere;
+    }
+
+
+    /* .50 cal Arrow */
+
+
+    public static void applyEffectsIfShotRapidly(Player shooter) {
+        PotionEffect existingNausea = shooter.getPotionEffect(PotionEffectType.NAUSEA);
+        int amplifier = existingNausea != null ? existingNausea.getAmplifier() + 1 : 0;
+
+        PotionEffect nausea = new PotionEffect(PotionEffectType.NAUSEA, 4 * 20, amplifier, true);
+        shooter.addPotionEffect(nausea);
+
+        if (amplifier < 3) return;
+        PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 60, 1, true);
+        double damage = amplifier * 1.25;
+
+        shooter.addPotionEffect(blindness);
+        shooter.damage(damage);
     }
 }

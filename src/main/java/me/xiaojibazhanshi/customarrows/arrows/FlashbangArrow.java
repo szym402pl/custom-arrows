@@ -38,14 +38,7 @@ public class FlashbangArrow extends CustomArrow {
 
         itemDisplayLocation.getWorld().playSound(itemDisplayLocation, Sound.ENTITY_VILLAGER_CELEBRATE, 1.0F, 1.0F);
 
-        Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
-            itemDisplay.remove();
-            ArrowSpecificUtil.detonateFirework(itemDisplay.getLocation(), FireworkEffect.Type.BALL, Color.WHITE);
-
-            for (Entity onLooker : ArrowSpecificUtil.getEntitiesLookingAt(itemDisplay, 8)) {
-                ArrowSpecificUtil.applyFlashbangEffect(onLooker);
-            }
-        }, 50L);
+        ArrowSpecificUtil.detonateFlashbang(itemDisplay, 50L);
     }
 
     @Override
