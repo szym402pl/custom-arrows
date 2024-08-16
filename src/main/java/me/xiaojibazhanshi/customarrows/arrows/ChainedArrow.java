@@ -35,28 +35,12 @@ public class ChainedArrow extends CustomArrow {
         List<LivingEntity> targetList = new ArrayList<>(hitEntity.getNearbyEntities(8, 4, 8)
                 .stream()
                 .filter(entity -> entity instanceof LivingEntity)
+                .filter(entity -> !entity.equals(shooter) && !entity.equals(hitEntity))
                 .map(entity -> (LivingEntity) entity)
                 .toList());
 
-        if (targetList.isEmpty()) return;
-
-        // failsafe
-        targetList.remove(shooter);
-        targetList.remove(hitEntity);
-
-        for (LivingEntity target : targetList) {
-            if (!hitEntity.hasLineOfSight(target)) continue;
-
-            Vector hitEntityToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(hitEntity, target);
-            Vector clampedDirection = hitEntityToTarget.multiply(0.3);
-            double yCopy = hitEntityToTarget.getY();
-
-            Arrow newArrow = hitEntity.getWorld().spawn(hitEntity.getEyeLocation().add(clampedDirection), Arrow.class);
-
-            newArrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
-            newArrow.setVelocity(hitEntityToTarget.multiply(5.0).setY(yCopy));
-
-            GeneralUtil.removeArrowAfter(newArrow, 30L);
-        }
+        ArrowSpecificUtil.chainTargets(targetList, hitEntity);
     }
+
+
 }

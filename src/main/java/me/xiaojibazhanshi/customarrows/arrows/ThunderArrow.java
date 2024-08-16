@@ -27,13 +27,13 @@ public class ThunderArrow extends CustomArrow {
     public void onHitGround(ProjectileHitEvent event, Player shooter) {
         Location arrowLocation = event.getEntity().getLocation();
 
-        ArrowSpecificUtil.createThunderStrike(arrowLocation, 4, 5, 15);
+        ArrowSpecificUtil.createThunderStrike(arrowLocation, 6, 5, 12);
     }
 
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
         Location entityLocation = event.getEntity().getLocation();
 
-        ArrowSpecificUtil.createThunderStrike(entityLocation, 2, 0, 10);
+        ArrowSpecificUtil.createThunderStrike(entityLocation, 3, 1, 8);
     }
 }

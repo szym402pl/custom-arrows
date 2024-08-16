@@ -1,6 +1,7 @@
 package me.xiaojibazhanshi.customarrows.util;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
+import me.xiaojibazhanshi.customarrows.runnables.LightningStrikeTask;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
@@ -19,6 +20,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 
 public class ArrowSpecificUtil {
@@ -153,8 +155,9 @@ public class ArrowSpecificUtil {
         if (world == null) return;
 
         center.setY(center.getY() - 0.1); // so it's not on ground level
+        int range = 3;
 
-        for (Entity entity : world.getNearbyEntities(center, 3, 3, 3)) {
+        for (Entity entity : world.getNearbyEntities(center, range, range, range)) {
             // some complex calculations that took me fucking ages
             if (entity.isDead() || !(entity instanceof LivingEntity livingEntity)) continue;
 
@@ -216,6 +219,40 @@ public class ArrowSpecificUtil {
 
         firework.setFireworkMeta(meta);
         firework.detonate();
+    }
+
+
+    /* Aim Assist Arrow */
+
+
+    public static void provideAimAssist(Entity projectile, LivingEntity target) {
+        Vector initialSpeed = projectile.getVelocity();
+
+        Vector directionToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(projectile, target);
+        Vector finalVelocity =  directionToTarget.multiply(initialSpeed.length());
+
+        projectile.setVelocity(finalVelocity.multiply(1.15).multiply(new Vector(1, 1.1, 1)));
+    }
+
+
+    /* Chained Arrow */
+
+
+    public static void chainTargets(List<LivingEntity> targetList, LivingEntity hitEntity) {
+        for (LivingEntity target : targetList) {
+            if (!hitEntity.hasLineOfSight(target)) continue;
+
+            Vector hitEntityToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(hitEntity, target);
+            Vector clampedDirection = hitEntityToTarget.multiply(0.3);
+            double yCopy = hitEntityToTarget.getY();
+
+            Arrow newArrow = hitEntity.getWorld().spawn(hitEntity.getEyeLocation().add(clampedDirection), Arrow.class);
+
+            newArrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
+            newArrow.setVelocity(hitEntityToTarget.multiply(5.0).setY(yCopy));
+
+            GeneralUtil.removeArrowAfter(newArrow, 30L);
+        }
     }
 
 
@@ -358,37 +395,19 @@ public class ArrowSpecificUtil {
 
 
     public static Location randomizeLocation(Location location, int maxOffset) {
-        Random randomInstance = new Random();
+        ThreadLocalRandom random = ThreadLocalRandom.current();
 
-        Vector[] directions = {
-                new Vector(0, 0, randomInstance.nextDouble(-1 * maxOffset, maxOffset)),
-                new Vector(randomInstance.nextDouble(-1 * maxOffset, maxOffset), 0, 0) };
-
-        Location offsetLocation = location.clone();
-
-        for (Vector direction : directions) {
-            offsetLocation.add(direction);
-        }
-
-        return offsetLocation;
+        return new Location(
+                location.getWorld(),
+                location.getX() + random.nextDouble(-maxOffset, maxOffset),
+                location.getY() + random.nextDouble(-maxOffset, maxOffset),
+                location.getZ() + random.nextDouble(-maxOffset, maxOffset)
+        );
     }
 
     public static void createThunderStrike(Location location, int thunderAmount, int maxOffset, long strikePeriod) {
-        World world = location.getWorld();
-        assert world != null;
+        LightningStrikeTask task = new LightningStrikeTask(thunderAmount, location, maxOffset);
 
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), new Consumer<>() {
-            int counter = 0;
-
-            @Override
-            public void accept(BukkitTask bukkitTask) {
-                if (counter == thunderAmount) bukkitTask.cancel();
-
-                world.spawn(randomizeLocation(location.clone(), maxOffset), LightningStrike.class);
-
-                counter++;
-            }
-
-        }, 0, strikePeriod);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 0, strikePeriod);
     }
 }

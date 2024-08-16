@@ -31,15 +31,12 @@ public class AimAssistArrow extends CustomArrow {
     @Override
     public void onShoot(EntityShootBowEvent event, Player shooter) {
         LivingEntity target = ArrowSpecificUtil.findEntityInSight(shooter, 60, 5.0);
+
         if (target == null || target.isDead()) return;
         if (!shooter.hasLineOfSight(target)) return;
 
         Entity projectile = event.getProjectile();
-        Vector initialSpeed = projectile.getVelocity();
-
-        Vector directionToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(projectile, target);
-        Vector finalVelocity =  directionToTarget.multiply(initialSpeed.length());
-
-        projectile.setVelocity(finalVelocity.multiply(1.15).multiply(new Vector(1, 1.1, 1)));
+        
+        ArrowSpecificUtil.provideAimAssist(projectile, target);
     }
 }
