@@ -33,6 +33,7 @@ public class ArrowManager {
         registerCustomArrow("necromancer_arrow", new NecromancerArrow());
         registerCustomArrow("flashbang_arrow", new FlashbangArrow());
         registerCustomArrow("thunder_arrow", new ThunderArrow());
+        registerCustomArrow("stealth_arrow", new StealthArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
