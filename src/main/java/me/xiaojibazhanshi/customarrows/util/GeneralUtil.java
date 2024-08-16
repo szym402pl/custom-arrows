@@ -2,6 +2,7 @@ package me.xiaojibazhanshi.customarrows.util;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -111,5 +112,16 @@ public class GeneralUtil {
         }
 
         return false;
+    }
+
+    public static boolean isNotPlant(Block block) {
+        Material material = block.getType();
+
+        return !(material == Material.OAK_SAPLING || material == Material.DANDELION ||
+                material == Material.POPPY || material == Material.SHORT_GRASS ||
+                material == Material.FERN || material == Material.DEAD_BUSH ||
+                material == Material.VINE || material == Material.WHEAT ||
+                material == Material.BEETROOTS || material == Material.SUGAR_CANE ||
+                material == Material.TALL_GRASS || material == Material.SUNFLOWER);
     }
 }

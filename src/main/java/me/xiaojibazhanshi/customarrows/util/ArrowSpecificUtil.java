@@ -6,6 +6,7 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.*;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.potion.PotionEffect;
@@ -511,6 +512,23 @@ public class ArrowSpecificUtil {
                 blockDisplay.remove();
                 block.setBlockData(originalBlockData);
             }
-        }.runTaskLater(CustomArrows.getInstance(), 6);
+        }.runTaskLater(CustomArrows.getInstance(), 4);
+    }
+
+    public static void shootFakeArrow(EntityShootBowEvent event, Player shooter) {
+        Arrow arrow = shooter.getWorld().spawnArrow(event.getProjectile().getLocation(),
+                event.getProjectile().getVelocity(), 3.0f, 0.0f, Arrow.class);
+
+        arrow.setVelocity(event.getProjectile().getVelocity().multiply(1.04));
+        arrow.setVisualFire(true);
+        arrow.setVisibleByDefault(false);
+        arrow.setGravity(false);
+        arrow.setPersistent(true);
+
+        GeneralUtil.removeArrowAfter(arrow, 300);
+    }
+
+    public static boolean isFakeArrow(Entity arrow) {
+        return arrow instanceof Arrow && (!arrow.isVisibleByDefault()) && arrow.isVisualFire();
     }
 }
