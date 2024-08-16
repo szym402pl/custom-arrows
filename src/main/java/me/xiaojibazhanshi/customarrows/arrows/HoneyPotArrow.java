@@ -1,36 +1,30 @@
 package me.xiaojibazhanshi.customarrows.arrows;
 
-import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.Levelled;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.util.Vector;
 
 import java.util.List;
 import java.util.Map;
 
-public class HoneyTrapArrow extends CustomArrow {
+public class HoneyPotArrow extends CustomArrow {
 
     private final int DELETE_AFTER_SECONDS = 5;
-    private final Material REPLACEMENT = Material.HONEY_BLOCK;
+    private final Material REPLACEMENT = Material.ORANGE_STAINED_GLASS;
 
-    public HoneyTrapArrow() {
+    public HoneyPotArrow() {
         super(ArrowFactory.changeTippedColor
                 (ArrowFactory.createArrowItemStack(
-                                Material.TIPPED_ARROW, "&6Honey Trap Arrow", "honey_trap_arrow",
-                                List.of("", "This arrow will trap the", "target in honey blocks")),
+                                Material.TIPPED_ARROW, "&6Honeypot Arrow", "honeypot_arrow",
+                                List.of("", "This arrow will trap the", "target in a temporary dome")),
                         Color.ORANGE));
     }
 
@@ -39,7 +33,7 @@ public class HoneyTrapArrow extends CustomArrow {
         event.getDamager().remove();
         int radius = 4;
 
-        Location targetLocation = event.getEntity().getLocation();
+        Location targetLocation = event.getEntity().getLocation().add(new Vector(0.5, 0, 0.5));
         Map<Location, Material> targetBlockLocations = ArrowSpecificUtil.getAHollowSphereAround(targetLocation, radius);
 
         ArrowSpecificUtil.placeTemporaryBlocks(targetBlockLocations, DELETE_AFTER_SECONDS, REPLACEMENT);

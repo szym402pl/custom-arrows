@@ -35,7 +35,8 @@ public class ArrowManager {
         registerCustomArrow("thunder_arrow", new ThunderArrow());
         registerCustomArrow("adrenaline_arrow", new AdrenalineArrow());
         registerCustomArrow("invisible_arrow", new InvisibleArrow());
-        registerCustomArrow("honey_trap_arrow", new HoneyTrapArrow());
+        registerCustomArrow("honey_trap_arrow", new HoneyPotArrow());
+        registerCustomArrow("fifty_cal_arrow", new FiftyCalArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

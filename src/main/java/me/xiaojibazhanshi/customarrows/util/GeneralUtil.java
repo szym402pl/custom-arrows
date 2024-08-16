@@ -1,13 +1,15 @@
 package me.xiaojibazhanshi.customarrows.util;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
-import org.bukkit.ChatColor;
-import org.bukkit.NamespacedKey;
+import org.bukkit.*;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -67,5 +69,22 @@ public class GeneralUtil {
                 arrow.remove();
             }
         }.runTaskLater(CustomArrows.getInstance(), delay);
+    }
+
+    public static void shootLikeABullet(Entity arrow, double dustOffset) {
+        Location location = arrow.getLocation();
+        arrow.setPersistent(true);
+        arrow.setGravity(false);
+        arrow.setGlowing(true);
+
+        assert location.getWorld() != null;
+
+        location.getWorld().spawnParticle(Particle.DUST,
+                location,
+                10,
+                dustOffset, dustOffset, dustOffset,
+                new Particle.DustOptions(Color.GRAY, 1.0F));
+
+        arrow.setVelocity(location.getDirection().multiply(5.0));
     }
 }

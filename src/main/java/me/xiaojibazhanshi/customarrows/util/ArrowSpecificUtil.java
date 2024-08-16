@@ -423,8 +423,9 @@ public class ArrowSpecificUtil {
 
         Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
             for (Location location : blockLocations.keySet()) {
+                Material originalMaterial = blockLocations.get(location);
 
-                location.getBlock().setType(blockLocations.get(location));
+                location.getBlock().setType(originalMaterial);
             }
         }, deleteAfter * 20L);
     }
