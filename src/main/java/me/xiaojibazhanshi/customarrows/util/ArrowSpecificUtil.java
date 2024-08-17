@@ -567,13 +567,15 @@ public class ArrowSpecificUtil {
      * @return true if there was at least one item in the vicinity
      */
     public static boolean teleportNearbyItemsTo(Entity target, int radius) {
+        boolean itemsNearby = false;
+
         for (Entity item : target.getNearbyEntities(radius, radius, radius)) {
             if (!(item instanceof Item)) continue;
 
             item.teleport(target.getLocation().add(new Vector(0, 1.25, 0)));
-            return true;
+            itemsNearby = true;
         }
 
-        return false;
+        return itemsNearby;
     }
 }

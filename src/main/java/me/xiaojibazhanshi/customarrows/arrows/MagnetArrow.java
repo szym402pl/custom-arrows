@@ -41,6 +41,8 @@ public class MagnetArrow extends CustomArrow {
             Sound sound = wereThereItems ? Sound.ENTITY_VILLAGER_CELEBRATE : Sound.ENTITY_VILLAGER_NO;
             shooter.getWorld().playSound(arrowLocation, sound, 1.0F, 1.0F);
         }, DELAY);
+
+        arrow.remove();
     }
 
     @Override

@@ -40,6 +40,8 @@ public class ArrowManager {
         registerCustomArrow("ghost_arrow", new GhostArrow());
         registerCustomArrow("smoke_arrow", new SmokeArrow());
         registerCustomArrow("magnet_arrow", new MagnetArrow());
+        registerCustomArrow("inversion_arrow", new InversionArrow());
+        registerCustomArrow("hedgehog_arrow", new HedgehogArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
