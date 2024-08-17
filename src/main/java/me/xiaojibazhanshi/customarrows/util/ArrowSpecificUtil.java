@@ -606,4 +606,30 @@ public class ArrowSpecificUtil {
         location.setY(location.getY() + adjustedY);
         location.setZ(location.getZ() + adjustedZ);
     }
+
+
+    /* Crystal Heal Arrow */
+
+
+    public static void updateHealCrystalMap(Map<UUID, EnderCrystal> crystalMap, Player shooter, Entity arrow) {
+        Location arrowLocation = arrow.getLocation();
+        World world = arrowLocation.getWorld();
+        assert world != null;
+
+        if (crystalMap.containsKey(shooter.getUniqueId())) crystalMap.get(shooter.getUniqueId()).remove();
+
+        crystalMap.remove(shooter.getUniqueId());
+        crystalMap.put(shooter.getUniqueId(), createACrystal(arrowLocation, arrow.getWorld()));
+
+        GeneralUtil.removeCrystalAfter(shooter.getUniqueId(), 600, crystalMap);
+    }
+
+    private static EnderCrystal createACrystal(Location location, World world) {
+        EnderCrystal crystal = (EnderCrystal) world.spawnEntity(location, EntityType.END_CRYSTAL);
+        crystal.setShowingBottom(false);
+
+        return crystal;
+    }
+
+
 }

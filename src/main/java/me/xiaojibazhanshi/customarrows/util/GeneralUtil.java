@@ -4,6 +4,7 @@ import me.xiaojibazhanshi.customarrows.CustomArrows;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -13,9 +14,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class GeneralUtil {
 
@@ -69,6 +68,18 @@ public class GeneralUtil {
             @Override
             public void run() {
                 arrow.remove();
+            }
+        }.runTaskLater(CustomArrows.getInstance(), delay);
+    }
+
+    public static void removeCrystalAfter(UUID uuid, long delay, Map<UUID, EnderCrystal> crystalMap) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                EnderCrystal crystal = crystalMap.get(uuid);
+                if (crystal != null) crystal.remove();
+
+                crystalMap.remove(uuid);
             }
         }.runTaskLater(CustomArrows.getInstance(), delay);
     }
