@@ -29,13 +29,13 @@ public class SmokeArrow extends CustomArrow {
     public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         Location arrowLocation = event.getEntity().getLocation();
 
-        ArrowSpecificUtil.createSmokeCloud(arrowLocation);
+        ArrowSpecificUtil.createProgressiveSmokeCloud(arrowLocation);
     }
 
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
         Location arrowLocation = event.getDamager().getLocation();
-        ArrowSpecificUtil.createSmokeCloud(arrowLocation);
+        ArrowSpecificUtil.createProgressiveSmokeCloud(arrowLocation);
 
         if (!(event.getEntity() instanceof LivingEntity target)) return;
 

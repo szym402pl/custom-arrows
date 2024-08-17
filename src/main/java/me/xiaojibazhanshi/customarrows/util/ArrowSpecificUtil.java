@@ -538,14 +538,24 @@ public class ArrowSpecificUtil {
     /* Smoke Arrow */
 
 
-    public static void createSmokeCloud(Location location) {
-        int firstSmokeAmount = 150;
+    public static void createProgressiveSmokeCloud(Location location) {
+        int firstSmokeAmount = 300;
         int secondSmokeAmount = 250;
+        int thirdSmokeAmount = 200;
+        int fourthSmokeAmount = 175;
+        int fifthSmokeAmount = 150;
 
-        SmokeCloudTask firstIteration = new SmokeCloudTask(firstSmokeAmount, location, 2, 12.0F, 3);
-        SmokeCloudTask secondIteration = new SmokeCloudTask(secondSmokeAmount, location, 4, 22.0F, 12);
+        SmokeCloudTask firstIteration = new SmokeCloudTask(firstSmokeAmount, location, 2,  10);
+        SmokeCloudTask secondIteration = new SmokeCloudTask(secondSmokeAmount, location, 3,  15);
+        SmokeCloudTask thirdIteration = new SmokeCloudTask(thirdSmokeAmount, location, 4,  20);
+        SmokeCloudTask fourthIteration = new SmokeCloudTask(fourthSmokeAmount, location, 4,  25);
+        SmokeCloudTask fifthIteration = new SmokeCloudTask(fifthSmokeAmount, location, 4,  25);
 
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), firstIteration, 2, 1);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), secondIteration, firstSmokeAmount /2, 1);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), secondIteration, firstSmokeAmount/4, 1);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), thirdIteration, firstSmokeAmount/3, 1);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fourthIteration, firstSmokeAmount/2, 1);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fifthIteration,
+                firstSmokeAmount/2 + firstSmokeAmount/20, 1);
     }
 }

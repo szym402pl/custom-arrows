@@ -19,8 +19,8 @@ public class SmokeCloudTask implements Consumer<BukkitTask> {
 
     private int counter = 1;
 
-    public SmokeCloudTask(int smokeAmount, Location location, int maxOffset, float particleSize, int smokeIterations) {
-        this.particleSize = particleSize;
+    public SmokeCloudTask(int smokeAmount, Location location, int maxOffset, int smokeIterations) {
+        particleSize = 4.0F; // max value
         this.maxOffset = maxOffset;
         this.location = location;
         this.smokeAmount = smokeAmount;
