@@ -42,6 +42,8 @@ public class ArrowManager {
         registerCustomArrow("magnet_arrow", new MagnetArrow());
         registerCustomArrow("inversion_arrow", new InversionArrow());
         registerCustomArrow("hedgehog_arrow", new HedgehogArrow());
+        registerCustomArrow("weather_arrow", new WeatherArrow());
+        //registerCustomArrow("day_cycle_arrow", new DayCycleArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
