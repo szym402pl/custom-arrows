@@ -3,10 +3,7 @@ package me.xiaojibazhanshi.customarrows.util;
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.EnderCrystal;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -84,6 +81,15 @@ public class GeneralUtil {
         }.runTaskLater(CustomArrows.getInstance(), delay);
     }
 
+    public static void removeDisplayAfter(TextDisplay display, long delay) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                display.remove();
+            }
+        }.runTaskLater(CustomArrows.getInstance(), delay);
+    }
+
     public static void shootLikeABullet(Entity arrow, double dustOffset) {
         Location location = arrow.getLocation();
         assert location.getWorld() != null;
@@ -133,5 +139,11 @@ public class GeneralUtil {
                 material == Material.VINE || material == Material.WHEAT ||
                 material == Material.BEETROOTS || material == Material.SUGAR_CANE ||
                 material == Material.TALL_GRASS || material == Material.SUNFLOWER);
+    }
+
+    public static boolean isHealingCrystal(Entity entity) {
+        return entity instanceof EnderCrystal crystal
+                && crystal.getCustomName() != null
+                && crystal.getCustomName().equals("  ");
     }
 }

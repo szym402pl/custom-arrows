@@ -613,21 +613,34 @@ public class ArrowSpecificUtil {
 
     public static void updateHealCrystalMap(Map<UUID, EnderCrystal> crystalMap, Player shooter, Entity arrow) {
         Location arrowLocation = arrow.getLocation();
+        UUID uuid = shooter.getUniqueId();
+
         World world = arrowLocation.getWorld();
         assert world != null;
 
-        if (crystalMap.containsKey(shooter.getUniqueId())) crystalMap.get(shooter.getUniqueId()).remove();
+        if (crystalMap.containsKey(uuid)) crystalMap.get(uuid).remove();
 
-        crystalMap.remove(shooter.getUniqueId());
-        crystalMap.put(shooter.getUniqueId(), createACrystal(arrowLocation, arrow.getWorld()));
+        crystalMap.remove(uuid);
+        crystalMap.put(uuid, createACrystal(arrowLocation, arrow.getWorld(), shooter));
 
-        GeneralUtil.removeCrystalAfter(shooter.getUniqueId(), 600, crystalMap);
+        GeneralUtil.removeCrystalAfter(uuid, 600, crystalMap);
     }
 
-    private static EnderCrystal createACrystal(Location location, World world) {
+    private static EnderCrystal createACrystal(Location location, World world, Player owner) {
         EnderCrystal crystal = (EnderCrystal) world.spawnEntity(location, EntityType.END_CRYSTAL);
         crystal.setShowingBottom(false);
+        crystal.setCustomName("  ");
+        crystal.setCustomNameVisible(false);
 
+        String crystalName = GeneralUtil.color("&4" + owner.getName() + "&c's Heal Crystal");
+        Location crystalTextLocation = crystal.getLocation().clone().add(new Vector(0, 2.2, 0));
+
+        TextDisplay display = world.spawn(crystalTextLocation, TextDisplay.class, textDisplay -> {
+            textDisplay.setText(crystalName);
+            textDisplay.setBillboard(Display.Billboard.CENTER);
+        });
+
+        GeneralUtil.removeDisplayAfter(display, 30 * 20);
         return crystal;
     }
 

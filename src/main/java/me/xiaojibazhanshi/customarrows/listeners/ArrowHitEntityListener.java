@@ -2,6 +2,7 @@ package me.xiaojibazhanshi.customarrows.listeners;
 
 import me.xiaojibazhanshi.customarrows.managers.ArrowManager;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,6 +19,10 @@ public class ArrowHitEntityListener implements Listener {
 
     @EventHandler
     public void onEntityHitByEntity(EntityDamageByEntityEvent event) {
+        if (GeneralUtil.isHealingCrystal(event.getEntity())) {
+            event.setCancelled(true);
+        }
+
         if (!(event.getDamager() instanceof Arrow arrow)) return;
         if (!(arrow.getShooter() instanceof Player player)) return;
 
