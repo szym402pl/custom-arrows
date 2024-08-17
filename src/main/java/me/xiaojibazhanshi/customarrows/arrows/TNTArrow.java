@@ -2,7 +2,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,7 +19,7 @@ public class TNTArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&cTNT Arrow", "tnt_arrow",
                                 List.of("", "This arrow will spawn a primed", "tnt block wherever it lands")),
-                        Color.ORANGE));
+                Color.ORANGE));
     }
 
     @Override

@@ -1,13 +1,13 @@
 package me.xiaojibazhanshi.customarrows.arrows;
 
-import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
-import org.bukkit.*;
+import org.bukkit.Color;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -15,14 +15,14 @@ import org.bukkit.util.Vector;
 
 import java.util.List;
 
-public class FlashbangArrow extends CustomArrow {
+public class FlashBangArrow extends CustomArrow {
 
-    public FlashbangArrow() {
+    public FlashBangArrow() {
         super(ArrowFactory.changeTippedColor // Or you can use #changeTippedEffect if you need the effect
                 (ArrowFactory.createArrowItemStack(
-                                Material.TIPPED_ARROW, "&fFlashbang Arrow", "flashbang_arrow",
-                                List.of("", "This arrow will drop a flashbang,", "blinding entities in vicinity")),
-                        Color.WHITE));
+                                Material.TIPPED_ARROW, "&fFlash-bang Arrow", "flash_bang_arrow",
+                                List.of("", "This arrow will drop a flash-bang,", "blinding entities in vicinity")),
+                Color.WHITE));
     }
 
     @Override
@@ -38,12 +38,12 @@ public class FlashbangArrow extends CustomArrow {
 
         itemDisplayLocation.getWorld().playSound(itemDisplayLocation, Sound.ENTITY_VILLAGER_CELEBRATE, 1.0F, 1.0F);
 
-        ArrowSpecificUtil.detonateFlashbang(itemDisplay, 50L);
+        ArrowSpecificUtil.detonateFlashBang(itemDisplay, 50L);
     }
 
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
-        ArrowSpecificUtil.applyFlashbangEffect(event.getEntity());
+        ArrowSpecificUtil.applyFlashBangEffect(event.getEntity());
         event.getDamager().remove();
     }
 

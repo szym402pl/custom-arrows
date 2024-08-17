@@ -21,7 +21,7 @@ public class RepulsionArrow extends CustomArrow {
                                 Material.TIPPED_ARROW, "&bRepulsion Arrow", "repulsion_arrow",
                                 List.of("", "This arrow repels all nearby", "players from it's landing spot",
                                         "", "It additionally deals a bit of damage")),
-                        Color.AQUA));
+                Color.AQUA));
     }
 
     @Override

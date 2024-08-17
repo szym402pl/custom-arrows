@@ -12,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -105,7 +104,7 @@ public class GeneralUtil {
         assert event.getBow() != null;
 
         if (event.getBow().getType() != crossbowOrBow) {
-            shooter.playSound(shooter, Sound.ENTITY_VILLAGER_NO, 1.0F ,1.0F);
+            shooter.playSound(shooter, Sound.ENTITY_VILLAGER_NO, 1.0F, 1.0F);
             shooter.getInventory().addItem(event.getConsumable());
             event.setCancelled(true);
             return true;

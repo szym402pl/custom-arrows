@@ -31,7 +31,7 @@ public class ArrowManager {
         registerCustomArrow("aim_assist_arrow", new AimAssistArrow());
         registerCustomArrow("seeker_arrow", new SeekerArrow());
         registerCustomArrow("necromancer_arrow", new NecromancerArrow());
-        registerCustomArrow("flashbang_arrow", new FlashbangArrow());
+        registerCustomArrow("flash_bang_arrow", new FlashBangArrow());
         registerCustomArrow("thunder_arrow", new ThunderArrow());
         registerCustomArrow("adrenaline_arrow", new AdrenalineArrow());
         registerCustomArrow("invisible_arrow", new InvisibleArrow());
@@ -43,7 +43,7 @@ public class ArrowManager {
         registerCustomArrow("inversion_arrow", new InversionArrow());
         registerCustomArrow("hedgehog_arrow", new HedgehogArrow());
         registerCustomArrow("weather_arrow", new WeatherArrow());
-        //registerCustomArrow("day_cycle_arrow", new DayCycleArrow());
+        registerCustomArrow("day_cycle_arrow", new DayCycleArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

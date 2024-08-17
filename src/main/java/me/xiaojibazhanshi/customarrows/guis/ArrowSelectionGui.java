@@ -19,7 +19,7 @@ public class ArrowSelectionGui extends GuiHelper {
         this.arrowManager = arrowManager;
     }
 
-    final int[] BOTTOM_FRAME_SLOTS = {1,3,4,6,7,9};
+    final int[] BOTTOM_FRAME_SLOTS = {1, 3, 4, 6, 7, 9};
     final int CLOSE_BUTTON_SLOT = 5;
     final int PREVIOUS_PAGE_SLOT = 2;
     final int NEXT_PAGE_SLOT = 8;
@@ -58,10 +58,10 @@ public class ArrowSelectionGui extends GuiHelper {
         }
 
         GuiItem filler = getNoMoreArrowsFiller();
-        int maxSlot = gui.getPagesNum() * (gui.getRows() -1) * 9; // Rows -1 since there's 1 frame row
+        int maxSlot = gui.getPagesNum() * (gui.getRows() - 1) * 9; // Rows -1 since there's 1 frame row
 
         for (int i = itemAmount; i < maxSlot; i++) {
-           gui.addItem(filler);
+            gui.addItem(filler);
         }
 
         gui.open(player);

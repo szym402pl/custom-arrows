@@ -3,9 +3,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.runnables.SeekerArrowRunnable;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Color;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -22,8 +20,8 @@ public class SeekerArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&9Seeker Arrow", "seeker_arrow",
                                 List.of("", "This arrow, whilst flying,", "will seek for targets below",
-                             "", "Note: It doesn't work on targets that", "are too close to the arrow's flying path!")),
-                        Color.NAVY));
+                                        "", "Note: It doesn't work on targets that", "are too close to the arrow's flying path!")),
+                Color.NAVY));
     }
 
     @Override

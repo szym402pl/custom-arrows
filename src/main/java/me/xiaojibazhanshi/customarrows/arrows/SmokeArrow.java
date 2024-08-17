@@ -25,7 +25,7 @@ public class SmokeArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&8Smoke Arrow", "smoke_arrow",
                                 List.of("", "This arrow will hide the", "target in a dome of smoke")),
-                        Color.GRAY));
+                Color.GRAY));
     }
 
     @Override

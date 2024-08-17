@@ -10,10 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InvisibleArrow extends CustomArrow {
@@ -23,7 +20,7 @@ public class InvisibleArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&7Invisible Arrow", "invisible_arrow",
                                 List.of("", "This arrow is only visible", "to the player who shot it")),
-                        Color.GRAY));
+                Color.GRAY));
     }
 
     @Override

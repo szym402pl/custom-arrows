@@ -1,17 +1,16 @@
 package me.xiaojibazhanshi.customarrows.arrows;
 
-import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
-import org.bukkit.*;
+import org.bukkit.Color;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.List;
@@ -21,10 +20,10 @@ public class NecromancerArrow extends CustomArrow {
     public NecromancerArrow() {
         super(ArrowFactory.changeTippedColor // Or you can use #changeTippedEffect if you need the effect
                 (ArrowFactory.createArrowItemStack(
-                               Material.TIPPED_ARROW, "&2Necromancer Arrow", "necromancer_arrow",
-                               List.of("", "This arrow has a few uses:", "1) Turn villagers into undead ones",
-                               "2) Spawn a monster next to a player", "3) Heal monsters for a period of time")),
-                        Color.GREEN));
+                                Material.TIPPED_ARROW, "&2Necromancer Arrow", "necromancer_arrow",
+                                List.of("", "This arrow has a few uses:", "1) Turn villagers into undead ones",
+                                        "2) Spawn a monster next to a player", "3) Heal monsters for a period of time")),
+                Color.GREEN));
     }
 
     @Override

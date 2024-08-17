@@ -25,7 +25,7 @@ public class HoneyPotArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&6Honeypot Arrow", "honeypot_arrow",
                                 List.of("", "This arrow will trap the", "target in a temporary dome")),
-                        Color.ORANGE));
+                Color.ORANGE));
     }
 
     @Override

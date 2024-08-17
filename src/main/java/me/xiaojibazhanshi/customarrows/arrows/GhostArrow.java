@@ -1,28 +1,17 @@
 package me.xiaojibazhanshi.customarrows.arrows;
 
-import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GhostArrow extends CustomArrow {
@@ -32,8 +21,8 @@ public class GhostArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&7Ghost Arrow", "ghost_arrow",
                                 List.of("", "This arrow is able to phase", "through a single block layer",
-                                "", "Note: This arrow can only", "be shot using a crossbow!")),
-                        Color.GRAY));
+                                        "", "Note: This arrow can only", "be shot using a crossbow!")),
+                Color.GRAY));
     }
 
     @Override

@@ -3,9 +3,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Color;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -22,7 +20,7 @@ public class MolotovArrow extends CustomArrow {
                                 Material.TIPPED_ARROW, "&6Molotov Arrow", "molotov_arrow",
                                 List.of("", "This arrow will act like", "a molotov wherever it lands",
                                         "", "Warning: Only works in open spaces!")),
-                        Color.ORANGE));
+                Color.ORANGE));
     }
 
     @Override

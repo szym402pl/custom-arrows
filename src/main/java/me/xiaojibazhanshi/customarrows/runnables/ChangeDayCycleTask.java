@@ -10,11 +10,11 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.function.Consumer;
 
-public class ChangeWeatherTask implements Consumer<BukkitTask> {
+public class ChangeDayCycleTask implements Consumer<BukkitTask> {
 
     private final Entity arrow;
 
-    public ChangeWeatherTask(Entity arrow) {
+    public ChangeDayCycleTask(Entity arrow) {
         this.arrow = arrow;
     }
 
@@ -27,11 +27,11 @@ public class ChangeWeatherTask implements Consumer<BukkitTask> {
         if (world.getEnvironment() != World.Environment.NORMAL) return;
         if (location.getY() < 120) return;
 
-        boolean isClearWeather = world.isClearWeather();
-        Color nextWeatherColor = isClearWeather ? Color.BLUE : Color.GREEN;
+        boolean isDay = world.getTime() > 0 && world.getTime() < 12000;
+        Color nextCycle = isDay ? Color.BLACK : Color.AQUA;
 
-        ArrowSpecificUtil.detonateFirework(location, FireworkEffect.Type.STAR, nextWeatherColor);
-        world.setStorm(isClearWeather);
+        ArrowSpecificUtil.detonateFirework(location, FireworkEffect.Type.STAR, nextCycle);
+        world.setTime(isDay ? 18000 : 6000);
         arrow.remove();
     }
 

@@ -27,7 +27,7 @@ public class HomingArrowRunnable extends BukkitRunnable {
         if (ArrowSpecificUtil.isDistanceGreaterThan(homingEntity, target, maxDistance)) return;
 
         Vector directionToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(homingEntity, target);
-        Vector finalVelocity =  directionToTarget.multiply(initialSpeed.length());
+        Vector finalVelocity = directionToTarget.multiply(initialSpeed.length());
 
         homingEntity.setVelocity(finalVelocity);
     }

@@ -5,14 +5,10 @@ import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +22,11 @@ public class AdrenalineArrow extends CustomArrow {
             new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0)));
 
     public AdrenalineArrow() {
-        super(ArrowFactory.changeTippedColor // Or you can use #changeTippedEffect if you need the effect
+        super(ArrowFactory.changeTippedColor
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&4Adrenaline Arrow", "adrenaline_arrow",
                                 List.of("", "This arrow gives you", "an adrenaline boost")),
-                        Color.MAROON));
+                Color.MAROON));
     }
 
     @Override

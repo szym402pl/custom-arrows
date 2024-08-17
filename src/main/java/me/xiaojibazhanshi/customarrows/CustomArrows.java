@@ -2,9 +2,9 @@ package me.xiaojibazhanshi.customarrows;
 
 import lombok.Getter;
 import me.xiaojibazhanshi.customarrows.commands.CustomArrowCommand;
-import me.xiaojibazhanshi.customarrows.listeners.ArrowHitEntityListener;
-import me.xiaojibazhanshi.customarrows.listeners.ArrowHitBlockListener;
 import me.xiaojibazhanshi.customarrows.listeners.ArrowFireListener;
+import me.xiaojibazhanshi.customarrows.listeners.ArrowHitBlockListener;
+import me.xiaojibazhanshi.customarrows.listeners.ArrowHitEntityListener;
 import me.xiaojibazhanshi.customarrows.managers.ArrowManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;

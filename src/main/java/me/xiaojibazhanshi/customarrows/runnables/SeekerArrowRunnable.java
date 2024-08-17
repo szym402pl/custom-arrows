@@ -25,7 +25,7 @@ public class SeekerArrowRunnable extends BukkitRunnable {
         if (target.getType() == EntityType.ENDERMAN || target instanceof Fish) return;
 
         Vector directionToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(projectile, target);
-        Vector finalVelocity =  directionToTarget.multiply(initialSpeed.length());
+        Vector finalVelocity = directionToTarget.multiply(initialSpeed.length());
 
         projectile.setVelocity(finalVelocity.multiply(0.75));
         projectile.setGlowing(true);
@@ -33,7 +33,7 @@ public class SeekerArrowRunnable extends BukkitRunnable {
         cancel();
     }
 
-    public void start(Player shooter, Entity projectile, Vector initialSpeed){
+    public void start(Player shooter, Entity projectile, Vector initialSpeed) {
         this.shooter = shooter;
         this.initialSpeed = initialSpeed;
         this.projectile = projectile;

@@ -2,7 +2,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
-import me.xiaojibazhanshi.customarrows.runnables.ChangeWeatherTask;
+import me.xiaojibazhanshi.customarrows.runnables.ChangeDayCycleTask;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Bukkit;
@@ -16,21 +16,21 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 import java.util.List;
 
-public class WeatherArrow extends CustomArrow {
+public class DayCycleArrow extends CustomArrow {
 
-    public WeatherArrow() {
+    public DayCycleArrow() {
         super(ArrowFactory.changeTippedColor
                 (ArrowFactory.createArrowItemStack(
-                                Material.TIPPED_ARROW, "&bWeather Arrow", "weather_arrow",
-                                List.of("", "This arrow will change", "the weather in your world")),
-                Color.AQUA));
+                                Material.TIPPED_ARROW, "&aDay Cycle Arrow", "day_cycle_arrow",
+                                List.of("", "This arrow will change", "the time in your world")),
+                Color.LIME));
     }
 
     @Override
     public void onShoot(EntityShootBowEvent event, Player shooter) {
         int heightCheckDelay = 50;
 
-        ChangeWeatherTask task = new ChangeWeatherTask(event.getProjectile());
+        ChangeDayCycleTask task = new ChangeDayCycleTask(event.getProjectile());
         Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), task, heightCheckDelay);
     }
 
@@ -40,7 +40,7 @@ public class WeatherArrow extends CustomArrow {
             shooter.sendTitle("", GeneralUtil.color("&7I need to aim higher..."), 5, 20, 5);
         } else {
             shooter.sendTitle(GeneralUtil.color("&7Oh wait..."),
-                    GeneralUtil.color("&7there's no weather here..."), 5, 30, 5);
+                    GeneralUtil.color("&7time doesn't change here..."), 5, 30, 5);
         }
     }
 
@@ -50,7 +50,7 @@ public class WeatherArrow extends CustomArrow {
             shooter.sendTitle("", GeneralUtil.color("&7I need to aim higher..."), 5, 20, 5);
         } else {
             shooter.sendTitle(GeneralUtil.color("&7Oh wait..."),
-                    GeneralUtil.color("&7there's no weather here..."), 5, 30, 5);
+                    GeneralUtil.color("&7time doesn't change here..."), 5, 30, 5);
         }
 
         event.getEntity().remove();

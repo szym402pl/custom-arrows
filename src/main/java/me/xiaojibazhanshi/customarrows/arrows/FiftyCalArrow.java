@@ -1,24 +1,19 @@
 package me.xiaojibazhanshi.customarrows.arrows;
 
-import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
-import org.bukkit.*;
+import org.bukkit.Color;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
 
 import java.util.List;
-import java.util.Random;
 
 public class FiftyCalArrow extends CustomArrow {
 
@@ -28,7 +23,7 @@ public class FiftyCalArrow extends CustomArrow {
                                 Material.TIPPED_ARROW, "&1.50 cal Arrow", "fifty_cal_arrow",
                                 List.of("", "This arrow is a literal 50 cal bullet",
                                         "and can only be shot using crossbows!")),
-                        Color.NAVY));
+                Color.NAVY));
     }
 
     @Override

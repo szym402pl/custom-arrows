@@ -1,14 +1,9 @@
 package me.xiaojibazhanshi.customarrows.arrows;
 
-import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
@@ -21,7 +16,7 @@ public class HedgehogArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&dHedgehog Arrow", "hedgehog_arrow",
                                 List.of("", "This arrow will turn the", "target into a hedgehog")),
-                        Color.PURPLE));
+                Color.PURPLE));
     }
 
     @Override

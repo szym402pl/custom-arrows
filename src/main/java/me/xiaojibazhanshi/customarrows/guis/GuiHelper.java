@@ -5,7 +5,6 @@ import dev.triumphteam.gui.components.GuiAction;
 import dev.triumphteam.gui.guis.GuiItem;
 import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
@@ -14,7 +13,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class GuiHelper {

@@ -31,7 +31,7 @@ public class ArrowSpecificUtil {
         Vector direction = eyeLocation.getDirection();
 
         RayTraceResult target = player.getWorld().rayTraceEntities
-                        (eyeLocation, direction, maxDistance, rayTraceSize,
+                (eyeLocation, direction, maxDistance, rayTraceSize,
                         entity -> (entity instanceof LivingEntity && entity != player));
 
         if (target != null) {
@@ -122,9 +122,9 @@ public class ArrowSpecificUtil {
         arrow.setVelocity(directionToPlayer.multiply(2));
     }
 
-    private static Arrow spawnNoGravityArrow(Location arrowLocation) {
-        assert arrowLocation.getWorld() != null;
-        Arrow arrow = arrowLocation.getWorld().spawn(arrowLocation, Arrow.class);
+    private static Arrow spawnNoGravityArrow(Location location) {
+        assert location.getWorld() != null;
+        Arrow arrow = location.getWorld().spawn(location, Arrow.class);
 
         arrow.setGravity(false);
         arrow.setCritical(false);
@@ -133,14 +133,13 @@ public class ArrowSpecificUtil {
         return arrow;
     }
 
-    private static void animateSplitArrow(Arrow arrow, Location arrowLocation, Location targetLocation) {
-        Vector directionToTarget = targetLocation.toVector().subtract(arrowLocation.toVector()).normalize();
+    private static void animateSplitArrow(Arrow arrow, Location startingLocation, Location targetLocation) {
+        Vector directionToTarget = targetLocation.toVector().subtract(startingLocation.toVector()).normalize();
 
         arrow.setVelocity(new Vector(0, 0.3, 0));
 
-        Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
-            arrow.setVelocity(directionToTarget.multiply(0.05));
-        }, 10);
+        Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () ->
+                arrow.setVelocity(directionToTarget.multiply(0.05)), 10);
     }
 
 
@@ -163,18 +162,24 @@ public class ArrowSpecificUtil {
 
             double forceMagnitude = 1 / (distance + 0.05);
             Vector repulsionForce = toEntity.normalize().multiply(forceMagnitude);
+            clampRepulsionForceVector(repulsionForce);
 
-            clampVector(repulsionForce, 0.8, 0.2);
+            double onGroundMultiplier = 2.3;
+            double inAirMultiplier = 1.4;
+            int delay = 4;
 
-            Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
-                livingEntity.setVelocity(livingEntity.isOnGround()
-                                ? repulsionForce.multiply(2.3) : repulsionForce.multiply(1.4));
-            }, 4); // simulate actual repulsion
+            // simulate actual repulsion
+            Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () ->
+                    livingEntity.setVelocity(livingEntity.isOnGround()
+                    ? repulsionForce.multiply(onGroundMultiplier) : repulsionForce.multiply(inAirMultiplier)), delay);
         }
     }
 
-    private static void clampVector(Vector vector, double maxMagnitude, double minYSpeed) {
+    private static void clampRepulsionForceVector(Vector vector) {
         // some other complex calculations that took me fucking ages
+        double maxMagnitude = 0.8;
+        double minYSpeed = 0.8;
+
         double x = vector.getX();
         double y = vector.getY();
         double z = vector.getZ();
@@ -189,9 +194,10 @@ public class ArrowSpecificUtil {
 
         y = Math.max(minYSpeed, Math.min(maxMagnitude, y));
 
+        double minXAndZ = 0.2;
         if (x == 0 && z == 0) {
-            x = 0.2;
-            z = 0.2;
+            x = minXAndZ;
+            z = minXAndZ;
         }
 
         vector.setX(x);
@@ -226,7 +232,7 @@ public class ArrowSpecificUtil {
         Vector initialSpeed = projectile.getVelocity();
 
         Vector directionToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(projectile, target);
-        Vector finalVelocity =  directionToTarget.multiply(initialSpeed.length());
+        Vector finalVelocity = directionToTarget.multiply(initialSpeed.length());
 
         projectile.setVelocity(finalVelocity.multiply(1.15).multiply(new Vector(1, 1.1, 1)));
     }
@@ -324,32 +330,32 @@ public class ArrowSpecificUtil {
     }
 
 
-    /* Flashbang Arrow */
+    /* Flash-bang Arrow */
 
-    public static void detonateFlashbang(Entity itemDisplay, long delay) {
+    public static void detonateFlashBang(Entity itemDisplay, long delay) {
         Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
             itemDisplay.remove();
             ArrowSpecificUtil.detonateFirework(itemDisplay.getLocation(), FireworkEffect.Type.BALL, Color.WHITE);
 
             for (Entity onLooker : ArrowSpecificUtil.getEntitiesLookingAt(itemDisplay, 8)) {
-                ArrowSpecificUtil.applyFlashbangEffect(onLooker);
+                ArrowSpecificUtil.applyFlashBangEffect(onLooker);
             }
         }, delay);
     }
 
 
-    public static void applyFlashbangEffect(Entity entity) {
+    public static void applyFlashBangEffect(Entity entity) {
         if (!(entity instanceof LivingEntity livingEntity)) return;
 
         Random randomInstance = new Random();
-        int flashbangDuration = (randomInstance.nextInt(4, 9) + 1) * 20;
+        int flashBangDuration = (randomInstance.nextInt(4, 9) + 1) * 20;
 
-        ArrayList<PotionEffect> flashbangEffects = new ArrayList<>(List.of
-                (new PotionEffect(PotionEffectType.NAUSEA, flashbangDuration, 2, true),
-                 new PotionEffect(PotionEffectType.SLOWNESS, flashbangDuration, 2, true),
-                 new PotionEffect(PotionEffectType.BLINDNESS, flashbangDuration, 2, true)));
+        ArrayList<PotionEffect> flashBangEffects = new ArrayList<>(List.of
+                (new PotionEffect(PotionEffectType.NAUSEA, flashBangDuration, 2, true),
+                        new PotionEffect(PotionEffectType.SLOWNESS, flashBangDuration, 2, true),
+                        new PotionEffect(PotionEffectType.BLINDNESS, flashBangDuration, 2, true)));
 
-        for (PotionEffect effect : flashbangEffects) {
+        for (PotionEffect effect : flashBangEffects) {
             livingEntity.addPotionEffect(effect);
         }
     }
@@ -546,17 +552,19 @@ public class ArrowSpecificUtil {
         int fourthSmokeAmount = 225;
         int fifthSmokeAmount = 200;
 
-        SmokeCloudTask firstIteration = new SmokeCloudTask(firstSmokeAmount, location, 2,  10);
-        SmokeCloudTask secondIteration = new SmokeCloudTask(secondSmokeAmount, location, 3,  15);
-        SmokeCloudTask thirdIteration = new SmokeCloudTask(thirdSmokeAmount, location, 4,  20);
-        SmokeCloudTask fourthIteration = new SmokeCloudTask(fourthSmokeAmount, location, 4,  25);
-        SmokeCloudTask fifthIteration = new SmokeCloudTask(fifthSmokeAmount, location, 4,  25);
+        int period = 1;
+
+        SmokeCloudTask firstIteration = new SmokeCloudTask(firstSmokeAmount, location, 2, 10);
+        SmokeCloudTask secondIteration = new SmokeCloudTask(secondSmokeAmount, location, 3, 15);
+        SmokeCloudTask thirdIteration = new SmokeCloudTask(thirdSmokeAmount, location, 4, 20);
+        SmokeCloudTask fourthIteration = new SmokeCloudTask(fourthSmokeAmount, location, 4, 25);
+        SmokeCloudTask fifthIteration = new SmokeCloudTask(fifthSmokeAmount, location, 4, 25);
 
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), firstIteration, 2, 1);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), secondIteration, firstSmokeAmount/8, 1);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), thirdIteration, firstSmokeAmount/5, 1);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fourthIteration, firstSmokeAmount/3, 1);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fifthIteration, firstSmokeAmount/2, 1);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), secondIteration,firstSmokeAmount/8,period);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), thirdIteration,firstSmokeAmount/5, period);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fourthIteration,firstSmokeAmount/3,period);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fifthIteration,firstSmokeAmount/2, period);
     }
 
 
