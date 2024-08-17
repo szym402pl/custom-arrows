@@ -2,6 +2,7 @@ package me.xiaojibazhanshi.customarrows.util;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.runnables.LightningStrikeTask;
+import me.xiaojibazhanshi.customarrows.runnables.SmokeCloudTask;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
@@ -18,7 +19,6 @@ import org.bukkit.util.Vector;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Consumer;
 
 public class ArrowSpecificUtil {
 
@@ -528,7 +528,24 @@ public class ArrowSpecificUtil {
         GeneralUtil.removeArrowAfter(arrow, 300);
     }
 
-    public static boolean isFakeArrow(Entity arrow) {
-        return arrow instanceof Arrow && (!arrow.isVisibleByDefault()) && arrow.isVisualFire();
+    public static boolean isFakeArrow(Entity entity) {
+        return entity instanceof Arrow arrow
+                && (!arrow.isVisibleByDefault())
+                && arrow.isVisualFire();
+    }
+
+
+    /* Smoke Arrow */
+
+
+    public static void createSmokeCloud(Location location) {
+        int firstSmokeAmount = 150;
+        int secondSmokeAmount = 250;
+
+        SmokeCloudTask firstIteration = new SmokeCloudTask(firstSmokeAmount, location, 2, 12.0F, 3);
+        SmokeCloudTask secondIteration = new SmokeCloudTask(secondSmokeAmount, location, 4, 22.0F, 12);
+
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), firstIteration, 2, 1);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), secondIteration, firstSmokeAmount /2, 1);
     }
 }

@@ -46,18 +46,18 @@ public class GhostArrow extends CustomArrow {
         arrow.setGlowing(true);
 
         ArrowSpecificUtil.shootFakeArrow(event, shooter);
-
-        GeneralUtil.removeArrowAfter((Arrow) event.getProjectile(), 200);
+        GeneralUtil.removeArrowAfter((Arrow) arrow, 200);
     }
 
     @Override
     public void onHitBlock(ProjectileHitEvent event, Player shooter) {
-        if (event.getHitBlock() != null && event.getHitBlock().getType().isSolid() &&
-        GeneralUtil.isNotPlant(event.getHitBlock()) && !event.getEntity().isVisibleByDefault()) {
+        if (event.getHitBlock() != null
+                && event.getHitBlock().getType().isSolid()
+                && GeneralUtil.isNotPlant(event.getHitBlock())
+                && ArrowSpecificUtil.isFakeArrow(event.getEntity())) {
 
             ArrowSpecificUtil.temporarilyConvertToDisplayItem(event.getHitBlock());
             event.getEntity().remove();
-
         }
     }
 }
