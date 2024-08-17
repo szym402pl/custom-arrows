@@ -539,11 +539,12 @@ public class ArrowSpecificUtil {
 
 
     public static void createProgressiveSmokeCloud(Location location) {
-        int firstSmokeAmount = 300;
-        int secondSmokeAmount = 250;
-        int thirdSmokeAmount = 200;
-        int fourthSmokeAmount = 175;
-        int fifthSmokeAmount = 150;
+        // I KNOW THE CODE'S UGLY BUT HEY IT LOOKS AWESOME IN-GAME SO SHUT UP
+        int firstSmokeAmount = 400;
+        int secondSmokeAmount = 350;
+        int thirdSmokeAmount = 250;
+        int fourthSmokeAmount = 225;
+        int fifthSmokeAmount = 200;
 
         SmokeCloudTask firstIteration = new SmokeCloudTask(firstSmokeAmount, location, 2,  10);
         SmokeCloudTask secondIteration = new SmokeCloudTask(secondSmokeAmount, location, 3,  15);
@@ -552,10 +553,27 @@ public class ArrowSpecificUtil {
         SmokeCloudTask fifthIteration = new SmokeCloudTask(fifthSmokeAmount, location, 4,  25);
 
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), firstIteration, 2, 1);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), secondIteration, firstSmokeAmount/4, 1);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), thirdIteration, firstSmokeAmount/3, 1);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fourthIteration, firstSmokeAmount/2, 1);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fifthIteration,
-                firstSmokeAmount/2 + firstSmokeAmount/20, 1);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), secondIteration, firstSmokeAmount/8, 1);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), thirdIteration, firstSmokeAmount/5, 1);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fourthIteration, firstSmokeAmount/3, 1);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fifthIteration, firstSmokeAmount/2, 1);
+    }
+
+
+    /* Magnet Arrow */
+
+
+    /**
+     * @return true if there was at least one item in the vicinity
+     */
+    public static boolean teleportNearbyItemsTo(Entity target, int radius) {
+        for (Entity item : target.getNearbyEntities(radius, radius, radius)) {
+            if (!(item instanceof Item)) continue;
+
+            item.teleport(target.getLocation().add(new Vector(0, 1.25, 0)));
+            return true;
+        }
+
+        return false;
     }
 }

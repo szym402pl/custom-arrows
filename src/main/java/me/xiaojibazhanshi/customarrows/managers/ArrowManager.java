@@ -39,6 +39,7 @@ public class ArrowManager {
         registerCustomArrow("fifty_cal_arrow", new FiftyCalArrow());
         registerCustomArrow("ghost_arrow", new GhostArrow());
         registerCustomArrow("smoke_arrow", new SmokeArrow());
+        registerCustomArrow("magnet_arrow", new MagnetArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
