@@ -662,4 +662,66 @@ public class ArrowSpecificUtil {
     }
 
 
+    /* Black Hole Arrow */
+
+
+    public static List<Location> generateSphere(Location center, double radius, double pointDensity) {
+        List<Location> points = new ArrayList<>();
+
+        double step = 1.0 / pointDensity;
+
+        for (double phi = 0.0; phi < Math.PI * 2; phi += step) {
+            for (double theta = 0.0; theta < Math.PI; theta += step) {
+                double x = radius * Math.cos(phi) * Math.sin(theta);
+                double y = radius * Math.sin(phi) * Math.sin(theta);
+                double z = radius * Math.cos(theta);
+
+                Location point = center.clone().add(x, y, z);
+                points.add(point);
+            }
+        }
+
+        return points;
+    }
+
+    public static List<Location> generateOneHighCylinder(Location center, double radius, double pointDensity) {
+        List<Location> points = new ArrayList<>();
+
+        double step = 1.0 / pointDensity;
+
+        for (double phi = 0.0; phi < Math.PI * 2; phi += step) {
+            for (double theta = 0.0; theta < Math.PI; theta += step) {
+                double x = radius * Math.cos(phi) * Math.sin(theta);
+                double y = center.getY();
+                double z = radius * Math.cos(theta);
+
+                Location point = center.clone().add(x, y, z);
+                points.add(point);
+            }
+        }
+
+        return points;
+    }
+
+    public static void breakBlocksAround(Location center, int radius) {
+        World world = center.getWorld();
+        int centerX = center.getBlockX();
+        int centerY = center.getBlockY();
+        int centerZ = center.getBlockZ();
+
+        for (int x = centerX - radius; x <= centerX + radius; x++) {
+            for (int y = centerY - radius; y <= centerY + radius; y++) {
+                for (int z = centerZ - radius; z <= centerZ + radius; z++) {
+                    assert world != null;
+                    Block block = world.getBlockAt(x, y, z);
+
+                    if (block.getType() != Material.AIR && block.getType() != Material.BEDROCK) {
+                        block.breakNaturally();
+                    }
+                }
+            }
+        }
+    }
+
+
 }
