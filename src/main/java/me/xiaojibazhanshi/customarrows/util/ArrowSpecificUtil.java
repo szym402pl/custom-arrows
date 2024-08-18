@@ -640,7 +640,7 @@ public class ArrowSpecificUtil {
             textDisplay.setBillboard(Display.Billboard.CENTER);
         });
 
-        GeneralUtil.removeDisplayAfter(display, 30 * 20);
+        GeneralUtil.removeEntityAfter(display, 30 * 20);
         return crystal;
     }
 

@@ -81,11 +81,11 @@ public class GeneralUtil {
         }.runTaskLater(CustomArrows.getInstance(), delay);
     }
 
-    public static void removeDisplayAfter(TextDisplay display, long delay) {
+    public static void removeEntityAfter(Entity entity, long delay) {
         new BukkitRunnable() {
             @Override
             public void run() {
-                display.remove();
+                entity.remove();
             }
         }.runTaskLater(CustomArrows.getInstance(), delay);
     }

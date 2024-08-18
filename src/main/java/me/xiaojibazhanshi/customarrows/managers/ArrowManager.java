@@ -46,6 +46,7 @@ public class ArrowManager {
         registerCustomArrow("day_cycle_arrow", new DayCycleArrow());
         registerCustomArrow("meteor_arrow", new MeteorArrow());
         registerCustomArrow("crystal_heal_arrow", new CrystalHealArrow());
+        registerCustomArrow("grappling_hook_arrow", new GrapplingHookArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
