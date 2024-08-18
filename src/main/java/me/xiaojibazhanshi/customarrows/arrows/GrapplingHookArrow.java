@@ -3,12 +3,10 @@ package me.xiaojibazhanshi.customarrows.arrows;
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
+import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.*;
-import org.bukkit.entity.Chicken;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -22,8 +20,6 @@ import java.util.UUID;
 
 public class GrapplingHookArrow extends CustomArrow {
 
-    private Set<UUID> playersUsingArrow = new HashSet<>();
-
     public GrapplingHookArrow() {
         super(ArrowFactory.changeTippedColor
                 (ArrowFactory.createArrowItemStack(
@@ -34,25 +30,19 @@ public class GrapplingHookArrow extends CustomArrow {
 
     @Override
     public void onHitBlock(ProjectileHitEvent event, Player shooter) {
+        Arrow arrow = (Arrow) event.getEntity();
 
-        Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
-            playersUsingArrow.remove(shooter.getUniqueId());
-
-            event.getEntity().eject();
-            event.getEntity().remove();
-        }, 40);
+        Vector direction = ArrowSpecificUtil.getDirectionFromEntityToTarget(arrow, shooter);
+        shooter.setVelocity(direction.add(new Vector(0, 1, 0)));
     }
 
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
+        if (!(event.getEntity() instanceof LivingEntity target)) return;
+        if (event.getEntity().equals(shooter)) return;
 
-        Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
-            playersUsingArrow.remove(shooter.getUniqueId());
-
-            event.getDamager().eject();
-            event.getDamager().remove();
-            shooter.eject();
-        }, 40);
+        Vector direction = ArrowSpecificUtil.getDirectionFromEntityToTarget(target, shooter);
+        target.setVelocity(direction);
     }
 
     @Override
@@ -65,40 +55,7 @@ public class GrapplingHookArrow extends CustomArrow {
             return;
         }
 
-        if (playersUsingArrow.contains(shooter.getUniqueId())) {
-            event.setCancelled(true);
-            shooter.sendTitle("", GeneralUtil.color("&7I'll wait for the last hook to fall"));
-            return;
-        }
-
-        Entity arrow = event.getProjectile();
-        World world = shooter.getWorld();
-
-        Location arrowLocation = arrow.getLocation();
-
-        arrow.setVelocity(arrow.getVelocity().multiply(0.5));
-        playersUsingArrow.add(shooter.getUniqueId());
-
-        Chicken arrowHolder = createInvisibleChicken(arrowLocation, world);
-        arrowHolder.setLeashHolder(shooter);
-
-        GeneralUtil.removeEntityAfter(arrowHolder, 200);
-        arrow.addPassenger(arrowHolder);
-    }
-
-    @Override
-    public void onPlayerLeave(PlayerQuitEvent event, Player player) {
-        playersUsingArrow.remove(player.getUniqueId());
-        player.eject();
-    }
-
-    private Chicken createInvisibleChicken(Location location, World world) {
-        Chicken chicken = (Chicken) world.spawnEntity(location, EntityType.CHICKEN);
-        chicken.setGravity(false);
-        chicken.setAI(false);
-        chicken.setInvulnerable(true);
-        chicken.setVisibleByDefault(false);
-
-        return chicken;
+        Arrow arrow = (Arrow) event.getProjectile();
+        arrow.setVelocity(arrow.getVelocity().multiply(0.6));
     }
 }
