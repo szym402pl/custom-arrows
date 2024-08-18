@@ -36,23 +36,22 @@ public class DayCycleArrow extends CustomArrow {
 
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
-        if (shooter.getWorld().getEnvironment() == World.Environment.NORMAL) {
-            shooter.sendTitle("", GeneralUtil.color("&7I need to aim higher..."), 5, 20, 5);
-        } else {
-            shooter.sendTitle(GeneralUtil.color("&7Oh wait..."),
-                    GeneralUtil.color("&7time doesn't change here..."), 5, 30, 5);
-        }
+        sendTitle(shooter);
     }
 
     @Override
     public void onHitBlock(ProjectileHitEvent event, Player shooter) {
+        sendTitle(shooter);
+
+        event.getEntity().remove();
+    }
+
+    private void sendTitle(Player shooter) {
         if (shooter.getWorld().getEnvironment() == World.Environment.NORMAL) {
             shooter.sendTitle("", GeneralUtil.color("&7I need to aim higher..."), 5, 20, 5);
         } else {
             shooter.sendTitle(GeneralUtil.color("&7Oh wait..."),
                     GeneralUtil.color("&7time doesn't change here..."), 5, 30, 5);
         }
-
-        event.getEntity().remove();
     }
 }

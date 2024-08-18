@@ -27,7 +27,8 @@ public class SeekerArrowRunnable extends BukkitRunnable {
         Vector directionToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(projectile, target);
         Vector finalVelocity = directionToTarget.multiply(initialSpeed.length());
 
-        projectile.setVelocity(finalVelocity.multiply(0.75));
+        final double velocityClamp = 0.75;
+        projectile.setVelocity(finalVelocity.multiply(velocityClamp));
         projectile.setGlowing(true);
 
         cancel();

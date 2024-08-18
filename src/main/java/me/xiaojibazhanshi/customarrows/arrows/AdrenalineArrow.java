@@ -15,11 +15,13 @@ import java.util.List;
 
 public class AdrenalineArrow extends CustomArrow {
 
+    private final int potionDuration = 20 * 20; // 20 sec
+
     ArrayList<PotionEffect> effects = new ArrayList<>(List.of(
-            new PotionEffect(PotionEffectType.SPEED, 20 * 20, 1),
-            new PotionEffect(PotionEffectType.HASTE, 20 * 20, 0),
-            new PotionEffect(PotionEffectType.RESISTANCE, 20 * 20, 0),
-            new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0)));
+            new PotionEffect(PotionEffectType.SPEED, potionDuration, 1),
+            new PotionEffect(PotionEffectType.HASTE, potionDuration, 0),
+            new PotionEffect(PotionEffectType.RESISTANCE, potionDuration, 0),
+            new PotionEffect(PotionEffectType.NIGHT_VISION, potionDuration, 0)));
 
     public AdrenalineArrow() {
         super(ArrowFactory.changeTippedColor

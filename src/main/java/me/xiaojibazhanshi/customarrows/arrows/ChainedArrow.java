@@ -25,8 +25,10 @@ public class ChainedArrow extends CustomArrow {
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
         if (!(event.getEntity() instanceof LivingEntity hitEntity)) return;
+        final int radius = 8;
+        final int yRadius = 4;
 
-        List<LivingEntity> targetList = new ArrayList<>(hitEntity.getNearbyEntities(8, 4, 8)
+        List<LivingEntity> targetList = new ArrayList<>(hitEntity.getNearbyEntities(radius, yRadius, radius)
                 .stream()
                 .filter(entity -> entity instanceof LivingEntity)
                 .filter(entity -> !entity.equals(shooter) && !entity.equals(hitEntity))

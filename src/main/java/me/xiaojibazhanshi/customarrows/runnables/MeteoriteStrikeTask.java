@@ -29,8 +29,9 @@ public class MeteoriteStrikeTask implements Consumer<BukkitTask> {
         if (location.getWorld() == null) return;
 
         Location randomLocation = randomizeLocation(location.clone(), maxOffset);
-        float pitch = 35.0F;
-        randomLocation.setPitch(pitch);
+
+        float angle = 35.0F;
+        randomLocation.setPitch(angle);
 
         location.getWorld().spawn(randomLocation, Fireball.class);
 

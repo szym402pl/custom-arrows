@@ -20,18 +20,28 @@ public class ChangeDayCycleTask implements Consumer<BukkitTask> {
 
     @Override
     public void accept(BukkitTask bukkitTask) {
+        final long nightPeak = 18000;
+        final long dayPeak = 6000;
+        final long nightThreshold = 12000;
+        final long dayThreshold = 0;
+
+        final int minHeight = 120;
+
         Location location = arrow.getLocation();
         World world = location.clone().getWorld();
 
         if (world == null) return;
         if (world.getEnvironment() != World.Environment.NORMAL) return;
-        if (location.getY() < 120) return;
+        if (location.getY() < minHeight) return;
 
-        boolean isDay = world.getTime() > 0 && world.getTime() < 12000;
-        Color nextCycle = isDay ? Color.BLACK : Color.AQUA;
+        boolean isDay = world.getTime() > dayThreshold && world.getTime() < nightThreshold;
 
-        ArrowSpecificUtil.detonateFirework(location, FireworkEffect.Type.STAR, nextCycle);
-        world.setTime(isDay ? 18000 : 6000);
+        long time = isDay ? nightPeak : dayPeak;
+        Color fireworkColor = isDay ? Color.BLACK : Color.AQUA;
+
+        ArrowSpecificUtil.detonateFirework(location, FireworkEffect.Type.STAR, fireworkColor);
+
+        world.setTime(time);
         arrow.remove();
     }
 

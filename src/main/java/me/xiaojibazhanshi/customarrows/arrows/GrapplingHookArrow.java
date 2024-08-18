@@ -11,6 +11,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.HashSet;
@@ -32,8 +34,11 @@ public class GrapplingHookArrow extends CustomArrow {
     public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         Arrow arrow = (Arrow) event.getEntity();
 
-        Vector direction = ArrowSpecificUtil.getDirectionFromEntityToTarget(arrow, shooter);
-        shooter.setVelocity(direction.add(new Vector(0, 1, 0)));
+        PotionEffect fall = new PotionEffect(PotionEffectType.SLOW_FALLING, 60, 0);
+        shooter.addPotionEffect(fall);
+
+        double speed = event.getEntity().isOnGround() ? 1.9 : 1.7;
+        ArrowSpecificUtil.applyGrapplingHookVelocity(shooter, arrow.getLocation(), speed);
     }
 
     @Override
@@ -41,8 +46,8 @@ public class GrapplingHookArrow extends CustomArrow {
         if (!(event.getEntity() instanceof LivingEntity target)) return;
         if (event.getEntity().equals(shooter)) return;
 
-        Vector direction = ArrowSpecificUtil.getDirectionFromEntityToTarget(target, shooter);
-        target.setVelocity(direction);
+        double speed = event.getEntity().isOnGround() ? 6.0 : 4.0;
+        ArrowSpecificUtil.applyGrapplingHookVelocity(target, shooter.getLocation(), speed);
     }
 
     @Override
@@ -56,6 +61,6 @@ public class GrapplingHookArrow extends CustomArrow {
         }
 
         Arrow arrow = (Arrow) event.getProjectile();
-        arrow.setVelocity(arrow.getVelocity().multiply(0.6));
+        arrow.setVelocity(arrow.getVelocity().multiply(0.65));
     }
 }

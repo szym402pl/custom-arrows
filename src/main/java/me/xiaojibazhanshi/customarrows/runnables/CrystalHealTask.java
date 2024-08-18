@@ -38,7 +38,12 @@ public class CrystalHealTask implements Consumer<BukkitTask> {
 
     @Override
     public void accept(BukkitTask bukkitTask) {
-        if (counter * chosenPeriod == durationInSeconds * 20) bukkitTask.cancel();
+        final int ticksInSecond = 20;
+        final double healingFactor = 0.4;
+        final double directionClamp = 0.02;
+        final Vector neededYSubtraction = new Vector(0, 0.6, 0);
+
+        if (counter * chosenPeriod >= durationInSeconds * ticksInSecond) bukkitTask.cancel();
 
         if (!target.isOnline() || target.isDead()) {
             crystalMap.remove(target.getUniqueId());
@@ -46,12 +51,12 @@ public class CrystalHealTask implements Consumer<BukkitTask> {
         }
 
         Vector fromCrystalToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(crystal, target)
-                .multiply(0.02)
-                .add(new Vector(0, 0.6, 0));
+                .multiply(directionClamp)
+                .add(neededYSubtraction);
 
         crystal.setBeamTarget(target.getLocation().subtract(fromCrystalToTarget));
 
-        double updatedHealth = Math.min(target.getHealth() + 0.4, maxPlayerHealth);
+        double updatedHealth = Math.min(target.getHealth() + healingFactor, maxPlayerHealth);
         target.setHealth(updatedHealth);
 
         counter++;

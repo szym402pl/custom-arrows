@@ -30,12 +30,13 @@ public class FlashBangArrow extends CustomArrow {
         Location arrowLocation = event.getEntity().getLocation();
         event.getEntity().remove();
 
+        Vector locationAdjustment = new Vector(0, 0.2, 0);
+
         Entity itemDisplay = ArrowSpecificUtil.spawnDisplayItem
-                (Material.SNOWBALL, arrowLocation.add(new Vector(0, 0.2, 0)), "&eLook here!");
+                (Material.SNOWBALL, arrowLocation.add(locationAdjustment), "&eLook here!");
 
         Location itemDisplayLocation = itemDisplay.getLocation();
         assert itemDisplayLocation.getWorld() != null;
-
         itemDisplayLocation.getWorld().playSound(itemDisplayLocation, Sound.ENTITY_VILLAGER_CELEBRATE, 1.0F, 1.0F);
 
         ArrowSpecificUtil.detonateFlashBang(itemDisplay, 50L);

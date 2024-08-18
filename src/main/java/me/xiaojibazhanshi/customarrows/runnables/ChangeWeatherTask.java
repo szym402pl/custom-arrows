@@ -20,17 +20,19 @@ public class ChangeWeatherTask implements Consumer<BukkitTask> {
 
     @Override
     public void accept(BukkitTask bukkitTask) {
+        final int minHeight = 120;
+
         Location location = arrow.getLocation();
         World world = location.clone().getWorld();
 
         if (world == null) return;
         if (world.getEnvironment() != World.Environment.NORMAL) return;
-        if (location.getY() < 120) return;
+        if (location.getY() < minHeight) return;
 
         boolean isClearWeather = world.isClearWeather();
-        Color nextWeatherColor = isClearWeather ? Color.BLUE : Color.GREEN;
+        Color fireworkColor = isClearWeather ? Color.BLUE : Color.GREEN;
 
-        ArrowSpecificUtil.detonateFirework(location, FireworkEffect.Type.STAR, nextWeatherColor);
+        ArrowSpecificUtil.detonateFirework(location, FireworkEffect.Type.STAR, fireworkColor);
         world.setStorm(isClearWeather);
         arrow.remove();
     }
