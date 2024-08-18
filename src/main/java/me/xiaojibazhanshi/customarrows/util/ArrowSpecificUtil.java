@@ -702,7 +702,7 @@ public class ArrowSpecificUtil {
         return points;
     }
 
-    public static Map<Location, BlockData> getBlocksAround(Location center, int radius) {
+    public static Map<Location, BlockData> getBlocksAround(Location center, double radius) {
         Map<Location, BlockData> blockMap = new HashMap<>();
 
         World world = center.getWorld();
@@ -710,11 +710,11 @@ public class ArrowSpecificUtil {
         int centerY = center.getBlockY();
         int centerZ = center.getBlockZ();
 
-        for (int x = centerX - radius; x <= centerX + radius; x++) {
-            for (int y = centerY - radius; y <= centerY + radius; y++) {
-                for (int z = centerZ - radius; z <= centerZ + radius; z++) {
+        for (double x = centerX - radius; x <= centerX + radius; x++) {
+            for (double y = centerY - radius; y <= centerY + radius; y++) {
+                for (double z = centerZ - radius; z <= centerZ + radius; z++) {
                     assert world != null;
-                    Block block = world.getBlockAt(x, y, z);
+                    Block block = world.getBlockAt((int) x,(int) y,(int) z);
 
                     if (block.getType() != Material.AIR && block.getType() != Material.BEDROCK) {
                         blockMap.put(block.getLocation(), block.getBlockData());
@@ -728,29 +728,58 @@ public class ArrowSpecificUtil {
         return blockMap;
     }
 
-    public static void executeBlackHoleAnimation(Location location, int radius) {
+    public static void executeBlackHoleAnimation(Location location, double radius) {
         Map<Location, BlockData> blockDataMap = getBlocksAround(location, radius);
+        List<BlockDisplay> blockDisplayList = recreateBrokenBlocks(blockDataMap);
 
-        BlackHoleAnimationTask task = new BlackHoleAnimationTask(location, blockDataMap);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 1, 2);
+        BlackHoleAnimationTask task = new BlackHoleAnimationTask(location, blockDisplayList);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 1, 1);
     }
 
-    public static void animateTowardBlackHole(Location blackHole, Location blockLocation, BlockData blockData) {
-        assert blockLocation.getWorld() != null;
+    public static void animateTowardBlackHole(Location blackHole, BlockDisplay blockDisplay) {
+        Location currentLocation = blockDisplay.getLocation();
+        Vector direction = blackHole.toVector().subtract(currentLocation.toVector()).normalize();
 
-        BlockDisplay blockDisplay = blockLocation.getWorld().spawn(blockLocation, BlockDisplay.class, (display) -> {
-            display.setBlock(blockData);
-            display.setInvulnerable(true);
-            display.setGravity(false);
-        });
+        currentLocation.add(direction);
+
+        double yaw = Math.toDegrees(Math.atan2(direction.getZ(), direction.getX())) - 90;
+        double pitch = Math.toDegrees(Math.asin(-direction.getY()));
+
+        currentLocation.setYaw((float) yaw);
+        currentLocation.setPitch((float) pitch);
+
+        blockDisplay.setTeleportDuration(20);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                blockDisplay.teleport(blackHole);
+            }
+        }.runTaskLater(CustomArrows.getInstance(), 2);
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 blockDisplay.remove();
             }
-        }.runTaskLater(CustomArrows.getInstance(), 10);
+        }.runTaskLater(CustomArrows.getInstance(), 20);
+    }
 
+    public static List<BlockDisplay> recreateBrokenBlocks(Map<Location, BlockData> blockDataMap) {
+        List<BlockDisplay> recreatedBlocks = new ArrayList<>();
+
+        for (Location blockLocation : blockDataMap.keySet()) {
+            assert blockLocation.getWorld() != null;
+
+            BlockDisplay blockDisplay = blockLocation.getWorld().spawn(blockLocation, BlockDisplay.class, (display) -> {
+                display.setBlock(blockDataMap.get(blockLocation));
+                display.setInvulnerable(true);
+                display.setGravity(false);
+            });
+
+            recreatedBlocks.add(blockDisplay);
+        }
+
+        return recreatedBlocks;
     }
 
 

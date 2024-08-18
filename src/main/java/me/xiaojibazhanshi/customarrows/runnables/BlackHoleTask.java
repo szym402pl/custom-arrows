@@ -3,7 +3,10 @@ package me.xiaojibazhanshi.customarrows.runnables;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.*;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.util.Vector;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,10 +34,22 @@ public class BlackHoleTask implements Consumer<BukkitTask> {
         int ticksInSecond = 20;
         if (counter * chosenPeriod >= durationInSeconds * ticksInSecond) bukkitTask.cancel();
 
+        if (!areBlocksBroken) {
+            ArrowSpecificUtil.executeBlackHoleAnimation(location, 2.5);
+            areBlocksBroken = true;
+        }
+
         World world = location.getWorld();
         assert world != null;
 
-        List<Location> ringLocations = ArrowSpecificUtil.generateOneHighRing(location, 3, 8.0);
+        generateBlackHole(world);
+        suckInNearbyEntities(location);
+
+        counter++;
+    }
+
+    private void generateBlackHole(World world) {
+        List<Location> ringLocations = ArrowSpecificUtil.generateOneHighRing(location, 3, 9.0);
         List<Location> blackHoleLocations = ArrowSpecificUtil.generateSphere(location, 0.75, 4.0);
 
         for (Location particleBLocation : ringLocations) {
@@ -54,13 +69,27 @@ public class BlackHoleTask implements Consumer<BukkitTask> {
                     0.0,
                     new Particle.DustOptions(Color.BLACK, 1.35F), true);
         }
+    }
 
-        if (!areBlocksBroken) {
-            ArrowSpecificUtil.executeBlackHoleAnimation(location, 2);
-            areBlocksBroken = true;
+    private void suckInNearbyEntities(Location location) {
+        World world = location.getWorld();
+        assert world != null;
+
+        for (Entity entity : world.getNearbyEntities(location, 6, 6, 6)) {
+            if (!(entity instanceof LivingEntity livingEntity)) return;
+
+            if (livingEntity.getLocation().distance(location) < 1.5) {
+                livingEntity.damage(0.75);
+            }
+
+            Location livingEntityLocation = livingEntity.getLocation();
+            Vector direction = location.toVector().subtract(livingEntityLocation.toVector());
+
+            direction.normalize();
+            direction.multiply(0.5);
+
+            livingEntity.setVelocity(livingEntity.getVelocity().add(direction));
         }
-
-        counter++;
     }
 
 }

@@ -28,7 +28,7 @@ public class BlackHoleArrow extends CustomArrow {
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
         event.getDamager().remove();
 
-        BlackHoleTask task = new BlackHoleTask(event.getDamager().getLocation(), 5, 2);
+        BlackHoleTask task = new BlackHoleTask(event.getDamager().getLocation(), 10, 2);
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 1, 2);
     }
 
