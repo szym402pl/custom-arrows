@@ -11,6 +11,7 @@ import org.bukkit.util.Vector;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 
 public class BlackHoleTask implements Consumer<BukkitTask> {
@@ -34,23 +35,27 @@ public class BlackHoleTask implements Consumer<BukkitTask> {
         int ticksInSecond = 20;
         if (counter * chosenPeriod >= durationInSeconds * ticksInSecond) bukkitTask.cancel();
 
-        if (!areBlocksBroken) {
-            ArrowSpecificUtil.executeBlackHoleAnimation(location, 2.5);
-            areBlocksBroken = true;
-        }
-
         World world = location.getWorld();
         assert world != null;
 
-        generateBlackHole(world);
         suckInNearbyEntities(location);
+        generateBlackHole(world);
+
+        if (!areBlocksBroken) {
+            ArrowSpecificUtil.executeBlackHoleAnimation(location, 2.4);
+            areBlocksBroken = true;
+        }
 
         counter++;
     }
 
     private void generateBlackHole(World world) {
-        List<Location> ringLocations = ArrowSpecificUtil.generateOneHighRing(location, 3, 9.0);
-        List<Location> blackHoleLocations = ArrowSpecificUtil.generateSphere(location, 0.75, 4.0);
+        Location adjustedLocation = location.clone().add(-1.1, 0, -1.1);
+
+        List<Location> ringLocations = ArrowSpecificUtil.generateOneHighRing(adjustedLocation, 1.75, 9.0);
+        List<Location> blackHoleLocations = ArrowSpecificUtil.generateSphere(adjustedLocation, 0.3, 4.0);
+
+        boolean isOtherColor = ThreadLocalRandom.current().nextInt(10) == 1;
 
         for (Location particleBLocation : ringLocations) {
             world.spawnParticle(Particle.DUST,
@@ -58,7 +63,7 @@ public class BlackHoleTask implements Consumer<BukkitTask> {
                     1,
                     0.0, 0.0, 0.0,
                     0.0,
-                    new Particle.DustOptions(Color.YELLOW, 0.6F), true);
+                    new Particle.DustOptions(isOtherColor ? Color.RED : Color.YELLOW, 0.5F), true);
         }
 
         for (Location particleALocation : blackHoleLocations) {
@@ -75,20 +80,22 @@ public class BlackHoleTask implements Consumer<BukkitTask> {
         World world = location.getWorld();
         assert world != null;
 
-        for (Entity entity : world.getNearbyEntities(location, 6, 6, 6)) {
+        for (Entity entity : world.getNearbyEntities(location, 8, 6, 8)) {
             if (!(entity instanceof LivingEntity livingEntity)) return;
 
-            if (livingEntity.getLocation().distance(location) < 1.5) {
-                livingEntity.damage(0.75);
-            }
-
+            double speed = livingEntity.getLocation().distance(location) > 5.0 ? 0.2 : 0.35;
             Location livingEntityLocation = livingEntity.getLocation();
+
             Vector direction = location.toVector().subtract(livingEntityLocation.toVector());
 
             direction.normalize();
-            direction.multiply(0.5);
+            direction.multiply(speed);
 
             livingEntity.setVelocity(livingEntity.getVelocity().add(direction));
+
+            if (livingEntity.getLocation().distance(location) < 2.0) {
+                livingEntity.damage(0.75);
+            }
         }
     }
 
