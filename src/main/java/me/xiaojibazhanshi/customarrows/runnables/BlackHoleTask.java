@@ -2,22 +2,20 @@ package me.xiaojibazhanshi.customarrows.runnables;
 
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.*;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.util.Vector;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-
-import static me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil.randomizeLocation;
 
 public class BlackHoleTask implements Consumer<BukkitTask> {
 
     private final Location location;
     private final int durationInSeconds;
     private final int chosenPeriod;
-    private boolean areBlocksBroken = false;
+    private boolean areBlocksBroken;
 
     private int counter = 1;
 
@@ -25,6 +23,7 @@ public class BlackHoleTask implements Consumer<BukkitTask> {
         this.durationInSeconds = durationInSeconds;
         this.chosenPeriod = chosenPeriod;
         this.location = location;
+        areBlocksBroken = false;
     }
 
     @Override
@@ -35,27 +34,29 @@ public class BlackHoleTask implements Consumer<BukkitTask> {
         World world = location.getWorld();
         assert world != null;
 
-        for (Location particleALocation : ArrowSpecificUtil.generateSphere(location, 0.5, 3)) {
-            world.spawnParticle(Particle.DUST,
-                    particleALocation,
-                    1,
-                    0.0, 0.0, 0.0,
-                    0.0,
-                    new Particle.DustOptions(Color.BLACK, 1.0F), true);
-        }
+        List<Location> ringLocations = ArrowSpecificUtil.generateOneHighRing(location, 3, 8.0);
+        List<Location> blackHoleLocations = ArrowSpecificUtil.generateSphere(location, 0.75, 4.0);
 
-        for (Location particleBLocation : ArrowSpecificUtil.generateOneHighCylinder(location, 2.5, 10)) {
+        for (Location particleBLocation : ringLocations) {
             world.spawnParticle(Particle.DUST,
                     particleBLocation,
                     1,
                     0.0, 0.0, 0.0,
                     0.0,
-                    new Particle.DustOptions(Color.YELLOW, 1.0F), true);
+                    new Particle.DustOptions(Color.YELLOW, 0.6F), true);
+        }
+
+        for (Location particleALocation : blackHoleLocations) {
+            world.spawnParticle(Particle.DUST,
+                    particleALocation,
+                    1,
+                    0.0, 0.0, 0.0,
+                    0.0,
+                    new Particle.DustOptions(Color.BLACK, 1.35F), true);
         }
 
         if (!areBlocksBroken) {
-            ArrowSpecificUtil.breakBlocksAround(location, 2);
-
+            ArrowSpecificUtil.executeBlackHoleAnimation(location, 2);
             areBlocksBroken = true;
         }
 

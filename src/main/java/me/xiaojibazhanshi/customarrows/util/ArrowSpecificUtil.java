@@ -1,6 +1,7 @@
 package me.xiaojibazhanshi.customarrows.util;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
+import me.xiaojibazhanshi.customarrows.runnables.BlackHoleAnimationTask;
 import me.xiaojibazhanshi.customarrows.runnables.LightningStrikeTask;
 import me.xiaojibazhanshi.customarrows.runnables.MeteoriteStrikeTask;
 import me.xiaojibazhanshi.customarrows.runnables.SmokeCloudTask;
@@ -15,6 +16,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
+import org.bukkit.util.Transformation;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nullable;
@@ -684,26 +686,25 @@ public class ArrowSpecificUtil {
         return points;
     }
 
-    public static List<Location> generateOneHighCylinder(Location center, double radius, double pointDensity) {
+    public static List<Location> generateOneHighRing(Location center, double radius, double pointDensity) {
         List<Location> points = new ArrayList<>();
 
-        double step = 1.0 / pointDensity;
+        double step = 2 * Math.PI / (pointDensity * 2 * Math.PI * radius);
 
-        for (double phi = 0.0; phi < Math.PI * 2; phi += step) {
-            for (double theta = 0.0; theta < Math.PI; theta += step) {
-                double x = radius * Math.cos(phi) * Math.sin(theta);
-                double y = center.getY();
-                double z = radius * Math.cos(theta);
+        for (double angle = 0.0; angle < 2 * Math.PI; angle += step) {
+            double x = radius * Math.cos(angle);
+            double z = radius * Math.sin(angle);
 
-                Location point = center.clone().add(x, y, z);
-                points.add(point);
-            }
+            Location point = center.clone().add(x, 0, z);
+            points.add(point);
         }
 
         return points;
     }
 
-    public static void breakBlocksAround(Location center, int radius) {
+    public static Map<Location, BlockData> getBlocksAround(Location center, int radius) {
+        Map<Location, BlockData> blockMap = new HashMap<>();
+
         World world = center.getWorld();
         int centerX = center.getBlockX();
         int centerY = center.getBlockY();
@@ -716,11 +717,40 @@ public class ArrowSpecificUtil {
                     Block block = world.getBlockAt(x, y, z);
 
                     if (block.getType() != Material.AIR && block.getType() != Material.BEDROCK) {
-                        block.breakNaturally();
+                        blockMap.put(block.getLocation(), block.getBlockData());
+
+                        block.setType(Material.AIR);
                     }
                 }
             }
         }
+
+        return blockMap;
+    }
+
+    public static void executeBlackHoleAnimation(Location location, int radius) {
+        Map<Location, BlockData> blockDataMap = getBlocksAround(location, radius);
+
+        BlackHoleAnimationTask task = new BlackHoleAnimationTask(location, blockDataMap);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 1, 2);
+    }
+
+    public static void animateTowardBlackHole(Location blackHole, Location blockLocation, BlockData blockData) {
+        assert blockLocation.getWorld() != null;
+
+        BlockDisplay blockDisplay = blockLocation.getWorld().spawn(blockLocation, BlockDisplay.class, (display) -> {
+            display.setBlock(blockData);
+            display.setInvulnerable(true);
+            display.setGravity(false);
+        });
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                blockDisplay.remove();
+            }
+        }.runTaskLater(CustomArrows.getInstance(), 10);
+
     }
 
 
