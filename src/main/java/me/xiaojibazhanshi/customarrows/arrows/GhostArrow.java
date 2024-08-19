@@ -6,6 +6,8 @@ import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.Container;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -40,12 +42,16 @@ public class GhostArrow extends CustomArrow {
 
     @Override
     public void onHitBlock(ProjectileHitEvent event, Player shooter) {
-        if (event.getHitBlock() != null
-                && event.getHitBlock().getType().isSolid()
-                && GeneralUtil.isNotPlant(event.getHitBlock())
-                && ArrowSpecificUtil.isFakeArrow(event.getEntity())) {
+        Block hitBlock = event.getHitBlock();
 
-            ArrowSpecificUtil.temporarilyConvertToDisplayItem(event.getHitBlock());
+        if (hitBlock != null
+                && hitBlock.getType().isSolid()
+                && GeneralUtil.isNotPlant(hitBlock)
+                && ArrowSpecificUtil.isFakeArrow(event.getEntity())
+                && hitBlock.getType().isBlock()
+                && !(hitBlock instanceof Container)) {
+
+            ArrowSpecificUtil.temporarilyConvertToDisplayItem(hitBlock);
             event.getEntity().remove();
         }
     }

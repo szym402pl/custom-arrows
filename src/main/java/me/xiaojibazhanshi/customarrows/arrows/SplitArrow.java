@@ -23,8 +23,6 @@ public class SplitArrow extends CustomArrow {
 
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
-        event.getDamager().remove();
-
         if (event.getEntity() instanceof LivingEntity)
             ArrowSpecificUtil.initiateFourWayArrowsOn((LivingEntity) event.getEntity());
     }

@@ -19,7 +19,7 @@ public class ArrowHitEntityListener implements Listener {
 
     @EventHandler
     public void onEntityHitByEntity(EntityDamageByEntityEvent event) {
-        if (event.getDamager().isVisibleByDefault()) event.setCancelled(true);
+        if (!event.getDamager().isVisibleByDefault()) event.setCancelled(true);
 
         if (GeneralUtil.isHealingCrystal(event.getEntity())) {
             event.setCancelled(true);
