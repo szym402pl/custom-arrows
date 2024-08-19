@@ -3,17 +3,17 @@ package me.xiaojibazhanshi.customarrows.util;
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.EnderCrystal;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 public class GeneralUtil {
@@ -148,5 +148,28 @@ public class GeneralUtil {
         return entity instanceof EnderCrystal crystal
                 && crystal.getCustomName() != null
                 && crystal.getCustomName().equals("  ");
+    }
+
+    public static Arrow copyArrow(Arrow originalArrow, Location location, @Nullable Vector velocity) {
+        Arrow newArrow = originalArrow.getWorld().spawnArrow(location, originalArrow.getVelocity(),
+                (float) originalArrow.getVelocity().length(), 0);
+
+        if (originalArrow.getShooter() instanceof LivingEntity) {
+            newArrow.setShooter(originalArrow.getShooter());
+        }
+
+        newArrow.setCritical(originalArrow.isCritical());
+        newArrow.setPickupStatus(originalArrow.getPickupStatus());
+        newArrow.setFireTicks(originalArrow.getFireTicks());
+        newArrow.setGravity(originalArrow.hasGravity());
+        newArrow.setInvulnerable(originalArrow.isInvulnerable());
+        newArrow.setVisibleByDefault(originalArrow.isVisibleByDefault());
+        newArrow.setVelocity(velocity == null ? originalArrow.getVelocity() : velocity);
+
+        for (PotionEffect effect : originalArrow.getCustomEffects()) {
+            newArrow.addCustomEffect(effect, true);
+        }
+
+        return newArrow;
     }
 }

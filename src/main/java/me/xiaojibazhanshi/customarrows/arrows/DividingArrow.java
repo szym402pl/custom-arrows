@@ -2,20 +2,19 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import org.apache.commons.math3.geometry.euclidean.threed.Plane;
-import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.util.Vector;
-import org.joml.Vector3d;
+import org.bukkit.event.entity.ProjectileHitEvent;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+
+import static me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil.divideArrow;
 
 public class DividingArrow extends CustomArrow {
 
@@ -33,22 +32,39 @@ public class DividingArrow extends CustomArrow {
 
     @Override
     public void onShoot(EntityShootBowEvent event, Player shooter) {
+        Arrow arrow = ((Arrow) event.getProjectile());
+        arrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
         UUID uuid = shooter.getUniqueId();
 
-        if (!activeArrows.containsKey(uuid)) return;
+        if (!activeArrows.containsKey(uuid)) {
+            activeArrows.put(uuid, List.of((Arrow) event.getProjectile()));
+            return;
+        }
+
         event.setCancelled(true);
-
         List<Arrow> arrows = activeArrows.get(uuid);
+        activeArrows.remove(uuid);
+
+        List<Arrow> newArrows = new ArrayList<>();
+
+        for (Arrow arrowA : arrows) {
+             newArrows.addAll(divideArrow(arrowA));
+        }
+
+        activeArrows.put(uuid, newArrows);
+        GeneralUtil.removeArrowAfter(arrow, 200);
     }
 
-    private void divideArrow(Arrow arrow) {
-        Vector direction = arrow.getVelocity();
-        Vector originalLocation = arrow.getLocation().toVector();
-
-        Vector3D direction3D = new Vector3D(direction.getX(), direction.getY(), direction.getZ());
-        Vector3D originalLocation3D = new Vector3D(originalLocation.getX(), originalLocation.getY(), originalLocation.getZ());
-
-        Plane plane = new Plane(originalLocation3D, direction3D);
-        Vector3D v = plane.getV();
+    @Override
+    public void onHitBlock(ProjectileHitEvent event, Player shooter) {
+        event.getEntity().remove();
+        activeArrows.remove(shooter.getUniqueId());
     }
+
+    @Override
+    public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
+        activeArrows.remove(shooter.getUniqueId());
+    }
+
+
 }
