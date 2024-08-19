@@ -16,7 +16,7 @@ public class HedgehogArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&dHedgehog Arrow", "hedgehog_arrow",
                                 List.of("", "This arrow will turn the", "target into a hedgehog")),
-                Color.PURPLE));
+                        Color.PURPLE));
     }
 
     @Override

@@ -19,7 +19,7 @@ public class ThunderArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&bThunder Arrow", "thunder_arrow",
                                 List.of("", "This arrow will strike", "thunder upon your enemies")),
-                Color.AQUA));
+                        Color.AQUA));
     }
 
     @Override

@@ -28,7 +28,7 @@ public class AdrenalineArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&4Adrenaline Arrow", "adrenaline_arrow",
                                 List.of("", "This arrow gives you", "an adrenaline boost")),
-                Color.MAROON));
+                        Color.MAROON));
     }
 
     @Override

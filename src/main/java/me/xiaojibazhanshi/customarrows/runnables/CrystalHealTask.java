@@ -1,20 +1,15 @@
 package me.xiaojibazhanshi.customarrows.runnables;
 
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
-import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EnderCrystal;
-import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
-
-import static me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil.randomizeLocation;
 
 public class CrystalHealTask implements Consumer<BukkitTask> {
 

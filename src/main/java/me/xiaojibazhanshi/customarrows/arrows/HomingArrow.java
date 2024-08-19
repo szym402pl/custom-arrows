@@ -24,7 +24,7 @@ public class HomingArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&4Homing Arrow", "homing_arrow",
                                 List.of("", "This arrow chases your enemy down", "as long as they aren't too far")),
-                Color.RED));
+                        Color.RED));
     }
 
     @Override

@@ -23,7 +23,7 @@ public class DayCycleArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&aDay Cycle Arrow", "day_cycle_arrow",
                                 List.of("", "This arrow will change", "the time in your world")),
-                Color.LIME));
+                        Color.LIME));
     }
 
     @Override

@@ -1,12 +1,8 @@
 package me.xiaojibazhanshi.customarrows.arrows;
 
-import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
-import me.xiaojibazhanshi.customarrows.runnables.LightningStrikeTask;
-import me.xiaojibazhanshi.customarrows.runnables.MeteoriteStrikeTask;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -23,7 +19,7 @@ public class MeteorArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&2Meteorite Arrow", "meteor_arrow",
                                 List.of("", "This arrow will strike", "meteorites upon your enemies")),
-                Color.GREEN));
+                        Color.GREEN));
     }
 
     @Override

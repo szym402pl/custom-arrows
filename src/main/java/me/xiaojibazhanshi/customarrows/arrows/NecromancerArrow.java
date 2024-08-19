@@ -23,7 +23,7 @@ public class NecromancerArrow extends CustomArrow {
                                 Material.TIPPED_ARROW, "&2Necromancer Arrow", "necromancer_arrow",
                                 List.of("", "This arrow has a few uses:", "1) Turn villagers into undead ones",
                                         "2) Spawn a monster next to a player", "3) Heal monsters for a period of time")),
-                Color.GREEN));
+                        Color.GREEN));
     }
 
     @Override

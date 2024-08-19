@@ -1,16 +1,11 @@
 package me.xiaojibazhanshi.customarrows.runnables;
 
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Location;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
-import java.util.Map;
-import java.util.UUID;
 import java.util.function.Consumer;
 
 public class HelicopterTask implements Consumer<BukkitTask> {
@@ -36,7 +31,7 @@ public class HelicopterTask implements Consumer<BukkitTask> {
         int ticksInSecond = 20;
         double heightClamp = 3.0;
 
-        if (counter * chosenPeriod >= durationInSeconds * ticksInSecond)  {
+        if (counter * chosenPeriod >= durationInSeconds * ticksInSecond) {
             target.setGravity(true);
             bukkitTask.cancel();
         }
@@ -49,7 +44,7 @@ public class HelicopterTask implements Consumer<BukkitTask> {
 
             player.teleport(newLocation);
         } else {
-            double newHeight = heightIncrement/heightClamp;
+            double newHeight = heightIncrement / heightClamp;
 
             target.setRotation(target.getLocation().getYaw() + angle, target.getLocation().getPitch());
             target.setGravity(false);

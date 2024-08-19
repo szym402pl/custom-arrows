@@ -22,7 +22,7 @@ public class FlashBangArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&fFlash-bang Arrow", "flash_bang_arrow",
                                 List.of("", "This arrow will drop a flash-bang,", "blinding entities in vicinity")),
-                Color.WHITE));
+                        Color.WHITE));
     }
 
     @Override

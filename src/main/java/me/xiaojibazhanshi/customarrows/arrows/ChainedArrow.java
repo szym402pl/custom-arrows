@@ -19,7 +19,7 @@ public class ChainedArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&8Chained Arrow", "chained_arrow",
                                 List.of("", "This arrow will 'chain' and hit", "all entities around the one you hit")),
-                Color.fromRGB(169, 169, 169))); // Dark gray
+                        Color.fromRGB(169, 169, 169))); // Dark gray
     }
 
     @Override

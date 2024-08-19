@@ -22,7 +22,7 @@ public class MagnetArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&fMagnet &4Arrow", "magnet_arrow",
                                 List.of("", "This arrow will retrieve", "all items in your vicinity")),
-                Color.RED));
+                        Color.RED));
     }
 
     @Override

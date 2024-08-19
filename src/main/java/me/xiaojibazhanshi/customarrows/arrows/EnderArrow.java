@@ -19,7 +19,7 @@ public class EnderArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&0Ender Arrow", "ender_arrow",
                                 List.of("", "This arrow will teleport", "you to wherever it lands")),
-                Color.BLACK));
+                        Color.BLACK));
     }
 
     @Override

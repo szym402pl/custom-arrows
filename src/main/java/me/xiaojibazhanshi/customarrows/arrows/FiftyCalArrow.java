@@ -24,7 +24,7 @@ public class FiftyCalArrow extends CustomArrow {
                                 Material.TIPPED_ARROW, "&1.50 cal Arrow", "fifty_cal_arrow",
                                 List.of("", "This arrow is a literal 50 cal bullet",
                                         "and can only be shot using crossbows!")),
-                Color.NAVY));
+                        Color.NAVY));
     }
 
     @Override

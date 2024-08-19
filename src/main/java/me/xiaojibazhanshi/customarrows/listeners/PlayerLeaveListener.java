@@ -20,19 +20,24 @@ public class PlayerLeaveListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        List<CustomArrow> arrowsExecutingPQE = new ArrayList<>(List.of(
-                retrieveCustomArrow("stealth_arrow")
-        ));
+        List<CustomArrow> arrowsExecutingPQE = new ArrayList<>();
+        CustomArrow stealthArrow = retrieveCustomArrow("stealth_arrow");
+
+        if (stealthArrow != null) {
+            arrowsExecutingPQE.add(stealthArrow);
+        }
 
         for (CustomArrow customArrow : arrowsExecutingPQE) {
-            if (customArrow == null) return;
-
             customArrow.onPlayerLeave(event, event.getPlayer());
         }
     }
 
     private CustomArrow retrieveCustomArrow(String id) {
-        return arrowManager.getCustomArrows().get(GeneralUtil.createStringNSKey(id));
+        if (arrowManager.getCustomArrows().containsKey(GeneralUtil.createStringNSKey(id))) {
+            return arrowManager.getCustomArrows().get(GeneralUtil.createStringNSKey(id));
+        }
+
+        return null;
     }
 
 }

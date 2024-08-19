@@ -12,11 +12,11 @@ import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
-import org.bukkit.util.Transformation;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nullable;
@@ -174,7 +174,7 @@ public class ArrowSpecificUtil {
             // simulate actual repulsion
             Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () ->
                     livingEntity.setVelocity(livingEntity.isOnGround()
-                    ? repulsionForce.multiply(onGroundMultiplier) : repulsionForce.multiply(inAirMultiplier)), delay);
+                            ? repulsionForce.multiply(onGroundMultiplier) : repulsionForce.multiply(inAirMultiplier)), delay);
         }
     }
 
@@ -564,10 +564,10 @@ public class ArrowSpecificUtil {
         SmokeCloudTask fifthIteration = new SmokeCloudTask(fifthSmokeAmount, location, 4, 25);
 
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), firstIteration, 2, 1);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), secondIteration,firstSmokeAmount/8,period);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), thirdIteration,firstSmokeAmount/5, period);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fourthIteration,firstSmokeAmount/3,period);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fifthIteration,firstSmokeAmount/2, period);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), secondIteration, firstSmokeAmount / 8, period);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), thirdIteration, firstSmokeAmount / 5, period);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fourthIteration, firstSmokeAmount / 3, period);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fifthIteration, firstSmokeAmount / 2, period);
     }
 
 
@@ -657,7 +657,7 @@ public class ArrowSpecificUtil {
         direction.normalize();
         direction.multiply(speed);
 
-        double targetY = direction.getY() + direction.getY()/2;
+        double targetY = direction.getY() + direction.getY() / 2;
         direction.setY(Math.max(targetY, 0.5));
 
         target.setVelocity(direction);
@@ -714,7 +714,7 @@ public class ArrowSpecificUtil {
             for (double y = centerY - radius; y <= centerY + radius; y++) {
                 for (double z = centerZ - radius; z <= centerZ + radius; z++) {
                     assert world != null;
-                    Block block = world.getBlockAt((int) x,(int) y,(int) z);
+                    Block block = world.getBlockAt((int) x, (int) y, (int) z);
 
                     if (block.getType() != Material.AIR && block.getType() != Material.BEDROCK) {
                         blockMap.put(block.getLocation(), block.getBlockData());
@@ -780,6 +780,22 @@ public class ArrowSpecificUtil {
         }
 
         return recreatedBlocks;
+    }
+
+
+    /* Area Heal Arrow */
+
+
+    public static void spawnALingeringPotion(Entity thrower) {
+        ItemStack potion = new ItemStack(Material.LINGERING_POTION);
+        PotionMeta potionMeta = (PotionMeta) potion.getItemMeta();
+        assert potionMeta != null;
+
+        potionMeta.addCustomEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1), true);
+        potion.setItemMeta(potionMeta);
+
+        ThrownPotion thrownPotion = thrower.getWorld().spawn(thrower.getLocation(), LingeringPotion.class);
+        thrownPotion.setItem(potion);
     }
 
 

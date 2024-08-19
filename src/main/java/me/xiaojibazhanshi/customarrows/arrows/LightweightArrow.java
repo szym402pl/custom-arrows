@@ -20,7 +20,7 @@ public class LightweightArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&fLightweight Arrow", "lightweight_arrow",
                                 List.of("", "This arrow is 100% faster", "but deals 25% less damage")),
-                Color.WHITE));
+                        Color.WHITE));
     }
 
     @Override

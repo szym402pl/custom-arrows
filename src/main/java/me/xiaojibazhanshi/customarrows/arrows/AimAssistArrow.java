@@ -19,7 +19,7 @@ public class AimAssistArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&aAim Assist Arrow", "aim_assist_arrow",
                                 List.of("", "This arrow makes sure you", "shoot straight at your target")),
-                Color.LIME));
+                        Color.LIME));
     }
 
     @Override

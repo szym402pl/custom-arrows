@@ -20,7 +20,7 @@ public class MolotovArrow extends CustomArrow {
                                 Material.TIPPED_ARROW, "&6Molotov Arrow", "molotov_arrow",
                                 List.of("", "This arrow will act like", "a molotov wherever it lands",
                                         "", "Warning: Only works in open spaces!")),
-                Color.ORANGE));
+                        Color.ORANGE));
     }
 
     @Override

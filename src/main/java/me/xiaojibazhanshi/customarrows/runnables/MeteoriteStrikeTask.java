@@ -2,7 +2,6 @@ package me.xiaojibazhanshi.customarrows.runnables;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Fireball;
-import org.bukkit.entity.LightningStrike;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.function.Consumer;

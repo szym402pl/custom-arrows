@@ -20,7 +20,7 @@ public class InvisibleArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&7Invisible Arrow", "invisible_arrow",
                                 List.of("", "This arrow is only visible", "to the player who shot it")),
-                Color.GRAY));
+                        Color.GRAY));
     }
 
     @Override

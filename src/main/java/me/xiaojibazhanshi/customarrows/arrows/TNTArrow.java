@@ -19,7 +19,7 @@ public class TNTArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&cTNT Arrow", "tnt_arrow",
                                 List.of("", "This arrow will spawn a primed", "tnt block wherever it lands")),
-                Color.ORANGE));
+                        Color.ORANGE));
     }
 
     @Override

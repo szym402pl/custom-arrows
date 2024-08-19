@@ -21,7 +21,7 @@ public class InversionArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&eInversion Arrow", "inversion_arrow",
                                 List.of("", "This arrow will rotate the", "target by 180 degrees")),
-                Color.YELLOW));
+                        Color.YELLOW));
     }
 
     @Override

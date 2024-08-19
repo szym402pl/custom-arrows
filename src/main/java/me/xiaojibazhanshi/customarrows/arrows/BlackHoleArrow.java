@@ -21,13 +21,13 @@ public class BlackHoleArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&0Black Hole Arrow", "black_hole_arrow",
                                 List.of("", "This arrow will turn the arrow", "into a black hole upon impact")),
-                Color.BLACK));
+                        Color.BLACK));
     }
 
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
         event.getDamager().remove();
-        Location holeLocation = event.getDamager().getLocation().clone().add(1.1,0,1.1);
+        Location holeLocation = event.getDamager().getLocation().clone().add(1.1, 0, 1.1);
 
         BlackHoleTask task = new BlackHoleTask(holeLocation, 10, 2);
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 1, 2);

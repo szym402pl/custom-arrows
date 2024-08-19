@@ -1,15 +1,13 @@
 package me.xiaojibazhanshi.customarrows.runnables;
 
-import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Location;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.BlockDisplay;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.sql.SQLOutput;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.TreeSet;
 import java.util.function.Consumer;
 
 public class BlackHoleAnimationTask implements Consumer<BukkitTask> {

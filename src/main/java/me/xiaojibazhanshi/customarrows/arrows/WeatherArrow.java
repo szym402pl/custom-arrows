@@ -23,7 +23,7 @@ public class WeatherArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&bWeather Arrow", "weather_arrow",
                                 List.of("", "This arrow will change", "the weather in your world")),
-                Color.AQUA));
+                        Color.AQUA));
     }
 
     @Override

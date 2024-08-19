@@ -22,7 +22,7 @@ public class GhostArrow extends CustomArrow {
                                 Material.TIPPED_ARROW, "&7Ghost Arrow", "ghost_arrow",
                                 List.of("", "This arrow is able to phase", "through a single block layer",
                                         "", "Note: This arrow can only", "be shot using a crossbow!")),
-                Color.GRAY));
+                        Color.GRAY));
     }
 
     @Override

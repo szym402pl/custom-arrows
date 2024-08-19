@@ -18,7 +18,7 @@ public class SplitArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&7Split Arrow", "split_arrow",
                                 List.of("", "This arrow will split into 4 and", "hit the target time and time again")),
-                Color.GRAY));
+                        Color.GRAY));
     }
 
     @Override

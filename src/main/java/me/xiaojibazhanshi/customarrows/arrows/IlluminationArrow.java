@@ -23,7 +23,7 @@ public class IlluminationArrow extends CustomArrow {
                                         "surrounding it's landing location",
                                         "", "Note: Light is active for one minute, and",
                                         "the arrow can only be retrieved in this time frame")),
-                Color.YELLOW));
+                        Color.YELLOW));
     }
 
     @Override

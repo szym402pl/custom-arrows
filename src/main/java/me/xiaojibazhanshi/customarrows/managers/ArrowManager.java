@@ -49,6 +49,7 @@ public class ArrowManager {
         registerCustomArrow("grappling_hook_arrow", new GrapplingHookArrow());
         registerCustomArrow("helicopter_arrow", new HelicopterArrow());
         registerCustomArrow("black_hole_arrow", new BlackHoleArrow());
+        registerCustomArrow("area_heal_arrow", new AreaHealArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
