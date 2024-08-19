@@ -35,7 +35,7 @@ public class ArrowManager {
         registerCustomArrow("thunder_arrow", new ThunderArrow());
         registerCustomArrow("adrenaline_arrow", new AdrenalineArrow());
         registerCustomArrow("invisible_arrow", new InvisibleArrow());
-        registerCustomArrow("honeypot_arrow", new HoneyPotArrow());
+        registerCustomArrow("honeypot_arrow", new HoneypotArrow());
         registerCustomArrow("fifty_cal_arrow", new FiftyCalArrow());
         registerCustomArrow("ghost_arrow", new GhostArrow());
         registerCustomArrow("smoke_arrow", new SmokeArrow());
@@ -51,6 +51,8 @@ public class ArrowManager {
         registerCustomArrow("black_hole_arrow", new BlackHoleArrow());
         registerCustomArrow("area_heal_arrow", new AreaHealArrow());
         registerCustomArrow("dividing_arrow", new DividingArrow());
+        registerCustomArrow("hive_arrow", new HiveArrow());
+        registerCustomArrow("vampire_arrow", new VampireArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

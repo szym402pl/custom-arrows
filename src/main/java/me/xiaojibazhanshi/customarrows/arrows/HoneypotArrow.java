@@ -15,12 +15,12 @@ import org.bukkit.util.Vector;
 import java.util.List;
 import java.util.Map;
 
-public class HoneyPotArrow extends CustomArrow {
+public class HoneypotArrow extends CustomArrow {
 
     private final int DELETE_AFTER_SECONDS = 5;
     private final Material REPLACEMENT = Material.ORANGE_STAINED_GLASS;
 
-    public HoneyPotArrow() {
+    public HoneypotArrow() {
         super(ArrowFactory.changeTippedColor
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&6Honeypot Arrow", "honeypot_arrow",

@@ -812,7 +812,7 @@ public class ArrowSpecificUtil {
         Vector3D direction3D = new Vector3D(originalDirection.getX(), originalDirection.getY(), originalDirection.getZ());
         Vector3D originalLocation3D = new Vector3D(originalLocation.getX(), originalLocation.getY(), originalLocation.getZ());
 
-        org.apache.commons.math3.geometry.euclidean.threed.Rotation rotation = new Rotation(direction3D, Math.PI);
+        Rotation rotation = new Rotation(direction3D, Math.PI);
         Plane plane = new Plane(originalLocation3D, direction3D);
 
         Vector3D u = plane.getU().normalize().scalarMultiply(0.5);
