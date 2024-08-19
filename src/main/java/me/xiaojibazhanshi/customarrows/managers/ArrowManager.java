@@ -50,6 +50,7 @@ public class ArrowManager {
         registerCustomArrow("helicopter_arrow", new HelicopterArrow());
         registerCustomArrow("black_hole_arrow", new BlackHoleArrow());
         registerCustomArrow("area_heal_arrow", new AreaHealArrow());
+        registerCustomArrow("dividing_arrow", new DividingArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
