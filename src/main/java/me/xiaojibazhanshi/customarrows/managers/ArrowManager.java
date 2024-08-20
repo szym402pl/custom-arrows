@@ -53,6 +53,8 @@ public class ArrowManager {
         registerCustomArrow("dividing_arrow", new DividingArrow());
         registerCustomArrow("hive_arrow", new HiveArrow());
         registerCustomArrow("vampire_arrow", new VampireArrow());
+        registerCustomArrow("trap_arrow", new TrapArrow());
+
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

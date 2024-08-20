@@ -10,6 +10,7 @@ import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -836,5 +837,28 @@ public class ArrowSpecificUtil {
 
         arrow.setVisibleByDefault(false);
         return List.of(arrow1, arrow2);
+    }
+
+
+    /* Trap Arrow */
+
+    /**@return true if block above isn't solid and there
+     *  isn't air around the to-be tnt block (the one below the main block)*/
+    public static boolean isValidTrapLocation(Block block) {
+        if (block == null) return false;
+
+        Material type = block.getType();
+        if (!type.isSolid() || !GeneralUtil.isNotPlant(block)) return false;
+
+        Block blockAbove = block.getRelative(BlockFace.UP);
+        if (blockAbove.getType() != Material.AIR && GeneralUtil.isNotPlant(blockAbove)) return false;
+
+        Block blockBelow = block.getRelative(BlockFace.DOWN);
+
+        for (BlockFace face : BlockFace.values()) {
+            if (blockBelow.getRelative(face).getType() == Material.AIR) return false;
+        }
+
+        return true;
     }
 }
