@@ -51,7 +51,7 @@ public class GhostArrow extends CustomArrow {
                 && hitBlock.getType().isBlock()
                 && !(hitBlock instanceof Container)) {
 
-            ArrowSpecificUtil.temporarilyConvertToDisplayItem(hitBlock);
+            ArrowSpecificUtil.temporarilyConvertToDisplayItem(hitBlock, 4, null);
             event.getEntity().remove();
         }
     }

@@ -506,7 +506,7 @@ public class ArrowSpecificUtil {
 
     /* Ghost Arrow */
 
-    public static void temporarilyConvertToDisplayItem(Block block) {
+    public static void temporarilyConvertToDisplayItem(Block block, int delay, @Nullable Material replacement) {
         BlockData originalBlockData = block.getBlockData();
         Location blockLocation = block.getLocation();
         assert blockLocation.getWorld() != null;
@@ -514,7 +514,7 @@ public class ArrowSpecificUtil {
         block.setType(Material.AIR);
 
         BlockDisplay blockDisplay = blockLocation.getWorld().spawn(blockLocation, BlockDisplay.class, (display) -> {
-            display.setBlock(originalBlockData);
+            display.setBlock(replacement != null ? replacement.createBlockData() : originalBlockData);
             display.setInvulnerable(true);
             display.setGravity(false);
         });
@@ -525,7 +525,7 @@ public class ArrowSpecificUtil {
                 blockDisplay.remove();
                 block.setBlockData(originalBlockData);
             }
-        }.runTaskLater(CustomArrows.getInstance(), 4);
+        }.runTaskLater(CustomArrows.getInstance(), delay);
     }
 
     public static void shootFakeArrow(EntityShootBowEvent event, Player shooter) {
@@ -789,7 +789,7 @@ public class ArrowSpecificUtil {
 
     /* Area Heal Arrow */
 
-
+    @SuppressWarnings("deprecation") // IDC that LingeringPotion.class is deprecated, there's no other way to do it
     public static void spawnALingeringPotion(Entity thrower) {
         ItemStack potion = new ItemStack(Material.LINGERING_POTION);
         PotionMeta potionMeta = (PotionMeta) potion.getItemMeta();
@@ -842,6 +842,7 @@ public class ArrowSpecificUtil {
 
     /* Trap Arrow */
 
+
     /**
      * @return true if block above isn't solid and there
      * isn't air around the to-be tnt block (the one below the main block)
@@ -862,5 +863,21 @@ public class ArrowSpecificUtil {
         }
 
         return true;
+    }
+
+
+    /* Marker Arrow */
+
+
+    public static void spawnBeam(Location location, int height, int durationInSeconds, Material beamMaterial) {
+        World world = location.getWorld();
+
+        for (int y = (int) location.getY(); y < location.getY() + height; y++) {
+            assert world != null;
+            Location location2 = new Location(world, location.getX(), y, location.getZ());
+            Block block = world.getBlockAt(location2);
+
+            temporarilyConvertToDisplayItem(block, durationInSeconds * 20, beamMaterial);
+        }
     }
 }

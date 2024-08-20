@@ -12,10 +12,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MarkerArrow extends CustomArrow {
 
@@ -47,9 +44,9 @@ public class MarkerArrow extends CustomArrow {
             Location location = event.getEntity().getLocation().clone().add(0, 3, 0);
 
             if (count >= 1) {
-                spawnBeam(location, 15, Material.BLUE_STAINED_GLASS);
+                ArrowSpecificUtil.spawnBeam(location, 50,15, Material.BLUE_STAINED_GLASS);
             } else {
-                spawnBeam(location, 15, Material.WHITE_STAINED_GLASS);
+                ArrowSpecificUtil.spawnBeam(location, 50,15, Material.WHITE_STAINED_GLASS);
             }
         }, 60);
     }
@@ -59,26 +56,7 @@ public class MarkerArrow extends CustomArrow {
         if (event.getEntity().isDead()) return;
         Location location = event.getEntity().getLocation().clone().add(0, 3, 0);
 
-        spawnBeam(location, 15, Material.RED_STAINED_GLASS);
-    }
-
-    private void spawnBeam(Location location, int durationInSeconds, Material beamMaterial) {
-        World world = location.getWorld();
-        Map<Location, Material> blockList = new HashMap<>();
-
-        for (int y = (int) location.getY(); y < location.getY() + 50; y++) {
-            assert world != null;
-            Location location2 = new Location(world, location.getX(), y, location.getZ());
-            Material material = world.getBlockAt(location2).getType();
-
-            if (material != beamMaterial) {
-                blockList.put(location2, material);
-            } else {
-                blockList.put(location2, Material.AIR);
-            }
-        }
-
-        ArrowSpecificUtil.placeTemporaryBlocks(blockList, durationInSeconds, beamMaterial);
+        ArrowSpecificUtil.spawnBeam(location, 50,15, Material.RED_STAINED_GLASS);
     }
 
 

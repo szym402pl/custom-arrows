@@ -56,6 +56,7 @@ public class ArrowManager {
         registerCustomArrow("trap_arrow", new TrapArrow());
         registerCustomArrow("marker_arrow", new MarkerArrow());
         registerCustomArrow("place_swap_arrow", new PlaceSwapArrow());
+        registerCustomArrow("anti_gravity_arrow", new AntiGravityArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
