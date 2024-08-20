@@ -4,16 +4,9 @@ import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LingeringPotion;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.List;
 

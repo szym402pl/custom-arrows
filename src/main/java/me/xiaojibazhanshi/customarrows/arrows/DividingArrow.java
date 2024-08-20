@@ -48,7 +48,7 @@ public class DividingArrow extends CustomArrow {
         List<Arrow> newArrows = new ArrayList<>();
 
         for (Arrow arrowA : arrows) {
-             newArrows.addAll(divideArrow(arrowA));
+            newArrows.addAll(divideArrow(arrowA));
         }
 
         activeArrows.put(uuid, newArrows);

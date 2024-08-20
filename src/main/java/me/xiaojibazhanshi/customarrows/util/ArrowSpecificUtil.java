@@ -842,8 +842,10 @@ public class ArrowSpecificUtil {
 
     /* Trap Arrow */
 
-    /**@return true if block above isn't solid and there
-     *  isn't air around the to-be tnt block (the one below the main block)*/
+    /**
+     * @return true if block above isn't solid and there
+     * isn't air around the to-be tnt block (the one below the main block)
+     */
     public static boolean isValidTrapLocation(Block block) {
         if (block == null) return false;
 

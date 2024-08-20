@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
 
-import java.util.*;
+import java.util.List;
 
 public class HiveArrow extends CustomArrow {
 
