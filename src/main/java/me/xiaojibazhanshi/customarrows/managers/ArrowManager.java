@@ -54,7 +54,7 @@ public class ArrowManager {
         registerCustomArrow("hive_arrow", new HiveArrow());
         registerCustomArrow("vampire_arrow", new VampireArrow());
         registerCustomArrow("trap_arrow", new TrapArrow());
-
+        registerCustomArrow("marker_arrow", new MarkerArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
