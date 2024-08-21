@@ -2,7 +2,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -10,6 +9,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.util.List;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Split.initiateFourWayArrowsOn;
 
 public class SplitArrow extends CustomArrow {
 
@@ -24,6 +25,6 @@ public class SplitArrow extends CustomArrow {
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
         if (event.getEntity() instanceof LivingEntity)
-            ArrowSpecificUtil.initiateFourWayArrowsOn((LivingEntity) event.getEntity());
+            initiateFourWayArrowsOn((LivingEntity) event.getEntity());
     }
 }

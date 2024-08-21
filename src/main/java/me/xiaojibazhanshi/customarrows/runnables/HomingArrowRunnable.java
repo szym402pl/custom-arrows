@@ -1,11 +1,12 @@
 package me.xiaojibazhanshi.customarrows.runnables;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.*;
 
 public class HomingArrowRunnable extends BukkitRunnable {
 
@@ -23,10 +24,10 @@ public class HomingArrowRunnable extends BukkitRunnable {
 
         int MAX_TURN_DEGREES = 120;
 
-        if (!ArrowSpecificUtil.isTargetWithinDegrees(homingEntity, target, MAX_TURN_DEGREES)) return;
-        if (ArrowSpecificUtil.isDistanceGreaterThan(homingEntity, target, maxDistance)) return;
+        if (!isTargetWithinDegrees(homingEntity, target, MAX_TURN_DEGREES)) return;
+        if (isDistanceGreaterThan(homingEntity, target, maxDistance)) return;
 
-        Vector directionToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(homingEntity, target);
+        Vector directionToTarget = getDirectionFromEntityToTarget(homingEntity, target);
         Vector finalVelocity = directionToTarget.multiply(initialSpeed.length());
 
         homingEntity.setVelocity(finalVelocity);

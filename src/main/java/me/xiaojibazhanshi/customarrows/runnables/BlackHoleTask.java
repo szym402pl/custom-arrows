@@ -1,6 +1,5 @@
 package me.xiaojibazhanshi.customarrows.runnables;
 
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -13,6 +12,8 @@ import org.bukkit.util.Vector;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.BlackHole.*;
 
 public class BlackHoleTask implements Consumer<BukkitTask> {
 
@@ -42,7 +43,7 @@ public class BlackHoleTask implements Consumer<BukkitTask> {
         generateBlackHole(world);
 
         if (!areBlocksBroken) {
-            ArrowSpecificUtil.executeBlackHoleAnimation(location, 2.4);
+            executeBlackHoleAnimation(location, 2.4);
             areBlocksBroken = true;
         }
 
@@ -52,8 +53,8 @@ public class BlackHoleTask implements Consumer<BukkitTask> {
     private void generateBlackHole(World world) {
         Location adjustedLocation = location.clone().add(-1.1, 0, -1.1);
 
-        List<Location> ringLocations = ArrowSpecificUtil.generateOneHighRing(adjustedLocation, 1.75, 9.0);
-        List<Location> blackHoleLocations = ArrowSpecificUtil.generateSphere(adjustedLocation, 0.3, 4.0);
+        List<Location> ringLocations = generateOneHighRing(adjustedLocation, 1.75, 9.0);
+        List<Location> blackHoleLocations = generateSphere(adjustedLocation, 0.3, 4.0);
 
         boolean isOtherColor = ThreadLocalRandom.current().nextInt(10) == 1;
 

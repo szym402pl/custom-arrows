@@ -1,6 +1,5 @@
 package me.xiaojibazhanshi.customarrows.runnables;
 
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
@@ -9,6 +8,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.function.Consumer;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Repulsion.detonateFirework;
 
 public class ChangeDayCycleTask implements Consumer<BukkitTask> {
 
@@ -39,7 +40,7 @@ public class ChangeDayCycleTask implements Consumer<BukkitTask> {
         long time = isDay ? nightPeak : dayPeak;
         Color fireworkColor = isDay ? Color.BLACK : Color.AQUA;
 
-        ArrowSpecificUtil.detonateFirework(location, FireworkEffect.Type.STAR, fireworkColor);
+        detonateFirework(location, FireworkEffect.Type.STAR, fireworkColor);
 
         world.setTime(time);
         arrow.remove();

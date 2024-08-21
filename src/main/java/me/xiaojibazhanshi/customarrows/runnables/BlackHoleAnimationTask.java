@@ -1,6 +1,5 @@
 package me.xiaojibazhanshi.customarrows.runnables;
 
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.BlockDisplay;
 import org.bukkit.scheduler.BukkitTask;
@@ -10,10 +9,12 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.function.Consumer;
 
+import static me.xiaojibazhanshi.customarrows.util.arrows.BlackHole.animateTowardBlackHole;
+
 public class BlackHoleAnimationTask implements Consumer<BukkitTask> {
 
     private final Location blackHoleLocation;
-    private TreeSet<BlockDisplay> blockDisplayList;
+    private final TreeSet<BlockDisplay> blockDisplayList;
 
     public BlackHoleAnimationTask(Location blackHoleLocation, List<BlockDisplay> blockDisplayList) {
         Comparator<BlockDisplay> distanceComparator = Comparator.comparingDouble
@@ -34,7 +35,7 @@ public class BlackHoleAnimationTask implements Consumer<BukkitTask> {
         }
 
         BlockDisplay workedOn = blockDisplayList.getFirst();
-        ArrowSpecificUtil.animateTowardBlackHole(blackHoleLocation, workedOn);
+        animateTowardBlackHole(blackHoleLocation, workedOn);
 
         blockDisplayList.remove(workedOn);
     }

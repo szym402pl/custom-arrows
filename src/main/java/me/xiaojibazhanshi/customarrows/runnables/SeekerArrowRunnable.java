@@ -1,10 +1,13 @@
 package me.xiaojibazhanshi.customarrows.runnables;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.getDirectionFromEntityToTarget;
+import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.isDistanceGreaterThan;
+import static me.xiaojibazhanshi.customarrows.util.arrows.Seeker.findFirstEntityBelow;
 
 public class SeekerArrowRunnable extends BukkitRunnable {
 
@@ -19,12 +22,12 @@ public class SeekerArrowRunnable extends BukkitRunnable {
             return;
         }
 
-        LivingEntity target = ArrowSpecificUtil.findFirstEntityBelow(projectile, 4, 100);
+        LivingEntity target = findFirstEntityBelow(projectile, 4, 100);
         if (target == null || !target.hasLineOfSight(projectile) || target.equals(shooter)) return;
-        if (!(ArrowSpecificUtil.isDistanceGreaterThan(projectile, target, 12.5))) return;
+        if (!(isDistanceGreaterThan(projectile, target, 12.5))) return;
         if (target.getType() == EntityType.ENDERMAN || target instanceof Fish) return;
 
-        Vector directionToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(projectile, target);
+        Vector directionToTarget = getDirectionFromEntityToTarget(projectile, target);
         Vector finalVelocity = directionToTarget.multiply(initialSpeed.length());
 
         final double velocityClamp = 0.75;

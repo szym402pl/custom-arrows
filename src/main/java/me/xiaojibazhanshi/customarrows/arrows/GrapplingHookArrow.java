@@ -2,7 +2,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import me.xiaojibazhanshi.customarrows.util.Util;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -16,6 +15,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.List;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.GrapplingHook.applyGrapplingHookVelocity;
 
 public class GrapplingHookArrow extends CustomArrow {
 
@@ -35,7 +36,7 @@ public class GrapplingHookArrow extends CustomArrow {
         shooter.addPotionEffect(fall);
 
         double speed = event.getEntity().isOnGround() ? 1.9 : 1.7;
-        ArrowSpecificUtil.applyGrapplingHookVelocity(shooter, arrow.getLocation(), speed);
+        applyGrapplingHookVelocity(shooter, arrow.getLocation(), speed);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class GrapplingHookArrow extends CustomArrow {
         if (event.getEntity().equals(shooter)) return;
 
         double speed = event.getEntity().isOnGround() ? 6.0 : 4.0;
-        ArrowSpecificUtil.applyGrapplingHookVelocity(target, shooter.getLocation(), speed);
+        applyGrapplingHookVelocity(target, shooter.getLocation(), speed);
     }
 
     @Override

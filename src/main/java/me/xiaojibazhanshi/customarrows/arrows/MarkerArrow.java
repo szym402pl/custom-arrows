@@ -3,7 +3,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import me.xiaojibazhanshi.customarrows.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -17,6 +16,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
 import java.util.List;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Marker.spawnBeam;
 
 public class MarkerArrow extends CustomArrow {
 
@@ -48,9 +49,9 @@ public class MarkerArrow extends CustomArrow {
             Location location = event.getEntity().getLocation().clone().add(0, 3, 0);
 
             if (count >= 1) {
-                ArrowSpecificUtil.spawnBeam(location, 50, 15, Material.BLUE_STAINED_GLASS);
+                spawnBeam(location, 50, 15, Material.BLUE_STAINED_GLASS);
             } else {
-                ArrowSpecificUtil.spawnBeam(location, 50, 15, Material.WHITE_STAINED_GLASS);
+                spawnBeam(location, 50, 15, Material.WHITE_STAINED_GLASS);
             }
         }, 60);
     }
@@ -60,7 +61,7 @@ public class MarkerArrow extends CustomArrow {
         if (event.getEntity().isDead()) return;
         Location location = event.getEntity().getLocation().clone().add(0, 3, 0);
 
-        ArrowSpecificUtil.spawnBeam(location, 50, 15, Material.RED_STAINED_GLASS);
+        spawnBeam(location, 50, 15, Material.RED_STAINED_GLASS);
     }
 
 

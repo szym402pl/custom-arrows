@@ -1,6 +1,5 @@
 package me.xiaojibazhanshi.customarrows.runnables;
 
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.Player;
@@ -10,6 +9,8 @@ import org.bukkit.util.Vector;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.getDirectionFromEntityToTarget;
 
 public class CrystalHealTask implements Consumer<BukkitTask> {
 
@@ -45,7 +46,7 @@ public class CrystalHealTask implements Consumer<BukkitTask> {
             crystal.remove();
         }
 
-        Vector fromCrystalToTarget = ArrowSpecificUtil.getDirectionFromEntityToTarget(crystal, target)
+        Vector fromCrystalToTarget = getDirectionFromEntityToTarget(crystal, target)
                 .multiply(directionClamp)
                 .add(neededYSubtraction);
 

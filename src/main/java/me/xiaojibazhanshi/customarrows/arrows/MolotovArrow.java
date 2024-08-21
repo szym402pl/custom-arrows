@@ -2,7 +2,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -11,6 +10,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
 import java.util.List;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Molotov.setFiresAround;
 
 public class MolotovArrow extends CustomArrow {
 
@@ -27,7 +28,7 @@ public class MolotovArrow extends CustomArrow {
     public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         Block arrowLocationBlock = event.getEntity().getLocation().getBlock();
 
-        ArrowSpecificUtil.setFiresAround(arrowLocationBlock, 3);
+        setFiresAround(arrowLocationBlock, 3);
         event.getEntity().remove();
     }
 
@@ -35,7 +36,7 @@ public class MolotovArrow extends CustomArrow {
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
         Block arrowLocationBlock = event.getEntity().getLocation().getBlock();
 
-        ArrowSpecificUtil.setFiresAround(arrowLocationBlock, 3);
+        setFiresAround(arrowLocationBlock, 3);
         event.getDamager().remove();
     }
 }

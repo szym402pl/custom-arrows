@@ -2,7 +2,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import me.xiaojibazhanshi.customarrows.util.Util;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -15,6 +14,8 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.util.Vector;
 
 import java.util.List;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.FiftyCal.applyEffectsIfShotRapidly;
 
 public class FiftyCalArrow extends CustomArrow {
 
@@ -59,6 +60,6 @@ public class FiftyCalArrow extends CustomArrow {
         Util.shootLikeABullet(arrow, 0.4);
 
         Util.damageWeapon(event.getBow(), 5);
-        ArrowSpecificUtil.applyEffectsIfShotRapidly(shooter);
+        applyEffectsIfShotRapidly(shooter);
     }
 }

@@ -3,7 +3,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -17,6 +16,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.List;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Smoke.createProgressiveSmokeCloud;
 
 public class SmokeArrow extends CustomArrow {
 
@@ -35,7 +36,7 @@ public class SmokeArrow extends CustomArrow {
         arrow.remove();
 
         Bukkit.getScheduler().runTaskAsynchronously(CustomArrows.getInstance(), () -> {
-            ArrowSpecificUtil.createProgressiveSmokeCloud(arrowLocation.clone());
+            createProgressiveSmokeCloud(arrowLocation.clone());
         });
 
         PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, 2 * 20, 0, true);
@@ -47,7 +48,7 @@ public class SmokeArrow extends CustomArrow {
         Location arrowLocation = event.getDamager().getLocation();
 
         Bukkit.getScheduler().runTaskAsynchronously(CustomArrows.getInstance(), () -> {
-            ArrowSpecificUtil.createProgressiveSmokeCloud(arrowLocation.clone());
+            createProgressiveSmokeCloud(arrowLocation.clone());
         });
 
         if (!(event.getEntity() instanceof LivingEntity target)) return;

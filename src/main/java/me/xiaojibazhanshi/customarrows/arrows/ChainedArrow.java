@@ -2,7 +2,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -11,6 +10,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Chained.chainTargets;
 
 public class ChainedArrow extends CustomArrow {
 
@@ -35,7 +36,7 @@ public class ChainedArrow extends CustomArrow {
                 .map(entity -> (LivingEntity) entity)
                 .toList());
 
-        ArrowSpecificUtil.chainTargets(targetList, hitEntity);
+        chainTargets(targetList, hitEntity);
     }
 
 

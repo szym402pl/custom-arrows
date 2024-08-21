@@ -14,7 +14,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 import java.util.*;
 
-import static me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil.divideArrow;
+import static me.xiaojibazhanshi.customarrows.util.arrows.Dividing.divideArrow;
 
 public class DividingArrow extends CustomArrow {
 

@@ -2,7 +2,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,6 +10,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
 import java.util.List;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Thunder.createThunderStrike;
 
 public class ThunderArrow extends CustomArrow {
 
@@ -26,13 +27,13 @@ public class ThunderArrow extends CustomArrow {
     public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         Location arrowLocation = event.getEntity().getLocation();
 
-        ArrowSpecificUtil.createThunderStrike(arrowLocation, 6, 5, 12);
+        createThunderStrike(arrowLocation, 6, 5, 12);
     }
 
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
         Location entityLocation = event.getEntity().getLocation();
 
-        ArrowSpecificUtil.createThunderStrike(entityLocation, 3, 1, 8);
+        createThunderStrike(entityLocation, 3, 1, 8);
     }
 }

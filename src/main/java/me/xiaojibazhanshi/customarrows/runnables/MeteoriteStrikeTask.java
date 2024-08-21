@@ -6,7 +6,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.function.Consumer;
 
-import static me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil.randomizeLocation;
+import static me.xiaojibazhanshi.customarrows.util.arrows.Thunder.randomizeLocation;
 
 public class MeteoriteStrikeTask implements Consumer<BukkitTask> {
 

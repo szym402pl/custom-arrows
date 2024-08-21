@@ -4,7 +4,6 @@ import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.runnables.CrystalHealTask;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -17,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.CrystalHeal.updateHealCrystalMap;
 
 public class CrystalHealArrow extends CustomArrow {
 
@@ -35,7 +36,7 @@ public class CrystalHealArrow extends CustomArrow {
         event.getEntity().remove();
         int period = 4;
 
-        ArrowSpecificUtil.updateHealCrystalMap(playersWithACrystal, shooter, event.getEntity());
+        updateHealCrystalMap(playersWithACrystal, shooter, event.getEntity());
 
         CrystalHealTask task = new CrystalHealTask(playersWithACrystal, shooter, 30, period);
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 1, period);

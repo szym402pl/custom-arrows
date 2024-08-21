@@ -2,7 +2,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import me.xiaojibazhanshi.customarrows.util.Util;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -15,6 +14,8 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
 import java.util.List;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Ghost.*;
 
 public class GhostArrow extends CustomArrow {
 
@@ -36,7 +37,7 @@ public class GhostArrow extends CustomArrow {
         arrow.setGravity(false);
         arrow.setGlowing(true);
 
-        ArrowSpecificUtil.shootFakeArrow(event, shooter);
+        shootFakeArrow(event, shooter);
         Util.removeArrowAfter((Arrow) arrow, 200);
     }
 
@@ -47,11 +48,11 @@ public class GhostArrow extends CustomArrow {
         if (hitBlock != null
                 && hitBlock.getType().isSolid()
                 && Util.isNotPlant(hitBlock)
-                && ArrowSpecificUtil.isFakeArrow(event.getEntity())
+                && isFakeArrow(event.getEntity())
                 && hitBlock.getType().isBlock()
                 && !(hitBlock instanceof Container)) {
 
-            ArrowSpecificUtil.temporarilyConvertToDisplayItem(hitBlock, 4, null);
+            temporarilyConvertToDisplayItem(hitBlock, 4, null);
             event.getEntity().remove();
         }
     }

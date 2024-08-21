@@ -2,7 +2,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import me.xiaojibazhanshi.customarrows.util.Util;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -17,6 +16,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
 import java.util.List;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Trap.isValidTrapLocation;
 
 public class TrapArrow extends CustomArrow {
 
@@ -33,7 +34,7 @@ public class TrapArrow extends CustomArrow {
     public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         Block block = event.getHitBlock();
 
-        if (!ArrowSpecificUtil.isValidTrapLocation(block)) {
+        if (!isValidTrapLocation(block)) {
             shooter.spigot().sendMessage(ChatMessageType.ACTION_BAR,
                     TextComponent.fromLegacy(Util.color("&7I can't set up a trap there...")));
             return;

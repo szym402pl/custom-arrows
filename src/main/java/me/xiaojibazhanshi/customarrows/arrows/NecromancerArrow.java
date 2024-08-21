@@ -2,7 +2,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,6 +13,9 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.util.Vector;
 
 import java.util.List;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Necromancer.convertToUndead;
+import static me.xiaojibazhanshi.customarrows.util.arrows.Necromancer.spawnOneOfSelected;
 
 public class NecromancerArrow extends CustomArrow {
 
@@ -31,8 +33,7 @@ public class NecromancerArrow extends CustomArrow {
         Location hitLocation = event.getEntity().getLocation();
         event.getEntity().remove();
 
-        ArrowSpecificUtil.spawnOneOfSelected
-                (List.of(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.SPIDER), hitLocation);
+        spawnOneOfSelected(List.of(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.SPIDER), hitLocation);
     }
 
     @Override
@@ -60,11 +61,10 @@ public class NecromancerArrow extends CustomArrow {
         }
 
         if (hitEntity.getType() == EntityType.VILLAGER) {
-            ArrowSpecificUtil.convertToUndead((Villager) hitEntity);
+            convertToUndead((Villager) hitEntity);
             return;
         }
 
-        ArrowSpecificUtil.spawnOneOfSelected
-                (List.of(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.SPIDER), hitEntity.getLocation());
+        spawnOneOfSelected(List.of(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.SPIDER), hitEntity.getLocation());
     }
 }

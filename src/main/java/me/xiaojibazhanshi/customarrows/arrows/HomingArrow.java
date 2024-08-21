@@ -3,7 +3,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.runnables.HomingArrowRunnable;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -14,6 +13,8 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
 import java.util.List;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.findEntityInSight;
 
 public class HomingArrow extends CustomArrow {
 
@@ -31,7 +32,7 @@ public class HomingArrow extends CustomArrow {
     public void onShoot(EntityShootBowEvent event, Player shooter) {
         final int MAX_DISTANCE = 75;
 
-        LivingEntity target = ArrowSpecificUtil.findEntityInSight(shooter, MAX_DISTANCE, 2.5);
+        LivingEntity target = findEntityInSight(shooter, MAX_DISTANCE, 2.5);
         if (target == null || target.isDead()) return;
 
         Entity projectile = event.getProjectile();

@@ -1,7 +1,6 @@
 package me.xiaojibazhanshi.customarrows.util.arrows;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import me.xiaojibazhanshi.customarrows.util.Util;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -17,15 +16,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static me.xiaojibazhanshi.customarrows.util.arrows.Repulsion.detonateFirework;
+
 public class FlashBang {
 
     public static void detonateFlashBang(Entity itemDisplay, long delay) {
         Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
             itemDisplay.remove();
-            ArrowSpecificUtil.detonateFirework(itemDisplay.getLocation(), FireworkEffect.Type.BALL, Color.WHITE);
+            detonateFirework(itemDisplay.getLocation(), FireworkEffect.Type.BALL, Color.WHITE);
 
-            for (Entity onLooker : ArrowSpecificUtil.getEntitiesLookingAt(itemDisplay, 8)) {
-                ArrowSpecificUtil.applyFlashBangEffect(onLooker);
+            for (Entity onLooker : getEntitiesLookingAt(itemDisplay, 8)) {
+                applyFlashBangEffect(onLooker);
             }
         }, delay);
     }

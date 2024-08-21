@@ -2,7 +2,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,6 +13,9 @@ import org.bukkit.util.Vector;
 
 import java.util.List;
 import java.util.Map;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.Honeypot.getAHollowSphereAround;
+import static me.xiaojibazhanshi.customarrows.util.arrows.Honeypot.placeTemporaryBlocks;
 
 public class HoneypotArrow extends CustomArrow {
 
@@ -34,9 +36,9 @@ public class HoneypotArrow extends CustomArrow {
         int radius = 4;
 
         Location targetLocation = event.getEntity().getLocation().add(new Vector(0.5, 0, 0.5));
-        Map<Location, Material> targetBlockLocations = ArrowSpecificUtil.getAHollowSphereAround(targetLocation, radius);
+        Map<Location, Material> targetBlockLocations = getAHollowSphereAround(targetLocation, radius);
 
-        ArrowSpecificUtil.placeTemporaryBlocks(targetBlockLocations, DELETE_AFTER_SECONDS, REPLACEMENT);
+        placeTemporaryBlocks(targetBlockLocations, DELETE_AFTER_SECONDS, REPLACEMENT);
     }
 
     @Override
@@ -48,6 +50,6 @@ public class HoneypotArrow extends CustomArrow {
 
         Map<Location, Material> targetBlockLocations = Map.of(hitBlock.getLocation(), hitBlock.getType());
 
-        ArrowSpecificUtil.placeTemporaryBlocks(targetBlockLocations, DELETE_AFTER_SECONDS, REPLACEMENT);
+        placeTemporaryBlocks(targetBlockLocations, DELETE_AFTER_SECONDS, REPLACEMENT);
     }
 }
