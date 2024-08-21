@@ -1,7 +1,7 @@
 package me.xiaojibazhanshi.customarrows.util.arrows;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ItemDisplay;
@@ -70,7 +70,7 @@ public class FlashBang {
         itemDisplay.setInvulnerable(true);
 
         if (displayName != null) {
-            itemDisplay.setCustomName(Util.color(displayName));
+            itemDisplay.setCustomName(GeneralUtil.color(displayName));
             itemDisplay.setCustomNameVisible(true);
         }
 

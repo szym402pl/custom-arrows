@@ -1,6 +1,6 @@
 package me.xiaojibazhanshi.customarrows.util.arrows;
 
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -15,10 +15,10 @@ public class Trap {
         if (block == null) return false;
 
         Material type = block.getType();
-        if (!type.isSolid() || !Util.isNotPlant(block)) return false;
+        if (!type.isSolid() || !GeneralUtil.isNotPlant(block)) return false;
 
         Block blockAbove = block.getRelative(BlockFace.UP);
-        if (blockAbove.getType() != Material.AIR && Util.isNotPlant(blockAbove)) return false;
+        if (blockAbove.getType() != Material.AIR && GeneralUtil.isNotPlant(blockAbove)) return false;
 
         Block blockBelow = block.getRelative(BlockFace.DOWN);
 

@@ -1,7 +1,7 @@
 package me.xiaojibazhanshi.customarrows.util.arrows;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
@@ -39,7 +39,7 @@ public class Split {
                 }
             }.runTaskLater(CustomArrows.getInstance(), 15L * (i + 1));
 
-            Util.removeArrowAfter(arrows[index], 30L * (i + 1));
+            GeneralUtil.removeArrowAfter(arrows[index], 30L * (i + 1));
         }
     }
 

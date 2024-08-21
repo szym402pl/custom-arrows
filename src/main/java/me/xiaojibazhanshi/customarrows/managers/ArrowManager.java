@@ -3,7 +3,7 @@ package me.xiaojibazhanshi.customarrows.managers;
 import lombok.Getter;
 import me.xiaojibazhanshi.customarrows.arrows.*;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Arrow;
 import org.bukkit.inventory.ItemStack;
@@ -57,10 +57,11 @@ public class ArrowManager {
         registerCustomArrow("marker_arrow", new MarkerArrow());
         registerCustomArrow("place_swap_arrow", new PlaceSwapArrow());
         registerCustomArrow("anti_gravity_arrow", new AntiGravityArrow());
+        registerCustomArrow("frost_walker_arrow", new FrostWalkerArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
-        customArrows.put(Util.createStringNSKey(id), customArrow);
+        customArrows.put(GeneralUtil.createStringNSKey(id), customArrow);
     }
 
     public List<ItemStack> getItemStacks() {

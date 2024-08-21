@@ -1,6 +1,6 @@
 package me.xiaojibazhanshi.customarrows.util.arrows;
 
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.apache.commons.math3.geometry.euclidean.threed.Plane;
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
@@ -34,11 +34,11 @@ public class Dividing {
                 .normalize()
                 .multiply(originalDirection.length());
 
-        Arrow arrow1 = Util.copyArrow(arrow, arrow.getLocation(), newVelocity1);
-        Arrow arrow2 = Util.copyArrow(arrow, arrow.getLocation(), newVelocity2);
+        Arrow arrow1 = GeneralUtil.copyArrow(arrow, arrow.getLocation(), newVelocity1);
+        Arrow arrow2 = GeneralUtil.copyArrow(arrow, arrow.getLocation(), newVelocity2);
 
-        Util.removeArrowAfter(arrow1, 200);
-        Util.removeArrowAfter(arrow2, 200);
+        GeneralUtil.removeArrowAfter(arrow1, 200);
+        GeneralUtil.removeArrowAfter(arrow2, 200);
 
         arrow.setVisibleByDefault(false);
         return List.of(arrow1, arrow2);

@@ -1,7 +1,7 @@
 package me.xiaojibazhanshi.customarrows.util.arrows;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -49,7 +49,7 @@ public class Ghost {
         arrow.setGravity(false);
         arrow.setPersistent(true);
 
-        Util.removeArrowAfter(arrow, 300);
+        GeneralUtil.removeArrowAfter(arrow, 300);
     }
 
     public static boolean isFakeArrow(Entity entity) {

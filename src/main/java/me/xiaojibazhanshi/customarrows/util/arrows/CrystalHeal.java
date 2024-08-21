@@ -1,6 +1,6 @@
 package me.xiaojibazhanshi.customarrows.util.arrows;
 
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.*;
@@ -23,7 +23,7 @@ public class CrystalHeal {
         crystalMap.remove(uuid);
         crystalMap.put(uuid, createACrystal(arrowLocation, arrow.getWorld(), shooter));
 
-        Util.removeCrystalAfter(uuid, 600, crystalMap);
+        GeneralUtil.removeCrystalAfter(uuid, 600, crystalMap);
     }
 
     private static EnderCrystal createACrystal(Location location, World world, Player owner) {
@@ -32,7 +32,7 @@ public class CrystalHeal {
         crystal.setCustomName("  ");
         crystal.setCustomNameVisible(false);
 
-        String crystalName = Util.color("&4" + owner.getName() + "&c's Heal Crystal");
+        String crystalName = GeneralUtil.color("&4" + owner.getName() + "&c's Heal Crystal");
         Location crystalTextLocation = crystal.getLocation().clone().add(new Vector(0, 2.2, 0));
 
         TextDisplay display = world.spawn(crystalTextLocation, TextDisplay.class, textDisplay -> {
@@ -40,7 +40,7 @@ public class CrystalHeal {
             textDisplay.setBillboard(Display.Billboard.CENTER);
         });
 
-        Util.removeEntityAfter(display, 30 * 20);
+        GeneralUtil.removeEntityAfter(display, 30 * 20);
         return crystal;
     }
 

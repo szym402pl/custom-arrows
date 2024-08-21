@@ -1,6 +1,6 @@
 package me.xiaojibazhanshi.customarrows.util.arrows;
 
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -25,7 +25,7 @@ public class Chained {
             newArrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
             newArrow.setVelocity(hitEntityToTarget.multiply(5.0).setY(yCopy));
 
-            Util.removeArrowAfter(newArrow, 30L);
+            GeneralUtil.removeArrowAfter(newArrow, 30L);
         }
     }
 

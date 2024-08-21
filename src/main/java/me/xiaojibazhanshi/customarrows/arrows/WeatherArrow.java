@@ -4,7 +4,7 @@ import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.runnables.ChangeWeatherTask;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -37,20 +37,20 @@ public class WeatherArrow extends CustomArrow {
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
         if (shooter.getWorld().getEnvironment() == World.Environment.NORMAL) {
-            shooter.sendTitle("", Util.color("&7I need to aim higher..."), 5, 20, 5);
+            shooter.sendTitle("", GeneralUtil.color("&7I need to aim higher..."), 5, 20, 5);
         } else {
-            shooter.sendTitle(Util.color("&7Oh wait..."),
-                    Util.color("&7there's no weather here..."), 5, 30, 5);
+            shooter.sendTitle(GeneralUtil.color("&7Oh wait..."),
+                    GeneralUtil.color("&7there's no weather here..."), 5, 30, 5);
         }
     }
 
     @Override
     public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         if (shooter.getWorld().getEnvironment() == World.Environment.NORMAL) {
-            shooter.sendTitle("", Util.color("&7I need to aim higher..."), 5, 20, 5);
+            shooter.sendTitle("", GeneralUtil.color("&7I need to aim higher..."), 5, 20, 5);
         } else {
-            shooter.sendTitle(Util.color("&7Oh wait..."),
-                    Util.color("&7there's no weather here..."), 5, 30, 5);
+            shooter.sendTitle(GeneralUtil.color("&7Oh wait..."),
+                    GeneralUtil.color("&7there's no weather here..."), 5, 30, 5);
         }
 
         event.getEntity().remove();

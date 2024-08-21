@@ -2,7 +2,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Color;
@@ -36,7 +36,7 @@ public class TrapArrow extends CustomArrow {
 
         if (!isValidTrapLocation(block)) {
             shooter.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                    TextComponent.fromLegacy(Util.color("&7I can't set up a trap there...")));
+                    TextComponent.fromLegacy(GeneralUtil.color("&7I can't set up a trap there...")));
             return;
         }
 

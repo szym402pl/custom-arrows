@@ -2,7 +2,7 @@ package me.xiaojibazhanshi.customarrows.listeners;
 
 import me.xiaojibazhanshi.customarrows.managers.ArrowManager;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -33,8 +33,8 @@ public class PlayerLeaveListener implements Listener {
     }
 
     private CustomArrow retrieveCustomArrow(String id) {
-        if (arrowManager.getCustomArrows().containsKey(Util.createStringNSKey(id))) {
-            return arrowManager.getCustomArrows().get(Util.createStringNSKey(id));
+        if (arrowManager.getCustomArrows().containsKey(GeneralUtil.createStringNSKey(id))) {
+            return arrowManager.getCustomArrows().get(GeneralUtil.createStringNSKey(id));
         }
 
         return null;

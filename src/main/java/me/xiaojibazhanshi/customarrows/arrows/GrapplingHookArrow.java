@@ -2,7 +2,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
@@ -54,7 +54,7 @@ public class GrapplingHookArrow extends CustomArrow {
 
         if (force < 2.0) {
             event.setCancelled(true);
-            shooter.sendTitle("", Util.color("&7I need to draw the bow further..."));
+            shooter.sendTitle("", GeneralUtil.color("&7I need to draw the bow further..."));
             return;
         }
 

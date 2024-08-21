@@ -4,7 +4,7 @@ import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.runnables.ChangeDayCycleTask;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -48,10 +48,10 @@ public class DayCycleArrow extends CustomArrow {
 
     private void sendTitle(Player shooter) {
         if (shooter.getWorld().getEnvironment() == World.Environment.NORMAL) {
-            shooter.sendTitle("", Util.color("&7I need to aim higher..."), 5, 20, 5);
+            shooter.sendTitle("", GeneralUtil.color("&7I need to aim higher..."), 5, 20, 5);
         } else {
-            shooter.sendTitle(Util.color("&7Oh wait..."),
-                    Util.color("&7time doesn't change here..."), 5, 30, 5);
+            shooter.sendTitle(GeneralUtil.color("&7Oh wait..."),
+                    GeneralUtil.color("&7time doesn't change here..."), 5, 30, 5);
         }
     }
 }

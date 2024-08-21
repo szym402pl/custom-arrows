@@ -3,7 +3,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -42,7 +42,7 @@ public class MarkerArrow extends CustomArrow {
             for (Entity entity : event.getEntity().getNearbyEntities(0.5, 0.5, 0.5)) {
                 if (entity instanceof Arrow arrow) {
                     count++;
-                    Util.removeArrowAfter(arrow, 1);
+                    GeneralUtil.removeArrowAfter(arrow, 1);
                 }
             }
 

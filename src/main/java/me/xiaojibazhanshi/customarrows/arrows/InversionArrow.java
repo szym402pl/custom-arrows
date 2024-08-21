@@ -3,7 +3,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -34,10 +34,10 @@ public class InversionArrow extends CustomArrow {
         target.teleport(newLocation);
 
         if (target instanceof Player player) {
-            player.sendTitle(Util.color("&7Get rotated"), "", 10, 15, 5);
+            player.sendTitle(GeneralUtil.color("&7Get rotated"), "", 10, 15, 5);
 
             Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
-                player.sendTitle("", Util.color("&7&o...idiot"), 15, 10, 5);
+                player.sendTitle("", GeneralUtil.color("&7&o...idiot"), 15, 10, 5);
             }, 30);
         }
     }

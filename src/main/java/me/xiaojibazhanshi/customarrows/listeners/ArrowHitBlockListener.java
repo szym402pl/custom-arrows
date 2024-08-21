@@ -2,7 +2,7 @@ package me.xiaojibazhanshi.customarrows.listeners;
 
 import me.xiaojibazhanshi.customarrows.managers.ArrowManager;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
-import me.xiaojibazhanshi.customarrows.util.Util;
+import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +22,7 @@ public class ArrowHitBlockListener implements Listener {
     @EventHandler
     public void onArrowHitBlock(ProjectileHitEvent event) {
         if (isFakeArrow(event.getEntity())) {
-            CustomArrow customArrow = arrowManager.getCustomArrows().get(Util.createStringNSKey("ghost_arrow"));
+            CustomArrow customArrow = arrowManager.getCustomArrows().get(GeneralUtil.createStringNSKey("ghost_arrow"));
             customArrow.onHitBlock(event, (Player) event.getEntity().getShooter());
         }
 
