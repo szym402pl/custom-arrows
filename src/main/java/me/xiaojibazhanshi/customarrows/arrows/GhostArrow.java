@@ -3,7 +3,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
+import me.xiaojibazhanshi.customarrows.util.Util;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -29,7 +29,7 @@ public class GhostArrow extends CustomArrow {
 
     @Override
     public void onShoot(EntityShootBowEvent event, Player shooter) {
-        GeneralUtil.restrictUseIfWeaponIsNot(event, shooter, Material.CROSSBOW);
+        Util.restrictUseIfWeaponIsNot(event, shooter, Material.CROSSBOW);
 
         Entity arrow = event.getProjectile();
         arrow.setPersistent(true);
@@ -37,7 +37,7 @@ public class GhostArrow extends CustomArrow {
         arrow.setGlowing(true);
 
         ArrowSpecificUtil.shootFakeArrow(event, shooter);
-        GeneralUtil.removeArrowAfter((Arrow) arrow, 200);
+        Util.removeArrowAfter((Arrow) arrow, 200);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class GhostArrow extends CustomArrow {
 
         if (hitBlock != null
                 && hitBlock.getType().isSolid()
-                && GeneralUtil.isNotPlant(hitBlock)
+                && Util.isNotPlant(hitBlock)
                 && ArrowSpecificUtil.isFakeArrow(event.getEntity())
                 && hitBlock.getType().isBlock()
                 && !(hitBlock instanceof Container)) {

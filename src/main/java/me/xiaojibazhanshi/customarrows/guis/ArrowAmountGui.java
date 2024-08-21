@@ -3,7 +3,7 @@ package me.xiaojibazhanshi.customarrows.guis;
 import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
+import me.xiaojibazhanshi.customarrows.util.Util;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -17,14 +17,14 @@ public class ArrowAmountGui extends GuiHelper {
 
     public static void openGui(Player player, ItemStack desiredArrow, int arrowAmount) {
         Gui gui = Gui.gui()
-                .title(Component.text(GeneralUtil.color("&aChoose the arrow amount")))
+                .title(Component.text(Util.color("&aChoose the arrow amount")))
                 .rows(3)
                 .create();
 
-        List<String> newLore = GeneralUtil.extractLore(desiredArrow);
+        List<String> newLore = Util.extractLore(desiredArrow);
         newLore.addAll(getArrowInfo(arrowAmount));
 
-        ItemStack newLoreDesiredArrow = GeneralUtil.getItemCopyWithNewLore(desiredArrow, newLore);
+        ItemStack newLoreDesiredArrow = Util.getItemCopyWithNewLore(desiredArrow, newLore);
         newLoreDesiredArrow.setAmount(arrowAmount);
 
         GuiItem arrowAsGuiItem = ItemBuilder.from(newLoreDesiredArrow).asGuiItem(event -> {

@@ -3,7 +3,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
+import me.xiaojibazhanshi.customarrows.util.Util;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -49,16 +49,16 @@ public class FiftyCalArrow extends CustomArrow {
     @Override
     public void onShoot(EntityShootBowEvent event, Player shooter) {
         if (event.getBow() == null) return;
-        if (GeneralUtil.restrictUseIfWeaponIsNot(event, shooter, Material.CROSSBOW)) return;
+        if (Util.restrictUseIfWeaponIsNot(event, shooter, Material.CROSSBOW)) return;
 
         Entity arrow = event.getProjectile();
         Vector locationAdjustment = arrow.getVelocity().multiply(0.1);
         Location explosionLocation = arrow.getLocation().add(locationAdjustment);
 
         arrow.getWorld().createExplosion(explosionLocation, 0.3F);
-        GeneralUtil.shootLikeABullet(arrow, 0.4);
+        Util.shootLikeABullet(arrow, 0.4);
 
-        GeneralUtil.damageWeapon(event.getBow(), 5);
+        Util.damageWeapon(event.getBow(), 5);
         ArrowSpecificUtil.applyEffectsIfShotRapidly(shooter);
     }
 }

@@ -3,7 +3,7 @@ package me.xiaojibazhanshi.customarrows.guis;
 import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.components.GuiAction;
 import dev.triumphteam.gui.guis.GuiItem;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
+import me.xiaojibazhanshi.customarrows.util.Util;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -24,7 +24,7 @@ public class GuiHelper {
         ItemMeta fillerMeta = filler.getItemMeta();
         assert fillerMeta != null;
 
-        fillerMeta.setDisplayName(GeneralUtil.color("&7..."));
+        fillerMeta.setDisplayName(Util.color("&7..."));
         fillerMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         filler.setItemMeta(fillerMeta);
@@ -37,8 +37,8 @@ public class GuiHelper {
         ItemMeta fillerMeta = filler.getItemMeta();
         assert fillerMeta != null;
 
-        fillerMeta.setDisplayName(GeneralUtil.color("&cI'm not an arrow"));
-        fillerMeta.setLore(List.of("", GeneralUtil.color("&7Look elsewhere")));
+        fillerMeta.setDisplayName(Util.color("&cI'm not an arrow"));
+        fillerMeta.setLore(List.of("", Util.color("&7Look elsewhere")));
         fillerMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         filler.setItemMeta(fillerMeta);
@@ -51,7 +51,7 @@ public class GuiHelper {
         ItemMeta closeButtonMeta = closeButton.getItemMeta();
         assert closeButtonMeta != null;
 
-        closeButtonMeta.setDisplayName(GeneralUtil.color("&cClose the menu"));
+        closeButtonMeta.setDisplayName(Util.color("&cClose the menu"));
         closeButtonMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         closeButton.setItemMeta(closeButtonMeta);
@@ -67,7 +67,7 @@ public class GuiHelper {
         ItemMeta meta = item.getItemMeta();
 
         assert meta != null;
-        meta.setDisplayName(GeneralUtil.color(name));
+        meta.setDisplayName(Util.color(name));
         item.setItemMeta(meta);
 
         return ItemBuilder.from(item).asGuiItem(action);
@@ -91,7 +91,7 @@ public class GuiHelper {
                 (isAmountNegative ? Material.RED_WOOL : Material.GREEN_WOOL, Math.abs(amountToAdd));
 
         int targetAmount = Math.max(1, Math.min(64, currentAmount + amountToAdd));
-        String displayName = GeneralUtil.color((isAmountNegative ? "&c&l-" : "&a&l+") + Math.abs(amountToAdd));
+        String displayName = Util.color((isAmountNegative ? "&c&l-" : "&a&l+") + Math.abs(amountToAdd));
 
         ItemMeta aSMeta = amountSetter.getItemMeta();
         assert aSMeta != null;
@@ -112,7 +112,7 @@ public class GuiHelper {
         ItemMeta fillerMeta = filler.getItemMeta();
         assert fillerMeta != null;
 
-        fillerMeta.setDisplayName(GeneralUtil.color("&7..."));
+        fillerMeta.setDisplayName(Util.color("&7..."));
         fillerMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         filler.setItemMeta(fillerMeta);
@@ -127,24 +127,24 @@ public class GuiHelper {
         try {
             arrowDisplayName = arrow.getItemMeta().getDisplayName();
         } catch (NullPointerException npe) {
-            arrowDisplayName = GeneralUtil.color("&cUknown Arrow");
+            arrowDisplayName = Util.color("&cUknown Arrow");
         }
 
-        player.sendMessage(GeneralUtil.color
+        player.sendMessage(Util.color
                 ("&aYou've received " + arrowDisplayName + " &ax&b" + arrow.getAmount() + "&a!"));
 
-        if (!GeneralUtil.isInventoryFull(playerInventory)) {
+        if (!Util.isInventoryFull(playerInventory)) {
             playerInventory.addItem(arrow);
         } else {
             player.getWorld().dropItem(player.getLocation(), arrow);
-            player.sendMessage(GeneralUtil.color("&7&oInventory full, dropping the item(s)..."));
+            player.sendMessage(Util.color("&7&oInventory full, dropping the item(s)..."));
         }
     }
 
     protected static List<String> getArrowInfo(int arrowAmount) {
         return List.of("",
-                GeneralUtil.color("&aClick me to get this arrow!"),
-                GeneralUtil.color("&aCurrently selected amount: &b&l" + arrowAmount));
+                Util.color("&aClick me to get this arrow!"),
+                Util.color("&aCurrently selected amount: &b&l" + arrowAmount));
     }
 
 

@@ -3,7 +3,7 @@ package me.xiaojibazhanshi.customarrows.managers;
 import lombok.Getter;
 import me.xiaojibazhanshi.customarrows.arrows.*;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
+import me.xiaojibazhanshi.customarrows.util.Util;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Arrow;
 import org.bukkit.inventory.ItemStack;
@@ -60,7 +60,7 @@ public class ArrowManager {
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
-        customArrows.put(GeneralUtil.createStringNSKey(id), customArrow);
+        customArrows.put(Util.createStringNSKey(id), customArrow);
     }
 
     public List<ItemStack> getItemStacks() {

@@ -2,7 +2,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,6 +11,9 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static me.xiaojibazhanshi.customarrows.util.arrows.AimAssist.provideAimAssist;
+import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.findEntityInSight;
 
 public class AdrenalineArrow extends CustomArrow {
 
@@ -36,8 +38,8 @@ public class AdrenalineArrow extends CustomArrow {
         int matchingEffects = shooter.getActivePotionEffects().stream().filter(effects::contains).toList().size();
 
         if (matchingEffects == effects.size()) {
-            ArrowSpecificUtil.provideAimAssist(event.getProjectile(),
-                    ArrowSpecificUtil.findEntityInSight(shooter, 30, 1.5));
+            provideAimAssist(event.getProjectile(),
+                    findEntityInSight(shooter, 30, 1.5));
         }
 
         for (PotionEffect effect : effects) {

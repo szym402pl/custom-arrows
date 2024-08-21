@@ -16,7 +16,7 @@ import org.bukkit.util.Vector;
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class GeneralUtil {
+public class Util {
 
     public static String color(String text) {
         return ChatColor.translateAlternateColorCodes('&', text);

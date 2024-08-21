@@ -3,7 +3,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
+import me.xiaojibazhanshi.customarrows.util.Util;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -39,7 +39,7 @@ public class PlaceSwapArrow extends CustomArrow {
         shooter.teleport(hitEntityLocation);
 
         int time = 10;
-        shooter.sendTitle("", GeneralUtil.color("&7Woah, I really did swap places..."), time, time, time);
+        shooter.sendTitle("", Util.color("&7Woah, I really did swap places..."), time, time, time);
     }
 
     @Override

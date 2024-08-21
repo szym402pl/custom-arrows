@@ -21,9 +21,9 @@ public class ArrowFactory {
         ItemMeta arrowMeta = arrow.getItemMeta();
         assert arrowMeta != null;
 
-        List<String> finalLore = lore.stream().map(GeneralUtil::color).toList();
+        List<String> finalLore = lore.stream().map(Util::color).toList();
 
-        arrowMeta.setDisplayName(GeneralUtil.color(name));
+        arrowMeta.setDisplayName(Util.color(name));
         arrowMeta.getPersistentDataContainer()
                 .set(new NamespacedKey(CustomArrows.getInstance(), id), PersistentDataType.STRING, id);
         arrowMeta.setLore(finalLore);

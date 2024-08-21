@@ -2,7 +2,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
+import me.xiaojibazhanshi.customarrows.util.Util;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.AbstractArrow;
@@ -52,7 +52,7 @@ public class DividingArrow extends CustomArrow {
         }
 
         activeArrows.put(uuid, newArrows);
-        GeneralUtil.removeArrowAfter(arrow, 200);
+        Util.removeArrowAfter(arrow, 200);
     }
 
     @Override

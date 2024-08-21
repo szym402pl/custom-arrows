@@ -2,7 +2,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
+import me.xiaojibazhanshi.customarrows.util.Util;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -42,7 +42,7 @@ public class HiveArrow extends CustomArrow {
             bee.setAnger(999);
             bee.setTarget(target);
 
-            GeneralUtil.removeEntityAfter(bee, 400);
+            Util.removeEntityAfter(bee, 400);
         }
     }
 

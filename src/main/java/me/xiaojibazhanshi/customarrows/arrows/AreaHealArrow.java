@@ -10,7 +10,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 import java.util.List;
 
-import static me.xiaojibazhanshi.customarrows.util.ArrowSpecificUtil.spawnALingeringPotion;
+import static me.xiaojibazhanshi.customarrows.util.arrows.AreaHeal.spawnALingeringPotion;
 
 public class AreaHealArrow extends CustomArrow {
 

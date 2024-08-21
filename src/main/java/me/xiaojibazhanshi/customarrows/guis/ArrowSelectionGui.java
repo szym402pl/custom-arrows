@@ -4,7 +4,7 @@ import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import dev.triumphteam.gui.guis.PaginatedGui;
 import me.xiaojibazhanshi.customarrows.managers.ArrowManager;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
+import me.xiaojibazhanshi.customarrows.util.Util;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -26,7 +26,7 @@ public class ArrowSelectionGui extends GuiHelper {
 
     public void openGui(Player player) {
         PaginatedGui gui = Gui.paginated()
-                .title(Component.text(GeneralUtil.color("&aChoose a custom arrow")))
+                .title(Component.text(Util.color("&aChoose a custom arrow")))
                 .rows(4)
                 .pageSize(27)
                 .create();
@@ -48,7 +48,7 @@ public class ArrowSelectionGui extends GuiHelper {
         }
 
         List<GuiItem> arrowList = getArrowsAsGuiItems
-                (GeneralUtil.sortAlphabeticallyByNames(arrowManager.getItemStacks()), player);
+                (Util.sortAlphabeticallyByNames(arrowManager.getItemStacks()), player);
 
         int itemAmount = 0;
 
