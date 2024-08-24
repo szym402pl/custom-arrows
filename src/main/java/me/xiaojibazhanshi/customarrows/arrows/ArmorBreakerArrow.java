@@ -119,6 +119,4 @@ public class ArmorBreakerArrow extends CustomArrow {
 
         shooter.sendTitle("", shooterTitle.replace("{entity}", entityName), 5, 20, 5);
     }
-
-
 }

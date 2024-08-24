@@ -7,6 +7,10 @@ import org.bukkit.Location;
 
 public class Smoke {
 
+    private Smoke() {
+
+    }
+
     public static void createProgressiveSmokeCloud(Location location) {
         // I KNOW THE CODE'S UGLY BUT HEY IT LOOKS AWESOME IN-GAME SO SHUT UP
         int firstSmokeAmount = 400;

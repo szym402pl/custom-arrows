@@ -7,6 +7,10 @@ import org.bukkit.block.BlockFace;
 
 public class Trap {
 
+    private Trap() {
+
+    }
+
     /**
      * @return true if block above isn't solid and there
      * isn't air around the to-be tnt block (the one below the main block)

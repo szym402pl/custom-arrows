@@ -7,6 +7,10 @@ import org.bukkit.Location;
 
 public class Meteorite {
 
+    private Meteorite() {
+
+    }
+
     public static void executeOrderMeteorite(Location targetLocation) {
         adjustLocation(targetLocation);
 

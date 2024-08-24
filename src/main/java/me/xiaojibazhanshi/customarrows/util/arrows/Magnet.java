@@ -6,6 +6,10 @@ import org.bukkit.util.Vector;
 
 public class Magnet {
 
+    private Magnet() {
+
+    }
+
     /**
      * @return true if there was at least one item in the vicinity
      */

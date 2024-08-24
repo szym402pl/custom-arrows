@@ -32,7 +32,8 @@ public class InvisibleArrow extends CustomArrow {
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
         if (!(event.getEntity() instanceof LivingEntity)) return;
 
-        event.setDamage(event.getDamage() * 1.1);
+        double criticalDamageMultiplier = 1.1;
+        event.setDamage(event.getDamage() * criticalDamageMultiplier);
     }
 
     @Override

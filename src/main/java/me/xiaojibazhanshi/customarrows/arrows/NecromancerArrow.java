@@ -56,7 +56,9 @@ public class NecromancerArrow extends CustomArrow {
         }
 
         if (hitEntity instanceof IronGolem) {
-            event.setDamage(event.getDamage() * 2);
+            int ironGolemDamageMultiplier = 2;
+
+            event.setDamage(event.getDamage() * ironGolemDamageMultiplier);
             return;
         }
 

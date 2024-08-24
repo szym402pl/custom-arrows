@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -30,8 +31,7 @@ public class DayCycleArrow extends CustomArrow {
     public void onShoot(EntityShootBowEvent event, Player shooter) {
         int heightCheckDelay = 50;
 
-        ChangeDayCycleTask task = new ChangeDayCycleTask(event.getProjectile());
-        Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), task, heightCheckDelay);
+        executeChangeDayCycleTask(event.getProjectile(), heightCheckDelay);
     }
 
     @Override
@@ -44,6 +44,11 @@ public class DayCycleArrow extends CustomArrow {
         sendTitle(shooter);
 
         event.getEntity().remove();
+    }
+
+    private void executeChangeDayCycleTask(Entity arrow, int heightCheckDelay) {
+        ChangeDayCycleTask task = new ChangeDayCycleTask(arrow);
+        Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), task, heightCheckDelay);
     }
 
     private void sendTitle(Player shooter) {

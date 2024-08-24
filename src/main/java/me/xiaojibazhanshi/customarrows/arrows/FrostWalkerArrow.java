@@ -28,6 +28,10 @@ public class FrostWalkerArrow extends CustomArrow {
     public void onShoot(EntityShootBowEvent event, Player shooter) {
         Arrow arrow = (Arrow) event.getProjectile();
 
+        executeFrostWalkerRunnable(arrow);
+    }
+
+    private void executeFrostWalkerRunnable(Arrow arrow) {
         FrostWalkerRunnable runnable = new FrostWalkerRunnable(arrow);
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), runnable, 4, 1);
     }

@@ -11,6 +11,10 @@ import org.bukkit.util.Vector;
 
 public class Split {
 
+    private Split() {
+
+    }
+
     public static void initiateFourWayArrowsOn(LivingEntity target) {
         Vector[] directions = {
                 new Vector(0, 0, -4.5),

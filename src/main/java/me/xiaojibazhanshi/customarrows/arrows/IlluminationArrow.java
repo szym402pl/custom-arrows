@@ -36,6 +36,8 @@ public class IlluminationArrow extends CustomArrow {
         Material startingMaterial = hitBlock.getType();
         hitBlock.setType(Material.GLOWSTONE);
 
+        int timeInSeconds = 60;
+
         Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
             try {
                 arrow.remove();
@@ -43,6 +45,6 @@ public class IlluminationArrow extends CustomArrow {
             } // Just a failsafe for when the arrow got picked up
 
             hitBlock.setType(startingMaterial);
-        }, 60 * 20);
+        }, timeInSeconds * 20);
     }
 }

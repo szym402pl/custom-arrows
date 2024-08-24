@@ -64,7 +64,8 @@ public class BlackHoleTask implements Consumer<BukkitTask> {
                     1,
                     0.0, 0.0, 0.0,
                     0.0,
-                    new Particle.DustOptions(isOtherColor ? Color.RED : Color.YELLOW, 0.5F), true);
+                    new Particle.DustOptions(isOtherColor ? Color.RED : Color.YELLOW, 0.5F),
+                    true);
         }
 
         for (Location particleALocation : blackHoleLocations) {
@@ -73,7 +74,8 @@ public class BlackHoleTask implements Consumer<BukkitTask> {
                     1,
                     0.0, 0.0, 0.0,
                     0.0,
-                    new Particle.DustOptions(Color.BLACK, 1.35F), true);
+                    new Particle.DustOptions(Color.BLACK, 1.35F),
+                    true);
         }
     }
 
@@ -94,9 +96,7 @@ public class BlackHoleTask implements Consumer<BukkitTask> {
 
             livingEntity.setVelocity(livingEntity.getVelocity().add(direction));
 
-            if (livingEntity.getLocation().distance(location) < 2.0) {
-                livingEntity.damage(0.75);
-            }
+            if (livingEntity.getLocation().distance(location) < 2.0) livingEntity.damage(0.75);
         }
     }
 

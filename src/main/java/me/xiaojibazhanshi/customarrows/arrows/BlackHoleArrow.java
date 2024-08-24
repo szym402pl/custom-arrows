@@ -26,21 +26,28 @@ public class BlackHoleArrow extends CustomArrow {
 
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
+        int duration = 10;
+
         event.getDamager().remove();
         Location holeLocation = event.getDamager().getLocation().clone().add(1.1, 0, 1.1);
 
-        BlackHoleTask task = new BlackHoleTask(holeLocation, 10, 2);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 1, 2);
+        executeBlackHoleTask(holeLocation, duration);
     }
 
     @Override
     public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         if (event.getHitBlock() == null || event.getHitBlock().getType() == Material.AIR) return;
 
+        int duration = 5;
+
         event.getEntity().remove();
         Location holeLocation = event.getEntity().getLocation().clone().add(1.1, 1, 1.1);
 
-        BlackHoleTask task = new BlackHoleTask(holeLocation, 5, 2);
+        executeBlackHoleTask(holeLocation, duration);
+    }
+
+    private void executeBlackHoleTask(Location location, int durationInSeconds) {
+        BlackHoleTask task = new BlackHoleTask(location, durationInSeconds, 2);
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 1, 2);
     }
 }

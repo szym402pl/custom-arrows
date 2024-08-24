@@ -5,6 +5,10 @@ import org.bukkit.block.Block;
 
 public class Smelter {
 
+    private Smelter() {
+
+    }
+
     public static Material getSmeltedMaterial(Block block) {
         String newName = block.getType().name()
                 .replace("ORE", "INGOT")

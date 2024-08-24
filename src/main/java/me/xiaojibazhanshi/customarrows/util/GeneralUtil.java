@@ -19,6 +19,10 @@ import java.util.*;
 
 public class GeneralUtil {
 
+    private GeneralUtil() {
+
+    }
+
     public static String color(String text) {
         return ChatColor.translateAlternateColorCodes('&', text);
     }
@@ -59,7 +63,7 @@ public class GeneralUtil {
     public static List<String> extractLore(ItemStack item) {
         try {
             return new ArrayList<>(List.copyOf(item.getItemMeta().getLore()));
-        } catch (NullPointerException ignored) {
+        } catch (NullPointerException npe) {
             return new ArrayList<>();
         }
     }
@@ -167,9 +171,8 @@ public class GeneralUtil {
         newArrow.setVisibleByDefault(originalArrow.isVisibleByDefault());
         newArrow.setVelocity(velocity == null ? originalArrow.getVelocity() : velocity);
 
-        for (PotionEffect effect : originalArrow.getCustomEffects()) {
+        for (PotionEffect effect : originalArrow.getCustomEffects())
             newArrow.addCustomEffect(effect, true);
-        }
 
         return newArrow;
     }

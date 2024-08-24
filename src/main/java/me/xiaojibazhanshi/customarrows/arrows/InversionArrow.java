@@ -33,12 +33,14 @@ public class InversionArrow extends CustomArrow {
 
         target.teleport(newLocation);
 
-        if (target instanceof Player player) {
-            player.sendTitle(GeneralUtil.color("&7Get rotated"), "", 10, 15, 5);
+        if (target instanceof Player player) sendRotatedTitle(player);
+    }
 
-            Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
-                player.sendTitle("", GeneralUtil.color("&7&o...idiot"), 15, 10, 5);
-            }, 30);
-        }
+    private void sendRotatedTitle(Player player) {
+        player.sendTitle(GeneralUtil.color("&7Get rotated"), "", 10, 15, 5);
+
+        Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
+            player.sendTitle("", GeneralUtil.color("&7&o...idiot"), 15, 10, 5);
+        }, 30);
     }
 }

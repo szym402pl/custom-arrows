@@ -51,8 +51,9 @@ public class GrapplingHookArrow extends CustomArrow {
     @Override
     public void onShoot(EntityShootBowEvent event, Player shooter) {
         float force = event.getForce();
+        float fullBowDrawForce = 2.0F;
 
-        if (force < 2.0) {
+        if (force < fullBowDrawForce) {
             event.setCancelled(true);
             shooter.sendTitle("", GeneralUtil.color("&7I need to draw the bow further..."));
             return;

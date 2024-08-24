@@ -4,6 +4,7 @@ import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -24,15 +25,17 @@ public class AreaHealArrow extends CustomArrow {
 
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
-        spawnALingeringPotion(event.getDamager());
-        event.getDamager().remove();
+        executeAreaHeal(event.getDamager());
     }
 
     @Override
     public void onHitBlock(ProjectileHitEvent event, Player shooter) {
-        spawnALingeringPotion(event.getEntity());
-        event.getEntity().remove();
+        executeAreaHeal(event.getEntity());
     }
 
+    private void executeAreaHeal(Entity arrow) {
+        spawnALingeringPotion(arrow);
+        arrow.remove();
+    }
 
 }

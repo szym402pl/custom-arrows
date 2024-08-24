@@ -44,13 +44,22 @@ public class CorruptionArrow extends CustomArrow {
         shouldTrigger = false;
 
         Arrow arrow = (Arrow) event.getEntity();
+        setArrowProperties(arrow);
+
+        executeCorruptEntitiesTask(arrow, hitBlock);
+    }
+
+    private void setArrowProperties(Arrow arrow) {
         arrow.setInvulnerable(true);
         arrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
         arrow.setVisibleByDefault(false);
+    }
 
+    private void executeCorruptEntitiesTask(Arrow arrow, Block hitBlock) {
         temporarilyCorruptBlocksInRadius(hitBlock, 3, 10);
 
         CorruptEntitiesTask task = new CorruptEntitiesTask(arrow, 10, 4);
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 1, 4);
     }
+
 }
