@@ -3,6 +3,7 @@ package me.xiaojibazhanshi.customarrows.util;
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.Inventory;
@@ -171,5 +172,19 @@ public class GeneralUtil {
         }
 
         return newArrow;
+    }
+
+    public static boolean hasEnchant(ItemStack item, Enchantment enchant) {
+        return item != null
+                && item.getType() != Material.AIR
+                && item.getItemMeta() != null
+                && item.getItemMeta().hasEnchant(enchant);
+    }
+
+    public static int getEnchantLevel(ItemStack item, Enchantment enchant) {
+        assert item.getItemMeta() != null;
+        assert item.getItemMeta().hasEnchant(enchant);
+
+        return item.getItemMeta().getEnchantLevel(enchant);
     }
 }
