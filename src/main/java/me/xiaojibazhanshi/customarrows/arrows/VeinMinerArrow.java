@@ -44,7 +44,7 @@ public class VeinMinerArrow extends CustomArrow {
         List<Block> sortedVein = sortByDistanceTo(vein, block);
 
         VeinMinerTask task = new VeinMinerTask(sortedVein);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 2, 4);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 2, 4); // breaks blocks 1 by 1
     }
 
 
