@@ -4,22 +4,17 @@ import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import org.bukkit.*;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 
 import java.util.List;
-import java.util.Locale;
 
 import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
-import static me.xiaojibazhanshi.customarrows.util.arrows.AimAssist.provideAimAssist;
 import static me.xiaojibazhanshi.customarrows.util.arrows.ArmorBreaker.getBaseMaterialFromArmor;
 import static me.xiaojibazhanshi.customarrows.util.arrows.ArmorBreaker.hasEnchants;
-import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.findEntityInSight;
 
 public class ArmorBreakerArrow extends CustomArrow {
 
@@ -50,22 +45,22 @@ public class ArmorBreakerArrow extends CustomArrow {
         Arrow arrow = (Arrow) event.getDamager();
 
         Location hitLocation = arrow.getLocation();
-        Location targetEyeLocation = livingEntity.getEyeLocation();
-        double distanceFromEyeLevel = hitLocation.distance(targetEyeLocation);
+        Location targetHeadLocation = livingEntity.getEyeLocation().add(0, 0.18, 0); // approximation
+        double distanceFromTheTopOfTheHead = Math.abs(hitLocation.getY() - targetHeadLocation.getY());
 
         /* CHECKING FOR THE TARGET ARMOR PIECE */
 
-        if (distanceFromEyeLevel > 1.40) {
+        if (distanceFromTheTopOfTheHead > 1.10) {
             acquiredMaterialAmount = 4;
             hitArmorPiece = HitArmorPiece.BOOTS;
             targetItem = livingEntity.getEquipment().getBoots();
 
-        } else if (distanceFromEyeLevel > 1.0) {
+        } else if (distanceFromTheTopOfTheHead > 0.7) {
             acquiredMaterialAmount = 7;
             hitArmorPiece = HitArmorPiece.LEGGINGS;
             targetItem = livingEntity.getEquipment().getLeggings();
 
-        } else if (distanceFromEyeLevel > 0.4) {
+        } else if (distanceFromTheTopOfTheHead > 0.25) {
             acquiredMaterialAmount = 8;
             hitArmorPiece = HitArmorPiece.CHESTPLATE;
             targetItem = livingEntity.getEquipment().getChestplate();
@@ -80,35 +75,50 @@ public class ArmorBreakerArrow extends CustomArrow {
 
         /* CHECKING FOR THE ENCHANTS AND PERFORMING SPECIFIC ACTION ON THE ARMOR PIECE */
 
-        boolean hasEnchants = hasEnchants(targetItem);
+        Damageable itemMeta = (Damageable) targetItem.getItemMeta();
+        assert itemMeta != null;
 
-        if (hasEnchants) {
-            Damageable itemMeta = (Damageable) targetItem.getItemMeta();
-            assert itemMeta != null;
+        int damage = hasEnchants(targetItem) ? 35 : 50;
+        int newItemDamage = itemMeta.getDamage() + damage;
+        boolean breakArmor = newItemDamage > targetItem.getType().getMaxDurability();
 
-            itemMeta.setDamage(itemMeta.getDamage() + 50);
-        } else {
-            targetItem.setAmount(0); // this effectively breaks the armor piece
+        World world = livingEntity.getWorld();
 
+        if (breakArmor) {
             ItemStack acquiredMaterials = new ItemStack(getBaseMaterialFromArmor(targetItem), acquiredMaterialAmount);
 
-            World world = livingEntity.getWorld();
             world.dropItemNaturally(livingEntity.getLocation(), acquiredMaterials);
-            world.playSound(livingEntity.getLocation(), Sound.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
+            targetItem.setAmount(0); // this effectively breaks the armor piece
+        } else {
+            itemMeta.setDamage(newItemDamage);
+            targetItem.setItemMeta(itemMeta);
         }
 
-        if (livingEntity instanceof Player player)  {
-            String armorPieceName = hitArmorPiece.name().toLowerCase();
+        /* NOTIFYING PLAYERS ABOUT DAMAGES DONE */
 
-            String title = color("&c" + shooter.getName() + " &7has "
-                    + (hasEnchants ? "dealt &b50 &7damage to your " : "broken your ") + "&a" + armorPieceName + "&7!");
+        String armorPieceName = hitArmorPiece.name().toLowerCase();
 
-            player.sendTitle("", title, 5, 20, 5);
+        world.playSound(hitLocation,
+                breakArmor ? Sound.ENTITY_ITEM_BREAK : Sound.ENTITY_ZOMBIE_BREAK_WOODEN_DOOR,
+                0.3F, 0.3F);
+
+        String shooterTitle = color("&7You have "
+                + (!breakArmor ? "dealt &b" + damage + " &7damage to " : "broken ")
+                + "&a{entity}&7's " + armorPieceName + "&7!");
+
+        String entityName = livingEntity.getType().name().toLowerCase();
+
+        if (livingEntity instanceof Player player) {
+            String targetTitle = color("&c" + shooter.getName() + " &7has "
+                    + (!breakArmor ? "dealt &b" + damage + " &7damage to your " : "broken your ")
+                    + "&a" + armorPieceName + "&7!");
+
+            entityName = player.getName();
+            player.sendTitle("", targetTitle, 5, 20, 5);
         }
 
+        shooter.sendTitle("", shooterTitle.replace("{entity}", entityName), 5, 20, 5);
     }
-
-
 
 
 }

@@ -12,6 +12,10 @@ import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.getDirectionFro
 
 public class Chained {
 
+    private Chained() {
+
+    }
+
     public static void chainTargets(List<LivingEntity> targetList, LivingEntity hitEntity) {
         for (LivingEntity target : targetList) {
             if (!hitEntity.hasLineOfSight(target)) continue;

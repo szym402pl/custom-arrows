@@ -20,6 +20,10 @@ import static me.xiaojibazhanshi.customarrows.util.arrows.Repulsion.detonateFire
 
 public class FlashBang {
 
+    private FlashBang() {
+
+    }
+
     public static void detonateFlashBang(Entity itemDisplay, long delay) {
         Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
             itemDisplay.remove();

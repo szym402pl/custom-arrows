@@ -12,7 +12,6 @@ import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.util.Vector;
 
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class CorruptionArrow extends CustomArrow {
         Block hitBlock = event.getHitBlock();
         if (hitBlock == null) return;
 
-        if (!(shouldTrigger))  {
+        if (!(shouldTrigger)) {
             shouldTrigger = true;
             return;
         }

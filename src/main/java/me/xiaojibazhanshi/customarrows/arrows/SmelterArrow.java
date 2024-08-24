@@ -2,13 +2,11 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -60,12 +58,8 @@ public class SmelterArrow extends CustomArrow {
 
         world.dropItemNaturally(location, droppedItem);
         world.spawn(location, ExperienceOrb.class);
-        world.spawnParticle(Particle.LAVA, location.add(0, 1,0), 10, 0.5, 0, 0.5);
+        world.spawnParticle(Particle.LAVA, location.add(0, 1, 0), 10, 0.5, 0, 0.5);
     }
-
-
-
-
 
 
 }

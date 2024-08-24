@@ -23,7 +23,9 @@ public class VeinMiner {
         return blocks.stream().filter(VeinMiner::isOre).toList();
     }
 
-    /**Origin can just be a single block*/
+    /**
+     * Origin can just be a single block
+     */
     public static List<Block> getFullOreVein(List<Block> origin) {
         if (origin.isEmpty()) return List.of();
 

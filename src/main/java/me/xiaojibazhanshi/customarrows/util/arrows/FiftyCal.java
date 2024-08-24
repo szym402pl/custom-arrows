@@ -6,6 +6,10 @@ import org.bukkit.potion.PotionEffectType;
 
 public class FiftyCal {
 
+    private FiftyCal() {
+
+    }
+
     public static void applyEffectsIfShotRapidly(Player shooter) {
         PotionEffect existingNausea = shooter.getPotionEffect(PotionEffectType.NAUSEA);
         int amplifier = existingNausea != null ? existingNausea.getAmplifier() + 1 : 0;

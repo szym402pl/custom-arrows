@@ -1,22 +1,15 @@
 package me.xiaojibazhanshi.customarrows.runnables;
 
-import org.bukkit.Location;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.util.Vector;
 
-import java.util.Map;
-import java.util.UUID;
 import java.util.function.Consumer;
 
 import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
-import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.getDirectionFromEntityToTarget;
 
 public class CorruptEntitiesTask implements Consumer<BukkitTask> {
 

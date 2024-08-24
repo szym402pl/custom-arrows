@@ -6,6 +6,10 @@ import org.bukkit.util.Vector;
 
 public class GrapplingHook {
 
+    private GrapplingHook() {
+
+    }
+
     public static void applyGrapplingHookVelocity(LivingEntity target, Location toWhere, double speed) {
         Location playerLocation = target.getLocation();
         Vector direction = toWhere.toVector().subtract(playerLocation.toVector());

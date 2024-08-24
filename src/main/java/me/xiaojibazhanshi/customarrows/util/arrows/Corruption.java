@@ -4,15 +4,17 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static me.xiaojibazhanshi.customarrows.util.arrows.Honeypot.placeTemporaryBlocks;
 
 public class Corruption {
+
+    private Corruption(){
+
+    }
 
     public static void temporarilyCorruptBlocksInRadius(Block center, int radius, int deleteAfterSeconds) {
         World world = center.getWorld();

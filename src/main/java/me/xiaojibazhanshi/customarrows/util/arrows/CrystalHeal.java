@@ -11,6 +11,10 @@ import java.util.UUID;
 
 public class CrystalHeal {
 
+    private CrystalHeal() {
+
+    }
+
     public static void updateHealCrystalMap(Map<UUID, EnderCrystal> crystalMap, Player shooter, Entity arrow) {
         Location arrowLocation = arrow.getLocation();
         UUID uuid = shooter.getUniqueId();
