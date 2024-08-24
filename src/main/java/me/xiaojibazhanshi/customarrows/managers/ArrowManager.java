@@ -59,6 +59,7 @@ public class ArrowManager {
         registerCustomArrow("anti_gravity_arrow", new AntiGravityArrow());
         registerCustomArrow("frost_walker_arrow", new FrostWalkerArrow());
         registerCustomArrow("dimension_arrow", new DimensionArrow());
+        registerCustomArrow("laser_arrow", new LaserArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

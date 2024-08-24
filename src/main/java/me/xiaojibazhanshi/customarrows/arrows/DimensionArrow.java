@@ -7,9 +7,6 @@ import org.bukkit.*;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +14,7 @@ import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
-import static me.xiaojibazhanshi.customarrows.util.arrows.AimAssist.provideAimAssist;
 import static me.xiaojibazhanshi.customarrows.util.arrows.Dimension.teleportToOneOfDimensions;
-import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.findEntityInSight;
 import static me.xiaojibazhanshi.customarrows.util.arrows.Repulsion.detonateFirework;
 
 public class DimensionArrow extends CustomArrow {

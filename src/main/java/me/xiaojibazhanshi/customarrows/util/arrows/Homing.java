@@ -49,6 +49,15 @@ public class Homing {
         return direction.normalize();
     }
 
+    public static Vector getDirectionFromTo(Location loc1, Location loc2) {
+        Vector loc1Vector = loc1.toVector();
+        Vector loc2Vector = loc2.toVector();
+
+        Vector direction = loc2Vector.subtract(loc1Vector);
+
+        return direction.normalize();
+    }
+
     public static boolean isDistanceGreaterThan(Entity entity1, Entity entity2, double distance) {
         Vector location1 = entity1.getLocation().toVector();
         Vector location2 = entity2.getLocation().toVector();

@@ -14,8 +14,10 @@ import static me.xiaojibazhanshi.customarrows.util.arrows.Thunder.randomizeLocat
 
 public class Dimension {
 
-    /**@return false if it couldn't find a safe location in 10 attempts */
-    public static boolean teleportToOneOfDimensions(LivingEntity entity, boolean end){
+    /**
+     * @return false if it couldn't find a safe location in 10 attempts
+     */
+    public static boolean teleportToOneOfDimensions(LivingEntity entity, boolean end) {
         World targetWorld = end ? Bukkit.getWorld("world_the_end") : Bukkit.getWorld("world_nether");
         Location location = new Location(targetWorld, 0, -1, 0);
         assert targetWorld != null;
