@@ -64,6 +64,7 @@ public class ArrowManager {
         registerCustomArrow("corruption_arrow", new CorruptionArrow());
         registerCustomArrow("smelter_arrow", new SmelterArrow());
         registerCustomArrow("armor_breaker_arrow", new ArmorBreakerArrow());
+        registerCustomArrow("lava_arrow", new LavaArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
