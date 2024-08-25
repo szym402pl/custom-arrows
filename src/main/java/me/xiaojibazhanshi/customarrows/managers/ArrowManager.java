@@ -69,6 +69,8 @@ public class ArrowManager {
         registerCustomArrow("time_freeze_arrow", new TimeFreezeArrow());
         registerCustomArrow("tunnel_miner_arrow", new TunnelMinerArrow());
         registerCustomArrow("immunity_bubble_arrow", new ImmunityBubbleArrow());
+        registerCustomArrow("rider_arrow", new RiderArrow());
+        registerCustomArrow("growth_arrow", new GrowthArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
