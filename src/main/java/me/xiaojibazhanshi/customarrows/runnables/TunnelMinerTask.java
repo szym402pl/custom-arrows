@@ -1,57 +1,83 @@
 package me.xiaojibazhanshi.customarrows.runnables;
 
-import org.bukkit.Location;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
+import me.xiaojibazhanshi.customarrows.CustomArrows;
+import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.entity.*;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import java.util.function.Consumer;
+import java.util.List;
 
-public class TunnelMinerTask implements Consumer<BukkitTask> {
+import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.getDirectionFromEntityToTarget;
+import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.isDistanceGreaterThan;
+import static me.xiaojibazhanshi.customarrows.util.arrows.Seeker.findFirstEntityBelow;
 
-    private final LivingEntity target;
-    private final int durationInSeconds;
-    private final float angle;
-    private final int chosenPeriod;
-    private final double heightIncrement;
+public class TunnelMinerTask extends BukkitRunnable {
 
-    private int counter = 1;
+    private final List<Block> tunnelBlocks;
+    private final ItemStack pickaxe;
 
-    public TunnelMinerTask(LivingEntity target, int durationInSeconds, int chosenPeriod, float angle, double heightIncrement) {
-        this.target = target;
-        this.heightIncrement = heightIncrement;
-        this.durationInSeconds = durationInSeconds;
-        this.chosenPeriod = chosenPeriod;
-        this.angle = angle;
+    public TunnelMinerTask(List<Block> tunnelBlocks, ItemStack pickaxe) {
+        this.tunnelBlocks = tunnelBlocks;
+        this.pickaxe = pickaxe;
     }
 
     @Override
-    public void accept(BukkitTask bukkitTask) {
-        int ticksInSecond = 20;
-        double heightClamp = 3.0;
+    public void run() {
+        Block block = tunnelBlocks.getFirst();
+        tunnelBlocks.remove(block);
 
-        if (counter * chosenPeriod >= durationInSeconds * ticksInSecond) {
-            target.setGravity(true);
-            bukkitTask.cancel();
+        World world = block.getWorld();
+
+        if (tunnelBlocks.isEmpty()) {
+            world.playSound(block.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0F, 1.0F);
+
+            cancel();
         }
 
-        if (target instanceof Player player) {
-            Location newLocation = player.getLocation();
+        Damageable pickaxeMeta = (Damageable) pickaxe.getItemMeta();
+        assert pickaxeMeta != null;
 
-            newLocation.setYaw(newLocation.getYaw() + angle);
-            newLocation.setY(newLocation.getY() + heightIncrement);
+        boolean willPickaxeBreak = pickaxeMeta.getDamage() + 2 > pickaxe.getType().getMaxDurability();
 
-            player.teleport(newLocation);
-        } else {
-            double newHeight = heightIncrement / heightClamp;
+        if (willPickaxeBreak) {
+            pickaxe.setAmount(0);
+            world.playSound(block.getLocation(), Sound.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
 
-            target.setRotation(target.getLocation().getYaw() + angle, target.getLocation().getPitch());
-            target.setGravity(false);
-            target.setVelocity(new Vector(0, newHeight, 0));
+            cancel();
+            return;
         }
 
-        counter++;
+        pickaxeMeta.setDamage(pickaxeMeta.getDamage() + 2);
+        pickaxe.setItemMeta(pickaxeMeta);
+
+        Sound breakSound;
+
+        try {
+            breakSound = Sound.valueOf("BLOCK_" + block.getType() + "_BREAK");
+        } catch (IllegalArgumentException ex) {
+            breakSound = Sound.BLOCK_STONE_BREAK;
+        }
+
+        world.playSound(block.getLocation(), breakSound, 1.0F, 1.0F);
+
+        double offset = 0.5;
+        double yOffset = 0.2;
+        int count = 5;
+
+        world.spawnParticle(Particle.BLOCK, block.getLocation(), count, offset, yOffset, offset, block.getBlockData());
+
+        block.breakNaturally();
     }
 
+    public void start() {
+        runTaskTimer(CustomArrows.getInstance(), 10, 40);
+    }
 }
