@@ -71,6 +71,8 @@ public class ArrowManager {
         registerCustomArrow("immunity_bubble_arrow", new ImmunityBubbleArrow());
         registerCustomArrow("rider_arrow", new RiderArrow());
         registerCustomArrow("growth_arrow", new GrowthArrow());
+        registerCustomArrow("tree_arrow", new TreeArrow());
+        registerCustomArrow("mob_aggro_arrow", new MobAggroArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
