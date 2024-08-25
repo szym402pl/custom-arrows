@@ -67,6 +67,7 @@ public class ArrowManager {
         registerCustomArrow("lava_arrow", new LavaArrow());
         registerCustomArrow("explosive_decoy_arrow", new ExplosiveDecoyArrow());
         registerCustomArrow("time_freeze_arrow", new TimeFreezeArrow());
+        registerCustomArrow("tunnel_miner_arrow", new TunnelMinerArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
