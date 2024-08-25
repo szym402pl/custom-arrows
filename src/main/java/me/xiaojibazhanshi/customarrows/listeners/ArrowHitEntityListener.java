@@ -4,10 +4,14 @@ import me.xiaojibazhanshi.customarrows.managers.ArrowManager;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
+import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
 
 public class ArrowHitEntityListener implements Listener {
 
@@ -19,9 +23,20 @@ public class ArrowHitEntityListener implements Listener {
 
     @EventHandler
     public void onEntityHitByEntity(EntityDamageByEntityEvent event) {
+        Entity entity = event.getEntity();
+
+        if (entity.isCustomNameVisible()
+                && entity.getCustomName() != null
+                && entity.getCustomName().equals(color("&cHit me!"))) {
+
+            entity.setCustomName("");
+            entity.setCustomNameVisible(false);
+            entity.getWorld().createExplosion(entity.getLocation(), 3.0F);
+        }
+
         if (!event.getDamager().isVisibleByDefault()) event.setCancelled(true);
 
-        if (GeneralUtil.isHealingCrystal(event.getEntity())) {
+        if (GeneralUtil.isHealingCrystal(entity)) {
             event.setCancelled(true);
         }
 
