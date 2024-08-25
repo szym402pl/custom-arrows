@@ -2,7 +2,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
-import me.xiaojibazhanshi.customarrows.runnables.tornado.TornadoParticleTask;
+import me.xiaojibazhanshi.customarrows.runnables.tornado.TornadoTask;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -19,7 +19,7 @@ import java.util.List;
 public class TornadoArrow extends CustomArrow {
 
     private final int durationInSeconds = 15;
-    private final int period = 6;
+    private final int period = 4;
 
     public TornadoArrow() {
         super(ArrowFactory.changeTippedColor
@@ -51,7 +51,7 @@ public class TornadoArrow extends CustomArrow {
     private void initializeTornado(Entity centerEntity, int durationInSeconds, int period) {
         Location center = centerEntity.getLocation();
 
-        TornadoParticleTask animation = new TornadoParticleTask(center, durationInSeconds, period);
+        TornadoTask animation = new TornadoTask(center, durationInSeconds, period);
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), animation, 1, period);
     }
 }
