@@ -19,7 +19,7 @@ import java.util.List;
 public class TornadoArrow extends CustomArrow {
 
     private final int durationInSeconds = 15;
-    private final int period = 2;
+    private final int period = 6;
 
     public TornadoArrow() {
         super(ArrowFactory.changeTippedColor
