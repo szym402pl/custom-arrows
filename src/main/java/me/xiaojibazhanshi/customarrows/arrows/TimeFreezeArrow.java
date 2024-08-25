@@ -6,22 +6,16 @@ import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static me.xiaojibazhanshi.customarrows.util.arrows.AimAssist.provideAimAssist;
-import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.findEntityInSight;
 import static me.xiaojibazhanshi.customarrows.util.arrows.TimeFreeze.freezeInPlace;
 import static me.xiaojibazhanshi.customarrows.util.arrows.TimeFreeze.unFreeze;
 
@@ -52,9 +46,9 @@ public class TimeFreezeArrow extends CustomArrow {
         if (shotOutOfBow) {
             freezeInPlace(arrow, frozenArrows);
 
-            Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () ->  {
-                        unFreeze(arrow, frozenArrows, true);
-                        frozenArrows.remove(arrow);
+            Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
+                unFreeze(arrow, frozenArrows, true);
+                frozenArrows.remove(arrow);
             }, arrowFreezeTime);
 
         } else {

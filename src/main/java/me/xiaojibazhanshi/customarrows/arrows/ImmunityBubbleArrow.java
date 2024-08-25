@@ -2,7 +2,9 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import org.bukkit.*;
+import org.bukkit.Color;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -12,7 +14,10 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 import static me.xiaojibazhanshi.customarrows.util.arrows.ImmunityBubble.generateSpherePoints;
 import static me.xiaojibazhanshi.customarrows.util.arrows.ImmunityBubble.runBubbleTask;
@@ -26,7 +31,7 @@ public class ImmunityBubbleArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&9Immunity Bubble Arrow", "immunity_bubble_arrow",
                                 List.of("", "This arrow will create an", "immunity bubble where it lands")),
-                                Color.BLUE));
+                        Color.BLUE));
     }
 
     @Override

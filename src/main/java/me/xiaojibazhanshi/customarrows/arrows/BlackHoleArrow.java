@@ -2,7 +2,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
-import me.xiaojibazhanshi.customarrows.runnables.BlackHoleTask;
+import me.xiaojibazhanshi.customarrows.runnables.blackhole.BlackHoleTask;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;

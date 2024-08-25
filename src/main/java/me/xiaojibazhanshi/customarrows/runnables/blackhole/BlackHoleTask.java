@@ -1,4 +1,4 @@
-package me.xiaojibazhanshi.customarrows.runnables;
+package me.xiaojibazhanshi.customarrows.runnables.blackhole;
 
 import org.bukkit.Color;
 import org.bukkit.Location;

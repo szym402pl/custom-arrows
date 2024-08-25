@@ -1,10 +1,8 @@
 package me.xiaojibazhanshi.customarrows.arrows;
 
-import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.runnables.TunnelMinerTask;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -13,9 +11,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitTask;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
 import static me.xiaojibazhanshi.customarrows.util.arrows.TunnelMiner.getTunnelBlocks;
@@ -35,7 +35,7 @@ public class TunnelMinerArrow extends CustomArrow {
                                         "and it will drain 2 durability per block,",
                                         "plus it will stop once you leave the game or",
                                         "if it mines 100 blocks or encounters air blocks")),
-                                Color.GRAY));
+                        Color.GRAY));
 
         oppositeBlockFaces.put(BlockFace.DOWN, BlockFace.UP);
         oppositeBlockFaces.put(BlockFace.UP, BlockFace.DOWN);
@@ -47,11 +47,11 @@ public class TunnelMinerArrow extends CustomArrow {
         oppositeBlockFaces.put(BlockFace.WEST, BlockFace.EAST);
 
         pickaxes = List.of(Material.WOODEN_PICKAXE,
-                           Material.STONE_PICKAXE,
-                           Material.IRON_PICKAXE,
-                           Material.GOLDEN_PICKAXE,
-                           Material.DIAMOND_PICKAXE,
-                           Material.NETHERITE_PICKAXE);
+                Material.STONE_PICKAXE,
+                Material.IRON_PICKAXE,
+                Material.GOLDEN_PICKAXE,
+                Material.DIAMOND_PICKAXE,
+                Material.NETHERITE_PICKAXE);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class TunnelMinerArrow extends CustomArrow {
         for (UUID uuid : activeTunnelTasks.keySet()) {
             if (player.getUniqueId() == uuid) {
                 activeTunnelTasks.get(uuid).cancel();
-                activeTunnelTasks.remove(uuid,  activeTunnelTasks.get(uuid));
+                activeTunnelTasks.remove(uuid, activeTunnelTasks.get(uuid));
             }
         }
     }

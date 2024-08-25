@@ -7,36 +7,27 @@ import org.bukkit.Material;
 import org.bukkit.TreeType;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.data.type.Sapling;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.inventory.ItemStack;
 
-import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
-import static me.xiaojibazhanshi.customarrows.util.arrows.AimAssist.provideAimAssist;
-import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.findEntityInSight;
-import static me.xiaojibazhanshi.customarrows.util.arrows.Tree.*;
+import static me.xiaojibazhanshi.customarrows.util.arrows.Tree.generateTree;
+import static me.xiaojibazhanshi.customarrows.util.arrows.Tree.isSaplingEligible;
 
 public class TreeArrow extends CustomArrow {
 
     private final List<TreeType> treeTypes = List.of(
-                TreeType.MANGROVE,
-                TreeType.ACACIA,
-                TreeType.TREE,
-                TreeType.BIRCH,
-                TreeType.DARK_OAK,
-                TreeType.AZALEA,
-                TreeType.CHERRY,
-                TreeType.SMALL_JUNGLE
+            TreeType.MANGROVE,
+            TreeType.ACACIA,
+            TreeType.TREE,
+            TreeType.BIRCH,
+            TreeType.DARK_OAK,
+            TreeType.AZALEA,
+            TreeType.CHERRY,
+            TreeType.SMALL_JUNGLE
     );
 
     public TreeArrow() {
@@ -59,7 +50,7 @@ public class TreeArrow extends CustomArrow {
         event.getEntity().remove();
 
         Block blockAbove = event.getHitBlock().getRelative(BlockFace.UP);
-        int whichTree = ThreadLocalRandom.current().nextInt(0, treeTypes.size() -1);
+        int whichTree = ThreadLocalRandom.current().nextInt(0, treeTypes.size() - 1);
 
         generateTree(blockAbove, treeTypes.get(whichTree));
     }

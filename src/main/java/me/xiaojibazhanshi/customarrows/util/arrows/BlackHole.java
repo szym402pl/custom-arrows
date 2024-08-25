@@ -1,7 +1,7 @@
 package me.xiaojibazhanshi.customarrows.util.arrows;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
-import me.xiaojibazhanshi.customarrows.runnables.BlackHoleAnimationTask;
+import me.xiaojibazhanshi.customarrows.runnables.blackhole.BlackHoleAnimationTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;

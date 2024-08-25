@@ -1,23 +1,15 @@
 package me.xiaojibazhanshi.customarrows.runnables;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
-import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
 
 import java.util.List;
-
-import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.getDirectionFromEntityToTarget;
-import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.isDistanceGreaterThan;
-import static me.xiaojibazhanshi.customarrows.util.arrows.Seeker.findFirstEntityBelow;
 
 public class TunnelMinerTask extends BukkitRunnable {
 

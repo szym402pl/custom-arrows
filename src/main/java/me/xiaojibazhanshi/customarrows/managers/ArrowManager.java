@@ -73,6 +73,7 @@ public class ArrowManager {
         registerCustomArrow("growth_arrow", new GrowthArrow());
         registerCustomArrow("tree_arrow", new TreeArrow());
         registerCustomArrow("mob_aggro_arrow", new MobAggroArrow());
+        registerCustomArrow("tornado_arrow", new TornadoArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

@@ -16,7 +16,6 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 import java.util.List;
 
-import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
 import static me.xiaojibazhanshi.customarrows.util.arrows.Growth.temporarilyConvertToBiggerBlock;
 
 public class GrowthArrow extends CustomArrow {
