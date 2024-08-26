@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -38,6 +39,10 @@ public class CustomArrow {
     }
 
     public void onPlayerLeave(PlayerQuitEvent event, Player player) {
+        // Do whatever
+    }
+
+    public void onPlayerChat(AsyncPlayerChatEvent event, Player player) {
         // Do whatever
     }
 }

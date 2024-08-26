@@ -2,10 +2,7 @@ package me.xiaojibazhanshi.customarrows;
 
 import lombok.Getter;
 import me.xiaojibazhanshi.customarrows.commands.CustomArrowCommand;
-import me.xiaojibazhanshi.customarrows.listeners.ArrowFireListener;
-import me.xiaojibazhanshi.customarrows.listeners.ArrowHitBlockListener;
-import me.xiaojibazhanshi.customarrows.listeners.ArrowHitEntityListener;
-import me.xiaojibazhanshi.customarrows.listeners.PlayerLeaveListener;
+import me.xiaojibazhanshi.customarrows.listeners.*;
 import me.xiaojibazhanshi.customarrows.managers.ArrowManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,7 +11,7 @@ public final class CustomArrows extends JavaPlugin {
 
     /*                                OVERVIEW                               */
 
-    /*     This plugin just adds as many custom arrows as I can think of
+    /*  This plugin just adds as many custom arrows as I can possibly think of
 
         Upon entering a command, a GUI with all available arrows will open.
 
@@ -36,6 +33,7 @@ public final class CustomArrows extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ArrowHitBlockListener(arrowManager), this);
         Bukkit.getPluginManager().registerEvents(new ArrowFireListener(arrowManager), this);
         Bukkit.getPluginManager().registerEvents(new PlayerLeaveListener(arrowManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerChatListener(arrowManager), this);
 
         getCommand("customarrows").setExecutor(new CustomArrowCommand(arrowManager));
     }
