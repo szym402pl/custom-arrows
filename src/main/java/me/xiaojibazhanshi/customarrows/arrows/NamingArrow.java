@@ -11,19 +11,16 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.checkerframework.checker.units.qual.N;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
-import static me.xiaojibazhanshi.customarrows.util.arrows.AimAssist.provideAimAssist;
-import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.findEntityInSight;
 
 public class NamingArrow extends CustomArrow {
 

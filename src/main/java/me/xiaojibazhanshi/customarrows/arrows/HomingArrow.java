@@ -21,7 +21,7 @@ public class HomingArrow extends CustomArrow {
     private HomingArrowRunnable homingArrowRunnable;
 
     public HomingArrow() {
-        super(ArrowFactory.changeTippedColor // Or you can use #changeTippedEffect if you need the effect
+        super(ArrowFactory.changeTippedColor
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&4Homing Arrow", "homing_arrow",
                                 List.of("", "This arrow chases your enemy down", "as long as they aren't too far")),

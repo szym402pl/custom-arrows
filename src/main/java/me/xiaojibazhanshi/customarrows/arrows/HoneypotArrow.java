@@ -33,6 +33,7 @@ public class HoneypotArrow extends CustomArrow {
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
         event.getDamager().remove();
+
         int radius = 4;
 
         Location targetLocation = event.getEntity().getLocation().add(new Vector(0.5, 0, 0.5));

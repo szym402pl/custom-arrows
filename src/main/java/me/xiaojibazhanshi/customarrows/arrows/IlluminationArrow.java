@@ -41,8 +41,7 @@ public class IlluminationArrow extends CustomArrow {
         Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
             try {
                 arrow.remove();
-            } catch (Exception ignored) {
-            } // Just a failsafe for when the arrow got picked up
+            } catch (Exception ignored) {} // Just a failsafe for when the arrow got picked up
 
             hitBlock.setType(startingMaterial);
         }, timeInSeconds * 20);

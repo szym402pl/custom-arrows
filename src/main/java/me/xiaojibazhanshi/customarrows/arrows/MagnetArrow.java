@@ -20,7 +20,7 @@ public class MagnetArrow extends CustomArrow {
     private final int DELAY = 40;
 
     public MagnetArrow() {
-        super(ArrowFactory.changeTippedColor // Or you can use #changeTippedEffect if you need the effect
+        super(ArrowFactory.changeTippedColor
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&fMagnet &4Arrow", "magnet_arrow",
                                 List.of("", "This arrow will retrieve", "all items in your vicinity")),

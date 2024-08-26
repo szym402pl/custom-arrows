@@ -1,7 +1,7 @@
 package me.xiaojibazhanshi.customarrows.runnables;
 
-import me.xiaojibazhanshi.customarrows.CustomArrows;
-import org.bukkit.*;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitTask;
@@ -9,8 +9,6 @@ import org.bukkit.util.Vector;
 
 import java.util.List;
 import java.util.function.Consumer;
-
-import static me.xiaojibazhanshi.customarrows.util.arrows.BlackHole.generateOneHighRing;
 
 public class AttractionTask implements Consumer<BukkitTask> {
 

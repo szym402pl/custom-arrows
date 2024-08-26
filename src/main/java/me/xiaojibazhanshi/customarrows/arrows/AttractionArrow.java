@@ -17,8 +17,6 @@ import org.bukkit.util.Vector;
 
 import java.util.List;
 
-import static me.xiaojibazhanshi.customarrows.util.arrows.TimeFreeze.freezeInPlace;
-
 public class AttractionArrow extends CustomArrow {
 
     public AttractionArrow() {

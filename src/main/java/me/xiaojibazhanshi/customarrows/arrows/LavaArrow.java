@@ -5,6 +5,7 @@ import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -28,10 +29,11 @@ public class LavaArrow extends CustomArrow {
     @Override
     public void onHitBlock(ProjectileHitEvent event, Player shooter) {
         Block block = event.getHitBlock();
+        Arrow arrow = (Arrow) event.getEntity();
 
         if (block == null || !block.getType().isSolid()) return;
 
-        event.getEntity().remove();
+        arrow.remove();
         block.setType(Material.LAVA);
     }
 
@@ -73,14 +75,14 @@ public class LavaArrow extends CustomArrow {
             }
         }
 
-        if (hasMetalArmorPieces) {
-            entity.damage(2.0);
+        if (!hasMetalArmorPieces) return;
 
-            if (!(entity instanceof Player player)) return;
+        entity.damage(2.0);
 
-            player.sendTitle(color("&cOuch!"),
-                    color("&7A &cLava Arrow &7just hit my metal armor!"), 5, 20, 5);
-        }
+        if (!(entity instanceof Player player)) return;
+
+        player.sendTitle(color("&cOuch!"),
+                color("&7A &cLava Arrow &7just hit my metal armor!"), 5, 20, 5);
 
     }
 }

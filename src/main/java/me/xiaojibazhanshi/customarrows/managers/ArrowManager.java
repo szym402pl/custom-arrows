@@ -80,6 +80,7 @@ public class ArrowManager {
         registerCustomArrow("scanner_arrow", new ScannerArrow());
         registerCustomArrow("attraction_arrow", new AttractionArrow());
         registerCustomArrow("naming_arrow", new NamingArrow());
+        registerCustomArrow("betrayal_arrow", new BetrayalArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

@@ -1,8 +1,6 @@
 package me.xiaojibazhanshi.customarrows.util.arrows;
 
 import org.bukkit.entity.*;
-import org.bukkit.block.Block;
-import org.bukkit.block.data.BlockData;
 
 import java.util.List;
 
@@ -14,9 +12,9 @@ public class Harmony {
                 .filter(livingEntity -> livingEntity instanceof LivingEntity)
                 .map(livingEntity -> (LivingEntity) livingEntity)
                 .filter(livingEntity -> livingEntity instanceof Animals
-                                     || livingEntity instanceof Ambient
-                                     || livingEntity instanceof NPC
-                                     || livingEntity instanceof Slime)
+                        || livingEntity instanceof Ambient
+                        || livingEntity instanceof NPC
+                        || livingEntity instanceof Slime)
                 .toList();
     }
 

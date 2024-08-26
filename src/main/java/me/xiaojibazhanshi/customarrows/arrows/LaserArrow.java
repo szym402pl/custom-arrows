@@ -35,15 +35,16 @@ public class LaserArrow extends CustomArrow {
         ArrayList<Color> colors = new ArrayList<>(List.of(Color.GREEN, Color.BLUE, Color.LIME, Color.RED, Color.PURPLE));
         Collections.shuffle(colors);
 
-        LivingEntity entity = findEntityInSight(shooter, 50, 1.0);
         int laserLength = 50;
-
-        if (entity != null) {
-            shooter.sendTitle("", color("&7That's a hit!"), 5, 15, 5);
-            createParticleLaser(shooter.getEyeLocation(), entity.getEyeLocation(), colors.getFirst());
-            entity.damage(5.0);
-        }
-
         createParticleLaser(shooter.getEyeLocation(), laserLength, colors.getFirst());
+
+        int maxDistance = 50;
+        LivingEntity entity = findEntityInSight(shooter, maxDistance, 1.0);
+
+        if (entity == null) return;
+
+        shooter.sendTitle("", color("&7That's a hit!"), 5, 15, 5);
+        createParticleLaser(shooter.getEyeLocation(), entity.getEyeLocation(), colors.getFirst());
+        entity.damage(5.0);
     }
 }

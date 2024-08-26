@@ -5,8 +5,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nullable;
-
 public class Scanner {
 
     public static boolean areEnemiesNearby(Entity entity, LivingEntity excluded) {

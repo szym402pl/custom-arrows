@@ -36,6 +36,6 @@ public class LightweightArrow extends CustomArrow {
         Entity projectile = event.getProjectile();
         Vector doubledVelocity = projectile.getVelocity().clone().multiply(2.0);
 
-        event.getProjectile().setVelocity(doubledVelocity);
+        projectile.setVelocity(doubledVelocity);
     }
 }

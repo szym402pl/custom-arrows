@@ -37,10 +37,12 @@ public class InversionArrow extends CustomArrow {
     }
 
     private void sendRotatedTitle(Player player) {
+        long secondTitleDelay = (long) (1.5 * 20);
+
         player.sendTitle(GeneralUtil.color("&7Get rotated"), "", 10, 15, 5);
 
         Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
             player.sendTitle("", GeneralUtil.color("&7&o...idiot"), 15, 10, 5);
-        }, 30);
+        }, secondTitleDelay);
     }
 }

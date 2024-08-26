@@ -5,7 +5,8 @@ import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
@@ -45,10 +46,6 @@ public class ScannerArrow extends CustomArrow {
 
         arrow.remove();
     }
-
-
-
-
 
 
 }

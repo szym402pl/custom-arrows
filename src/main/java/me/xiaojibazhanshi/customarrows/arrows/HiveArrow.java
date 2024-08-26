@@ -17,6 +17,8 @@ import java.util.List;
 
 public class HiveArrow extends CustomArrow {
 
+    private final long beeLifetime = 20 * 20;
+
     public HiveArrow() {
         super(ArrowFactory.changeTippedColor
                 (ArrowFactory.createArrowItemStack(
@@ -39,10 +41,10 @@ public class HiveArrow extends CustomArrow {
 
         for (int i = 0; i < beeAmount; i++) {
             Bee bee = world.spawn(spawnLocation, Bee.class);
-            bee.setAnger(999);
+            bee.setAnger(99);
             bee.setTarget(target);
 
-            GeneralUtil.removeEntityAfter(bee, 400);
+            GeneralUtil.removeEntityAfter(bee, beeLifetime);
         }
     }
 

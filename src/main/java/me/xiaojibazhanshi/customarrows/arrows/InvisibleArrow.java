@@ -5,6 +5,7 @@ import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -38,7 +39,9 @@ public class InvisibleArrow extends CustomArrow {
 
     @Override
     public void onShoot(EntityShootBowEvent event, Player shooter) {
-        event.getProjectile().setVisibleByDefault(false);
-        shooter.showEntity(CustomArrows.getInstance(), event.getProjectile());
+        Entity projectile = event.getProjectile();
+
+        projectile.setVisibleByDefault(false);
+        shooter.showEntity(CustomArrows.getInstance(), projectile);
     }
 }
