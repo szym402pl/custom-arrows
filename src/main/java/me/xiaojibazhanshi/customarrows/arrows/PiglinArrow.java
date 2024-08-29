@@ -56,14 +56,7 @@ public class PiglinArrow extends CustomArrow {
 
         arrow.remove();
 
-        ItemStack nuggetItem = new ItemStack(Material.GOLD_INGOT);
-        Item nugget = world.dropItem(targetLocation, nuggetItem);
-
-        nugget.setPickupDelay(999);
-        nugget.setVisibleByDefault(false);
-
-        removeEntityAfter(nugget, 15 * 20);
-        detonateFirework(targetLocation, FireworkEffect.Type.BALL, Color.YELLOW);
+        executeItemDrop(targetLocation, world);
     }
 
     @Override
@@ -88,14 +81,18 @@ public class PiglinArrow extends CustomArrow {
 
         arrow.remove();
 
+        executeItemDrop(targetLocation, world);
+    }
+
+    private void executeItemDrop(Location location, World world) {
         ItemStack nuggetItem = new ItemStack(Material.GOLD_INGOT);
-        Item nugget = world.dropItem(targetLocation, nuggetItem);
+        Item nugget = world.dropItem(location, nuggetItem);
 
         nugget.setPickupDelay(999);
         nugget.setVisibleByDefault(false);
 
         removeEntityAfter(nugget, 15 * 20);
-        detonateFirework(targetLocation, FireworkEffect.Type.BALL, Color.YELLOW);
+        detonateFirework(location, FireworkEffect.Type.BALL, Color.YELLOW);
     }
 
 

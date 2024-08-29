@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -36,23 +37,23 @@ public class WeatherArrow extends CustomArrow {
 
     @Override
     public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
-        if (shooter.getWorld().getEnvironment() == World.Environment.NORMAL) {
-            shooter.sendTitle("", GeneralUtil.color("&7I need to aim higher..."), 5, 20, 5);
-        } else {
-            shooter.sendTitle(GeneralUtil.color("&7Oh wait..."),
-                    GeneralUtil.color("&7there's no weather here..."), 5, 30, 5);
-        }
+        executeWeatherChange(shooter);
     }
 
     @Override
     public void onHitBlock(ProjectileHitEvent event, Player shooter) {
+        executeWeatherChange(shooter);
+
+        Arrow arrow = (Arrow) event.getEntity();
+        arrow.remove();
+    }
+
+    private void executeWeatherChange(Player shooter) {
         if (shooter.getWorld().getEnvironment() == World.Environment.NORMAL) {
             shooter.sendTitle("", GeneralUtil.color("&7I need to aim higher..."), 5, 20, 5);
         } else {
             shooter.sendTitle(GeneralUtil.color("&7Oh wait..."),
                     GeneralUtil.color("&7there's no weather here..."), 5, 30, 5);
         }
-
-        event.getEntity().remove();
     }
 }

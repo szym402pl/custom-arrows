@@ -36,11 +36,7 @@ public class SlimeArmyArrow extends CustomArrow {
         Arrow arrow = (Arrow) event.getDamager();
         arrow.remove();
 
-        int slimeAmount = 10;
-        int period = 10;
-
-        SlimeArmyTask task = new SlimeArmyTask(livingEntity, slimeAmount, null);
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 1, period);
+        executeSlimeArmyTask(livingEntity, null);
     }
 
     @Override
@@ -56,10 +52,14 @@ public class SlimeArmyArrow extends CustomArrow {
 
         Location customLocation = hitBlock.getLocation();
 
+        executeSlimeArmyTask(shooter, customLocation);
+    }
+
+    private void executeSlimeArmyTask(LivingEntity entity, Location location) {
         int slimeAmount = 5;
         int period = 10;
 
-        SlimeArmyTask task = new SlimeArmyTask(shooter, slimeAmount, customLocation);
+        SlimeArmyTask task = new SlimeArmyTask(entity, slimeAmount, location);
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), task, 1, period);
     }
 }
