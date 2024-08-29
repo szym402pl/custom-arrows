@@ -2,9 +2,7 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
-import me.xiaojibazhanshi.customarrows.runnables.SeekerArrowRunnable;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -14,9 +12,10 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.entity.*;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.entity.Display;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.TextDisplay;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.Inventory;
 
@@ -34,7 +33,7 @@ public class PersonalChestArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&6Personal Chest Arrow", "personal_chest_arrow",
                                 List.of("", "This arrow will spawn a", "personal chest for you!")),
-                 Color.ORANGE));
+                        Color.ORANGE));
     }
 
     @Override
@@ -48,7 +47,7 @@ public class PersonalChestArrow extends CustomArrow {
         double distance = playerLocation.distance(hitBlockLocation);
 
         if (distance > 10) {
-            shooter.sendTitle("", color("&7I shot too far..."), 5, 25 ,5);
+            shooter.sendTitle("", color("&7I shot too far..."), 5, 25, 5);
             return;
         }
 
@@ -59,7 +58,7 @@ public class PersonalChestArrow extends CustomArrow {
         UUID uuid = shooter.getUniqueId();
 
         if (activeChests.contains(uuid)) {
-            shooter.sendTitle("", color("&7I already have my chest with me..."), 5, 25 ,5);
+            shooter.sendTitle("", color("&7I already have my chest with me..."), 5, 25, 5);
             return;
         }
 

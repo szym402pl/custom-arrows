@@ -38,7 +38,7 @@ public class BetrayalArrow extends CustomArrow {
 
         if (enemies.size() < 2) return;
 
-        for (int i = 0; i < enemies.size() -1; i++) {
+        for (int i = 0; i < enemies.size() - 1; i++) {
             if (enemies.get(i + 1) == null) break;
 
             Monster enemy = enemies.get(i);
