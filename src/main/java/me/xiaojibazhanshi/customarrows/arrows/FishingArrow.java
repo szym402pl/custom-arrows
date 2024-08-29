@@ -1,8 +1,12 @@
 package me.xiaojibazhanshi.customarrows.arrows;
 
+import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.runnables.BridgeTask;
+import me.xiaojibazhanshi.customarrows.runnables.FishingArrowTrackTask;
+import me.xiaojibazhanshi.customarrows.runnables.LavaWalkerRunnable;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -10,6 +14,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -22,25 +27,24 @@ import static me.xiaojibazhanshi.customarrows.util.arrows.Fishing.getFishingLoot
 
 public class FishingArrow extends CustomArrow {
 
-    private final Map<ItemStack, Double> lootTable;
-
     public FishingArrow() {
         super(ArrowFactory.changeTippedColor
                 (ArrowFactory.createArrowItemStack(
-                                Material.TIPPED_ARROW, "&7Bridge Arrow", "bridge_arrow",
-                                List.of("", "This arrow will make a bridge", "extruding from the block you hit")),
-                        Color.GRAY));
-
-        lootTable = getFishingLootTable();
-    }
-
-    @Override
-    public void onHitBlock(ProjectileHitEvent event, Player shooter) {
+                                Material.TIPPED_ARROW, "&bFishing Arrow", "fishing_arrow",
+                                List.of("", "This arrow will fish for you. That's it.")),
+                        Color.AQUA));
 
     }
 
     @Override
-    public void onHitEntity(EntityDamageByEntityEvent event, Player shooter) {
+    public void onShoot(EntityShootBowEvent event, Player shooter) {
+        Arrow arrow = (Arrow) event.getProjectile();
 
+        startTrackingFishingArrow(arrow, shooter);
+    }
+
+    private void startTrackingFishingArrow(Arrow arrow, Player shooter) {
+        FishingArrowTrackTask fishingTask = new FishingArrowTrackTask(arrow, shooter);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fishingTask, 1, 1);
     }
 }
