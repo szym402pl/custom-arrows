@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
-import static me.xiaojibazhanshi.customarrows.util.arrows.TunnelMiner.getTunnelBlocks;
+import static me.xiaojibazhanshi.customarrows.util.arrows.TunnelMiner.getTunnelOfBlocks;
 
 public class TunnelMinerArrow extends CustomArrow {
 
@@ -102,7 +102,7 @@ public class TunnelMinerArrow extends CustomArrow {
         int tunnelLength = 10;
         BlockFace oppositeFace = oppositeBlockFaces.get(event.getHitBlockFace());
 
-        List<Block> tunnelBlocks = getTunnelBlocks(hitBlock, oppositeFace, tunnelLength);
+        List<Block> tunnelBlocks = getTunnelOfBlocks(hitBlock, oppositeFace, tunnelLength);
 
         TunnelMinerTask task = new TunnelMinerTask(tunnelBlocks, pickaxe);
         task.start();
