@@ -27,7 +27,7 @@ public class Smoke {
         SmokeCloudTask fourthIteration = new SmokeCloudTask(fourthSmokeAmount, location, 4, 25);
         SmokeCloudTask fifthIteration = new SmokeCloudTask(fifthSmokeAmount, location, 4, 25);
 
-        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), firstIteration, 2, 1);
+        Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), firstIteration, 2, period);
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), secondIteration, firstSmokeAmount / 8, period);
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), thirdIteration, firstSmokeAmount / 5, period);
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fourthIteration, firstSmokeAmount / 3, period);
