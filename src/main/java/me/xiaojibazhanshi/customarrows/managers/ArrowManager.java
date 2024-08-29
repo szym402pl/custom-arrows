@@ -83,6 +83,7 @@ public class ArrowManager {
         registerCustomArrow("betrayal_arrow", new BetrayalArrow());
         registerCustomArrow("slime_army_arrow", new SlimeArmyArrow());
         registerCustomArrow("personal_chest_arrow", new PersonalChestArrow());
+        registerCustomArrow("rainbow_arrow", new RainbowArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
