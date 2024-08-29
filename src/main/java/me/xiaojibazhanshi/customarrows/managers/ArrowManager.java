@@ -86,6 +86,7 @@ public class ArrowManager {
         registerCustomArrow("rainbow_arrow", new RainbowArrow());
         registerCustomArrow("piglin_arrow", new PiglinArrow());
         registerCustomArrow("bridge_arrow", new BridgeArrow());
+        registerCustomArrow("lava_walker_arrow", new LavaWalkerArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
