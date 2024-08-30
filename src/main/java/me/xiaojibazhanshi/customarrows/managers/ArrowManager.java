@@ -96,6 +96,7 @@ public class ArrowManager {
         registerCustomArrow("tree_miner_arrow", new TreeMinerArrow());
         registerCustomArrow("distraction_arrow", new DistractionArrow());
         registerCustomArrow("signal_arrow", new SignalArrow());
+        registerCustomArrow("bone_meal_arrow", new BoneMealArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
