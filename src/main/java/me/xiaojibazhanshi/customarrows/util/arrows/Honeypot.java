@@ -11,9 +11,7 @@ import java.util.Map;
 
 public class Honeypot {
 
-    private Honeypot() {
-
-    }
+    private Honeypot() {}
 
     public static void placeTemporaryBlocks(Map<Location, Material> blockLocations, int deleteAfter, Material material) {
         if (blockLocations.isEmpty()) return;

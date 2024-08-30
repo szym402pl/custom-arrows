@@ -11,9 +11,7 @@ import java.util.List;
 
 public class Dividing {
 
-    private Dividing() {
-
-    }
+    private Dividing() {}
 
     public static List<Arrow> divideArrow(Arrow arrow) {
         Vector originalDirection = arrow.getVelocity();

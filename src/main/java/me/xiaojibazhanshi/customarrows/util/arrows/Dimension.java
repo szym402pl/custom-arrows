@@ -14,9 +14,7 @@ import static me.xiaojibazhanshi.customarrows.util.arrows.Thunder.randomizeLocat
 
 public class Dimension {
 
-    private Dimension() {
-
-    }
+    private Dimension() {}
 
     /**
      * @return false if it couldn't find a safe location in 10 attempts

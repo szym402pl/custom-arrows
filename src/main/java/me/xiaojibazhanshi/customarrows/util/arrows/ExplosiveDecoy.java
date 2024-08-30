@@ -13,9 +13,7 @@ import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.removeEntityAfter
 
 public class ExplosiveDecoy {
 
-    private ExplosiveDecoy() {
-
-    }
+    private ExplosiveDecoy() {}
 
     public static void spawnAngryDecoy(LivingEntity target, @Nullable Location customLocation) {
         long lifeTime = 10 * 20L;
