@@ -3,8 +3,6 @@ package me.xiaojibazhanshi.customarrows.runnables;
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;

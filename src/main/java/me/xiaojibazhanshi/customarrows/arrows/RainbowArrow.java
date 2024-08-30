@@ -3,16 +3,13 @@ package me.xiaojibazhanshi.customarrows.arrows;
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.runnables.RainbowCloudTask;
-import me.xiaojibazhanshi.customarrows.runnables.SmokeCloudTask;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +55,7 @@ public class RainbowArrow extends CustomArrow {
         int offset = 1;
 
         double radiusStep = 0.2;
-        double middleRadiusOffset = radius + (double) colorsOfRainbow.size() /2 * radiusStep;
+        double middleRadiusOffset = radius + (double) colorsOfRainbow.size() / 2 * radiusStep;
         Location hitLocationClone = hitLocation.clone().add(0, -0.25, 0);
 
         List<Location> middleRingLocations = generateVerticalRing(hitLocationClone, middleRadiusOffset, particles, shooter);

@@ -24,8 +24,7 @@ public class Fishing {
     public enum FishingCategories {
         FISH(0, 8),
         TREASURE(9, 19),
-        JUNK(20, 30)
-        ;
+        JUNK(20, 30);
 
         private final int minRange;
         private final int maxRange;
@@ -44,9 +43,11 @@ public class Fishing {
         }
     }
 
-    /**Fish category -> indexes: 0-8
+    /**
+     * Fish category -> indexes: 0-8
      * Treasure category -> indexes: 9-19
-     * Junk category -> indexes: 20- */
+     * Junk category -> indexes: 20-
+     */
     public static Map<ItemStack, Double> getFishingLootTable() {
         Map<ItemStack, Double> lootTable = new HashMap<>();
 
@@ -124,17 +125,13 @@ public class Fishing {
                 if (isItYourLuckyDay(entry.getValue())) {
                     return entry.getKey();
                 }
-            }
-
-            else if (currentIndex == treasureCategoryRandom
+            } else if (currentIndex == treasureCategoryRandom
                     && currentIndex >= minTreasureRange && currentIndex <= maxTreasureRange) {
 
                 if (isItYourLuckyDay(entry.getValue())) {
                     return entry.getKey();
                 }
-            }
-
-            else if (currentIndex == junkCategoryRandom
+            } else if (currentIndex == junkCategoryRandom
                     && currentIndex >= FishingCategories.JUNK.minRange
                     && currentIndex <= FishingCategories.JUNK.maxRange) {
 

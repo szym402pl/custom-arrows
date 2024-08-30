@@ -9,15 +9,11 @@ import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
 
 import java.util.List;
-import java.util.Map;
 
 import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
 import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.removeEntityAfter;
-import static me.xiaojibazhanshi.customarrows.util.arrows.Honeypot.getAHollowSphereAround;
-import static me.xiaojibazhanshi.customarrows.util.arrows.Honeypot.placeTemporaryBlocks;
 import static me.xiaojibazhanshi.customarrows.util.arrows.Piglin.arePiglinsNearby;
 import static me.xiaojibazhanshi.customarrows.util.arrows.Repulsion.detonateFirework;
 

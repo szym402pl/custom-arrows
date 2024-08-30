@@ -2,19 +2,14 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
-import me.xiaojibazhanshi.customarrows.runnables.FishingArrowTrackTask;
 import me.xiaojibazhanshi.customarrows.runnables.GuidedArrowTrackTask;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.List;
 
@@ -34,7 +29,7 @@ public class GuidedArrow extends CustomArrow {
     public void onShoot(EntityShootBowEvent event, Player shooter) {
         double force = event.getForce();
         if (force < 1.4) {
-            shooter.sendTitle("", color("&7I need to draw the bow further..."), 5, 25 ,5);
+            shooter.sendTitle("", color("&7I need to draw the bow further..."), 5, 25, 5);
             return;
         }
 

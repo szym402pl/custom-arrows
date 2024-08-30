@@ -1,7 +1,6 @@
 package me.xiaojibazhanshi.customarrows.managers;
 
 import lombok.Getter;
-import me.xiaojibazhanshi.customarrows.arrows.FishingArrow;
 import me.xiaojibazhanshi.customarrows.arrows.*;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.GeneralUtil;
@@ -91,6 +90,7 @@ public class ArrowManager {
         registerCustomArrow("snow_trap_arrow", new SnowTrapArrow());
         registerCustomArrow("fishing_arrow", new FishingArrow());
         registerCustomArrow("guided_arrow", new GuidedArrow());
+        registerCustomArrow("chorus_arrow", new ChorusArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

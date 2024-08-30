@@ -2,7 +2,6 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
-import me.xiaojibazhanshi.customarrows.runnables.FrostWalkerRunnable;
 import me.xiaojibazhanshi.customarrows.runnables.LavaWalkerRunnable;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import org.bukkit.Bukkit;

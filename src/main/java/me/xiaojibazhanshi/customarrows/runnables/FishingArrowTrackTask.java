@@ -2,19 +2,16 @@ package me.xiaojibazhanshi.customarrows.runnables;
 
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.UUID;
 import java.util.function.Consumer;
 
 import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
 import static me.xiaojibazhanshi.customarrows.util.arrows.Fishing.*;
-import static me.xiaojibazhanshi.customarrows.util.arrows.LavaWalker.applyLavaWalkerEffect;
 
 public class FishingArrowTrackTask implements Consumer<BukkitTask> {
 
@@ -35,7 +32,7 @@ public class FishingArrowTrackTask implements Consumer<BukkitTask> {
         }
 
         if (arrow.isDead() || arrow.isOnGround()) {
-            shooter.sendTitle("", color("&7I can't fish there..."), 5, 25 ,5);
+            shooter.sendTitle("", color("&7I can't fish there..."), 5, 25, 5);
 
             bukkitTask.cancel();
             return;
