@@ -8,8 +8,7 @@ import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.getDirectionFro
 
 public class AimAssist {
 
-    private AimAssist() {
-    }
+    private AimAssist() {}
 
     public static void provideAimAssist(Entity projectile, LivingEntity target) {
         Vector initialSpeed = projectile.getVelocity();
@@ -17,7 +16,10 @@ public class AimAssist {
         Vector directionToTarget = getDirectionFromEntityToTarget(projectile, target);
         Vector finalVelocity = directionToTarget.multiply(initialSpeed.length());
 
-        projectile.setVelocity(finalVelocity.multiply(1.15).multiply(new Vector(1, 1.1, 1)));
+        double yAdjustment = 1.1;
+        double velocityMultiplier = 1.15;
+
+        projectile.setVelocity(finalVelocity.multiply(velocityMultiplier).multiply(new Vector(1, yAdjustment, 1)));
     }
 
 }

@@ -11,9 +11,9 @@ import java.util.UUID;
 
 public class CrystalHeal {
 
-    private CrystalHeal() {
+    private CrystalHeal() {}
 
-    }
+    private static final int DELAY = 20 * 30;
 
     public static void updateHealCrystalMap(Map<UUID, EnderCrystal> crystalMap, Player shooter, Entity arrow) {
         Location arrowLocation = arrow.getLocation();
@@ -27,7 +27,7 @@ public class CrystalHeal {
         crystalMap.remove(uuid);
         crystalMap.put(uuid, createACrystal(arrowLocation, arrow.getWorld(), shooter));
 
-        GeneralUtil.removeCrystalAfter(uuid, 600, crystalMap);
+        GeneralUtil.removeCrystalAfter(uuid, DELAY, crystalMap);
     }
 
     private static EnderCrystal createACrystal(Location location, World world, Player owner) {
@@ -37,14 +37,16 @@ public class CrystalHeal {
         crystal.setCustomNameVisible(false);
 
         String crystalName = GeneralUtil.color("&4" + owner.getName() + "&c's Heal Crystal");
-        Location crystalTextLocation = crystal.getLocation().clone().add(new Vector(0, 2.2, 0));
+
+        double yAdjustment = 2.2;
+        Location crystalTextLocation = crystal.getLocation().clone().add(new Vector(0, yAdjustment, 0));
 
         TextDisplay display = world.spawn(crystalTextLocation, TextDisplay.class, textDisplay -> {
             textDisplay.setText(crystalName);
             textDisplay.setBillboard(Display.Billboard.CENTER);
         });
 
-        GeneralUtil.removeEntityAfter(display, 30 * 20);
+        GeneralUtil.removeEntityAfter(display, DELAY);
         return crystal;
     }
 

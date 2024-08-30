@@ -11,8 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class AreaHeal {
 
-    private AreaHeal() {
-    }
+    private AreaHeal() {}
 
     @SuppressWarnings("deprecation") // IDC that LingeringPotion.class is deprecated, there's no other way to do it
     public static void spawnALingeringPotion(Entity thrower) {

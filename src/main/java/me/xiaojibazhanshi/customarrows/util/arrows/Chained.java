@@ -12,24 +12,27 @@ import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.getDirectionFro
 
 public class Chained {
 
-    private Chained() {
-
-    }
+    private Chained() {}
 
     public static void chainTargets(List<LivingEntity> targetList, LivingEntity hitEntity) {
+        long delay = 30L;
+        double velocityMultiplier = 5.0;
+        double directionClamp = 0.3;
+
+
         for (LivingEntity target : targetList) {
             if (!hitEntity.hasLineOfSight(target)) continue;
 
             Vector hitEntityToTarget = getDirectionFromEntityToTarget(hitEntity, target);
-            Vector clampedDirection = hitEntityToTarget.multiply(0.3);
+            Vector clampedDirection = hitEntityToTarget.multiply(directionClamp);
             double yCopy = hitEntityToTarget.getY();
 
             Arrow newArrow = hitEntity.getWorld().spawn(hitEntity.getEyeLocation().add(clampedDirection), Arrow.class);
 
             newArrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
-            newArrow.setVelocity(hitEntityToTarget.multiply(5.0).setY(yCopy));
+            newArrow.setVelocity(hitEntityToTarget.multiply(velocityMultiplier).setY(yCopy));
 
-            GeneralUtil.removeArrowAfter(newArrow, 30L);
+            GeneralUtil.removeArrowAfter(newArrow, delay);
         }
     }
 
