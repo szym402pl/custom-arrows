@@ -90,6 +90,7 @@ public class ArrowManager {
         registerCustomArrow("lava_walker_arrow", new LavaWalkerArrow());
         registerCustomArrow("snow_trap_arrow", new SnowTrapArrow());
         registerCustomArrow("fishing_arrow", new FishingArrow());
+        registerCustomArrow("guided_arrow", new GuidedArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {
