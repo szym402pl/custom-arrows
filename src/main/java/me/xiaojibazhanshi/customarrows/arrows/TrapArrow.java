@@ -60,6 +60,4 @@ public class TrapArrow extends CustomArrow {
 
         block.setType(Material.COBWEB);
     }
-
-
 }

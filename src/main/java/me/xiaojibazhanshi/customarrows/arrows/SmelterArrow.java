@@ -60,6 +60,4 @@ public class SmelterArrow extends CustomArrow {
         world.spawn(location, ExperienceOrb.class);
         world.spawnParticle(Particle.LAVA, location.add(0, 1, 0), 10, 0.5, 0, 0.5);
     }
-
-
 }

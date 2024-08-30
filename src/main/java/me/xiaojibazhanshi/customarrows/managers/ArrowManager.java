@@ -93,6 +93,7 @@ public class ArrowManager {
         registerCustomArrow("chorus_arrow", new ChorusArrow());
         registerCustomArrow("redstone_arrow", new RedstoneArrow());
         registerCustomArrow("ore_locator_arrow", new OreLocatorArrow());
+        registerCustomArrow("tree_miner_arrow", new TreeMinerArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

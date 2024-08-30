@@ -46,6 +46,4 @@ public class ScannerArrow extends CustomArrow {
 
         arrow.remove();
     }
-
-
 }

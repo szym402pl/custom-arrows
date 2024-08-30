@@ -49,6 +49,4 @@ public class SnowTrapArrow extends CustomArrow {
 
         setUpTrap(hitBlock);
     }
-
-
 }

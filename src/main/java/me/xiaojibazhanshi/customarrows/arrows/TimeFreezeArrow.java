@@ -62,6 +62,4 @@ public class TimeFreezeArrow extends CustomArrow {
             frozenArrows.clear();
         }
     }
-
-
 }

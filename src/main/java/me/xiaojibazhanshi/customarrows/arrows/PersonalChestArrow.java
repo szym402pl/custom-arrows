@@ -61,6 +61,4 @@ public class PersonalChestArrow extends CustomArrow {
         int deleteAfter = 15;
         placeTemporaryPersonalChest(uuid, blockAbove, deleteAfter, privateChests, activeChests);
     }
-
-
 }

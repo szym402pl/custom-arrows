@@ -81,6 +81,4 @@ public class PiglinArrow extends CustomArrow {
         arrow.remove();
         dropFakeGold(targetLocation, world);
     }
-
-
 }

@@ -50,6 +50,5 @@ public class OreLocatorArrow extends CustomArrow {
 
         Color color = getColorBasedOffOre(oreMaterial);
         createParticleLaser(location, nearestOreLocation, color);
-        throw new NullPointerException();
     }
 }

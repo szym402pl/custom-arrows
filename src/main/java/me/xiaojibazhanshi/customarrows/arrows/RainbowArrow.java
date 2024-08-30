@@ -54,6 +54,4 @@ public class RainbowArrow extends CustomArrow {
 
         makeARainbow(shooter, hitLocation, colorsOfRainbow);
     }
-
-
 }
