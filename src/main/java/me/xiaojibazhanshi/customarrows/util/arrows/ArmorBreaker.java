@@ -6,7 +6,6 @@ import org.bukkit.inventory.ItemStack;
 public class ArmorBreaker {
 
     private ArmorBreaker() {
-
     }
 
     public static Material getBaseMaterialFromArmor(ItemStack armor) {

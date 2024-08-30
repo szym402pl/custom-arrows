@@ -24,7 +24,7 @@ public class OreLocatorArrow extends CustomArrow {
                 (ArrowFactory.createArrowItemStack(
                                 Material.TIPPED_ARROW, "&eOre Locator Arrow", "ore_locator_arrow",
                                 List.of("", "This arrow is a laser arrow which", "locates the ores in front of you",
-                                "", "NOTE: The laser color depends", "on the found (or not) ore type!")),
+                                        "", "NOTE: The laser color depends", "on the found (or not) ore type!")),
                         Color.YELLOW));
     }
 

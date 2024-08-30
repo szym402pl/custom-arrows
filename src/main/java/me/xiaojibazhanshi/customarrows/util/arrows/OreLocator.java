@@ -1,6 +1,9 @@
 package me.xiaojibazhanshi.customarrows.util.arrows;
 
-import org.bukkit.*;
+import org.bukkit.Color;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.util.Vector;
 
@@ -10,7 +13,9 @@ public class OreLocator {
 
     }
 
-    /**@return null if no ore was found in given length (max distance) */
+    /**
+     * @return null if no ore was found in given length (max distance)
+     */
     public static Block getNearestOre(Location startingLocation, int length) {
         Location currentLocation = startingLocation.clone();
         World world = currentLocation.getWorld();
@@ -35,7 +40,9 @@ public class OreLocator {
         return null;
     }
 
-    /**@return gray if the specified material doesn't match any ore */
+    /**
+     * @return gray if the specified material doesn't match any ore
+     */
     public static Color getColorBasedOffOre(Material material) {
 
         switch (material) {

@@ -39,7 +39,8 @@ public class Repulsion {
             // simulate actual repulsion
             Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () ->
                     livingEntity.setVelocity(livingEntity.isOnGround()
-                            ? repulsionForce.multiply(onGroundMultiplier) : repulsionForce.multiply(inAirMultiplier)), delay);
+                            ? repulsionForce.multiply(onGroundMultiplier)
+                            : repulsionForce.multiply(inAirMultiplier)), delay);
         }
     }
 

@@ -2,20 +2,24 @@ package me.xiaojibazhanshi.customarrows.arrows;
 
 import me.xiaojibazhanshi.customarrows.objects.CustomArrow;
 import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
-import org.bukkit.*;
+import org.bukkit.Color;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
 import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
-import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.removeEntityAfter;
 import static me.xiaojibazhanshi.customarrows.util.arrows.Piglin.arePiglinsNearby;
-import static me.xiaojibazhanshi.customarrows.util.arrows.Repulsion.detonateFirework;
+import static me.xiaojibazhanshi.customarrows.util.arrows.Piglin.dropFakeGold;
 
 public class PiglinArrow extends CustomArrow {
 
@@ -51,8 +55,7 @@ public class PiglinArrow extends CustomArrow {
         }
 
         arrow.remove();
-
-        executeItemDrop(targetLocation, world);
+        dropFakeGold(targetLocation, world);
     }
 
     @Override
@@ -76,19 +79,7 @@ public class PiglinArrow extends CustomArrow {
         }
 
         arrow.remove();
-
-        executeItemDrop(targetLocation, world);
-    }
-
-    private void executeItemDrop(Location location, World world) {
-        ItemStack nuggetItem = new ItemStack(Material.GOLD_INGOT);
-        Item nugget = world.dropItem(location, nuggetItem);
-
-        nugget.setPickupDelay(999);
-        nugget.setVisibleByDefault(false);
-
-        removeEntityAfter(nugget, 15 * 20);
-        detonateFirework(location, FireworkEffect.Type.BALL, Color.YELLOW);
+        dropFakeGold(targetLocation, world);
     }
 
 

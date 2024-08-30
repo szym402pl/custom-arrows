@@ -5,7 +5,6 @@ import me.xiaojibazhanshi.customarrows.util.ArrowFactory;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Beacon;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

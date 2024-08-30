@@ -1,18 +1,14 @@
 package me.xiaojibazhanshi.customarrows.util.arrows;
 
 import org.bukkit.Material;
-
-import java.util.Arrays;
-import org.bukkit.*;
-import org.bukkit.block.*;
-import org.bukkit.block.Hopper;
+import org.bukkit.Note;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.*;
-import org.bukkit.block.data.type.Comparator;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.TNTPrimed;
-import org.bukkit.inventory.ItemStack;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Redstone {
@@ -78,7 +74,7 @@ public class Redstone {
 
                 case REPEATER:
                     Repeater repeater = (Repeater) data;
-                    repeater.setDelay(repeater.getDelay() +1);
+                    repeater.setDelay(repeater.getDelay() + 1);
                     block.setBlockData(repeater);
                     break;
                 default:
