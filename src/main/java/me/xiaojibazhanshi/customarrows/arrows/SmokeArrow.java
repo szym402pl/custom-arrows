@@ -36,11 +36,8 @@ public class SmokeArrow extends CustomArrow {
         arrow.remove();
 
         Bukkit.getScheduler().runTaskAsynchronously(CustomArrows.getInstance(), () -> {
-            createProgressiveSmokeCloud(arrowLocation.clone());
+            createProgressiveSmokeCloud(arrowLocation.clone(), Color.GRAY);
         });
-
-        PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, 2 * 20, 0, true);
-        shooter.addPotionEffect(invisibility);
     }
 
     @Override
@@ -48,7 +45,7 @@ public class SmokeArrow extends CustomArrow {
         Location arrowLocation = event.getDamager().getLocation();
 
         Bukkit.getScheduler().runTaskAsynchronously(CustomArrows.getInstance(), () -> {
-            createProgressiveSmokeCloud(arrowLocation.clone());
+            createProgressiveSmokeCloud(arrowLocation.clone(), Color.GRAY);
         });
 
         if (!(event.getEntity() instanceof LivingEntity target)) return;

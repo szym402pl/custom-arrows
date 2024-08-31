@@ -99,6 +99,7 @@ public class ArrowManager {
         registerCustomArrow("bone_meal_arrow", new BoneMealArrow());
         registerCustomArrow("taming_arrow", new TamingArrow());
         registerCustomArrow("bouncing_arrow", new BouncingArrow());
+        registerCustomArrow("poison_cloud_arrow", new PoisonCloudArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

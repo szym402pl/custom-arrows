@@ -146,8 +146,8 @@ public class TornadoTask implements Consumer<BukkitTask> {
 
         int period = 1;
 
-        SmokeCloudTask thirdIteration = new SmokeCloudTask(thirdSmokeAmount, location, 4, 15);
-        SmokeCloudTask fourthIteration = new SmokeCloudTask(fourthSmokeAmount, location, 4, 20);
+        SmokeCloudTask thirdIteration = new SmokeCloudTask(thirdSmokeAmount, location, 4, 15, Color.GRAY);
+        SmokeCloudTask fourthIteration = new SmokeCloudTask(fourthSmokeAmount, location, 4, 20, Color.GRAY);
 
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), thirdIteration, 2, period);
         Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), fourthIteration, fourthSmokeAmount / 3, period);

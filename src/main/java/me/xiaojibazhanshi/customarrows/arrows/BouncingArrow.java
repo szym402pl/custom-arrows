@@ -21,6 +21,7 @@ import java.util.UUID;
 
 import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.copyArrow;
 import static me.xiaojibazhanshi.customarrows.util.arrows.AimAssist.provideAimAssist;
+import static me.xiaojibazhanshi.customarrows.util.arrows.Bouncing.executeBounce;
 import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.findEntityInSight;
 
 public class BouncingArrow extends CustomArrow {
@@ -53,22 +54,8 @@ public class BouncingArrow extends CustomArrow {
         if (hitBlockFace == BlockFace.UP && bouncedAlready.contains(arrowUUID)) return;
 
         event.setCancelled(true);
-        executeBounce(arrow, hitBlockFace);
+
+        executeBounce(arrow, hitBlockFace, bouncedAlready);
     }
 
-    private void executeBounce(Arrow originalArrow, BlockFace hitBlockFace) {
-        Vector velocity = originalArrow.getVelocity();
-        originalArrow.remove();
-
-        Vector normal = hitBlockFace.getDirection();
-        normal.normalize();
-
-        Vector reflected = velocity.clone().subtract(normal.clone().multiply(2 * velocity.dot(normal)));
-
-        double speedClamp = 0.6;
-        Arrow copy = copyArrow(originalArrow, originalArrow.getLocation(), reflected.multiply(speedClamp));
-
-        UUID arrowUUID = copy.getUniqueId();
-        bouncedAlready.add(arrowUUID);
-    }
 }

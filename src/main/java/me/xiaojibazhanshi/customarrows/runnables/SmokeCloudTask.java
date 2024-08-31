@@ -16,15 +16,17 @@ public class SmokeCloudTask implements Consumer<BukkitTask> {
     private final int maxOffset;
     private final float particleSize;
     private int smokeIterations;
+    private final Color color;
 
     private int counter = 1;
 
-    public SmokeCloudTask(int smokeAmount, Location location, int maxOffset, int smokeIterations) {
+    public SmokeCloudTask(int smokeAmount, Location location, int maxOffset, int smokeIterations, Color color) {
         particleSize = 4.0F; // max value
         this.maxOffset = maxOffset;
         this.location = location.clone();
         this.smokeAmount = smokeAmount;
         this.smokeIterations = smokeIterations;
+        this.color = color;
     }
 
     @Override
@@ -38,7 +40,7 @@ public class SmokeCloudTask implements Consumer<BukkitTask> {
                     2,
                     0.0, 0.0, 0.0,
                     0.0,
-                    new Particle.DustOptions(Color.GRAY, particleSize), true);
+                    new Particle.DustOptions(color, particleSize), true);
 
             smokeIterations--;
         } while (smokeIterations > 0);
