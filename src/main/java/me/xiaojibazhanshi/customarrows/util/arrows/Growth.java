@@ -13,9 +13,7 @@ import org.joml.Vector3f;
 
 public class Growth {
 
-    private Growth() {
-
-    }
+    private Growth() {}
 
     public static void temporarilyConvertToBiggerBlock(Block block, int delay, double sizeMultiplier) {
         BlockData originalBlockData = block.getBlockData();

@@ -6,9 +6,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class FiftyCal {
 
-    private FiftyCal() {
-
-    }
+    private FiftyCal() {}
 
     public static void applyEffectsIfShotRapidly(Player shooter) {
         PotionEffect existingNausea = shooter.getPotionEffect(PotionEffectType.NAUSEA);

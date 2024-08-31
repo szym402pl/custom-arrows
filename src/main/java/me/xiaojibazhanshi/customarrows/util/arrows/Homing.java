@@ -10,9 +10,7 @@ import org.bukkit.util.Vector;
 
 public class Homing {
 
-    private Homing() {
-
-    }
+    private Homing() {}
 
     public static LivingEntity findEntityInSight(Player player, int maxDistance, double rayTraceSize) {
         Location eyeLocation = player.getEyeLocation();

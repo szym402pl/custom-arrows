@@ -13,9 +13,7 @@ import java.util.UUID;
 
 public class ImmunityBubble {
 
-    private ImmunityBubble() {
-
-    }
+    private ImmunityBubble() {}
 
     public static List<Location> generateSpherePoints(Location center, double radius, double pointDensity) {
         List<Location> points = new ArrayList<>();

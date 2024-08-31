@@ -11,9 +11,7 @@ import java.util.Random;
 
 public class Necromancer {
 
-    private Necromancer() {
-
-    }
+    private Necromancer() {}
 
     public static void spawnOneOfSelected(List<EntityType> selectedEntities, Location location) {
         if (location.getWorld() == null) return;

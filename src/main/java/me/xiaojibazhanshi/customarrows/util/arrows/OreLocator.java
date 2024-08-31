@@ -9,9 +9,7 @@ import org.bukkit.util.Vector;
 
 public class OreLocator {
 
-    private OreLocator() {
-
-    }
+    private OreLocator() {}
 
     /**
      * @return null if no ore was found in given length (max distance)

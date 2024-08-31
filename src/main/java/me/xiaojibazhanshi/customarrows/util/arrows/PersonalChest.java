@@ -21,9 +21,7 @@ import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
 
 public class PersonalChest {
 
-    private PersonalChest() {
-
-    }
+    private PersonalChest() {}
 
     public static void placeTemporaryPersonalChest(UUID uuid, Block targetBlock, int deleteAfter,
                                                    Map<UUID, Inventory> privateChests, List<UUID> activeChests) {
@@ -41,13 +39,7 @@ public class PersonalChest {
         Inventory chestInventory = privateChests.get(uuid);
         chest.getBlockInventory().setContents(chestInventory.getContents());
 
-        Location displayLocation = targetBlock.getLocation().add(0.5, 1.25, 0.5);
-        String displayName = Bukkit.getOfflinePlayer(uuid).getName();
-
-        TextDisplay textDisplay = (TextDisplay) targetBlock.getWorld().spawnEntity(displayLocation, EntityType.TEXT_DISPLAY);
-        textDisplay.setText(color("&a" + displayName + "'s Personal Chest"));
-        textDisplay.setBillboard(Display.Billboard.CENTER);
-        textDisplay.setSeeThrough(true);
+        TextDisplay textDisplay = createPersonalChestTextDisplay(targetBlock, uuid);
 
         Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
             privateChests.put(uuid, chest.getBlockInventory());
@@ -56,6 +48,18 @@ public class PersonalChest {
             textDisplay.remove();
             targetBlock.setBlockData(ogBlockData);
         }, deleteAfter * 20L);
+    }
+
+    private static TextDisplay createPersonalChestTextDisplay(Block targetBlock, UUID uuid) {
+        Location displayLocation = targetBlock.getLocation().add(0.5, 1.25, 0.5);
+        String displayName = Bukkit.getOfflinePlayer(uuid).getName();
+
+        TextDisplay textDisplay = (TextDisplay) targetBlock.getWorld().spawnEntity(displayLocation, EntityType.TEXT_DISPLAY);
+        textDisplay.setText(color("&a" + displayName + "'s Personal Chest"));
+        textDisplay.setBillboard(Display.Billboard.CENTER);
+        textDisplay.setSeeThrough(true);
+
+        return textDisplay;
     }
 
 }

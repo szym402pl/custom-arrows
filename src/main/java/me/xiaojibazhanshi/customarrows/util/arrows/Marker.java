@@ -9,9 +9,7 @@ import static me.xiaojibazhanshi.customarrows.util.arrows.Ghost.temporarilyConve
 
 public class Marker {
 
-    private Marker() {
-
-    }
+    private Marker() {}
 
     public static void spawnBeam(Location location, int height, int durationInSeconds, Material beamMaterial) {
         World world = location.getWorld();

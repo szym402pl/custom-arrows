@@ -16,8 +16,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class BoneMeal {
 
-    private BoneMeal() {
-    }
+    private BoneMeal() {}
 
     private static final int GROWTH_RADIUS = 5;
     private static final ThreadLocalRandom RANDOM = ThreadLocalRandom.current();
