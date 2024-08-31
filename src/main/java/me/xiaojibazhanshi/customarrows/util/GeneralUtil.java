@@ -3,6 +3,7 @@ package me.xiaojibazhanshi.customarrows.util;
 import me.xiaojibazhanshi.customarrows.CustomArrows;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -10,6 +11,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -163,7 +166,9 @@ public class GeneralUtil {
             newArrow.setShooter(originalArrow.getShooter());
         }
 
+        newArrow.setColor(originalArrow.getColor());
         newArrow.setCritical(originalArrow.isCritical());
+        newArrow.setCustomName(originalArrow.getCustomName());
         newArrow.setPickupStatus(originalArrow.getPickupStatus());
         newArrow.setFireTicks(originalArrow.getFireTicks());
         newArrow.setGravity(originalArrow.hasGravity());
@@ -173,6 +178,9 @@ public class GeneralUtil {
 
         for (PotionEffect effect : originalArrow.getCustomEffects())
             newArrow.addCustomEffect(effect, true);
+
+        ItemStack item = originalArrow.getItem();
+        newArrow.setItem(item);
 
         return newArrow;
     }
