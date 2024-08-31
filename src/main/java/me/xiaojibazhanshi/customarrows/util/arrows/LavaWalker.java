@@ -8,7 +8,8 @@ import org.bukkit.block.BlockFace;
 
 public class LavaWalker {
 
-    private LavaWalker() {}
+    private LavaWalker() {
+    }
 
     enum BlockFaces {
         NORTH(BlockFace.NORTH),

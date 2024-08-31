@@ -6,7 +6,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Chorus {
 
-    private Chorus() {}
+    private Chorus() {
+    }
 
     public static Location randomizeLocation(Location location, int maxOffset) {
         ThreadLocalRandom random = ThreadLocalRandom.current();

@@ -9,7 +9,8 @@ import java.util.List;
 
 public class TurboMine {
 
-    private TurboMine() {}
+    private TurboMine() {
+    }
 
     public static List<Block> getAdjacentBlocks(Block block, List<BlockFace> allowedBlockFaces) {
         List<Block> list = new ArrayList<>();

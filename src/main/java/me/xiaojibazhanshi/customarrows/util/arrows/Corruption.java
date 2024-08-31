@@ -12,7 +12,8 @@ import static me.xiaojibazhanshi.customarrows.util.arrows.Honeypot.placeTemporar
 
 public class Corruption {
 
-    private Corruption() {}
+    private Corruption() {
+    }
 
     public static void temporarilyCorruptBlocksInRadius(Block center, int radius, int deleteAfterSeconds) {
         World world = center.getWorld();

@@ -11,11 +11,10 @@ import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
 public class Torch {
 
     private Torch() {
-
     }
 
     public static void sendLowerTitle(Player player, String text) {
-        player.sendTitle("", color(text), 5, 25 ,5);
+        player.sendTitle("", color(text), 5, 25, 5);
     }
 
     public static void setupTorchAt(Block origin, BlockFace targetBlockFace) {

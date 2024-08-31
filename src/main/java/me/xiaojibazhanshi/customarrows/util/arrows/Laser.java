@@ -10,7 +10,8 @@ import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.getDirectionFro
 
 public class Laser {
 
-    private Laser() {}
+    private Laser() {
+    }
 
     public static void createParticleLaser(Location startingLocation, Location endLocation, Color color) {
         Vector direction = getDirectionFromTo(startingLocation, endLocation);

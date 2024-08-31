@@ -20,7 +20,8 @@ import static me.xiaojibazhanshi.customarrows.util.arrows.Repulsion.detonateFire
 
 public class FlashBang {
 
-    private FlashBang() {}
+    private FlashBang() {
+    }
 
     public static void detonateFlashBang(Entity itemDisplay, long delay) {
         Bukkit.getScheduler().runTaskLater(CustomArrows.getInstance(), () -> {
@@ -41,7 +42,7 @@ public class FlashBang {
         int flashBangDuration = (randomInstance.nextInt(4, 9) + 1) * 20;
 
         ArrayList<PotionEffect> flashBangEffects = new ArrayList<>(List.of
-                        (new PotionEffect(PotionEffectType.NAUSEA, flashBangDuration, 2, true),
+                (new PotionEffect(PotionEffectType.NAUSEA, flashBangDuration, 2, true),
                         new PotionEffect(PotionEffectType.SLOWNESS, flashBangDuration, 2, true),
                         new PotionEffect(PotionEffectType.BLINDNESS, flashBangDuration, 2, true)));
 

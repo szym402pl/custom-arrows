@@ -7,7 +7,6 @@ import org.bukkit.util.Vector;
 public class Magnet {
 
     private Magnet() {
-
     }
 
     /**

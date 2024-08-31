@@ -21,7 +21,8 @@ import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
 
 public class PersonalChest {
 
-    private PersonalChest() {}
+    private PersonalChest() {
+    }
 
     public static void placeTemporaryPersonalChest(UUID uuid, Block targetBlock, int deleteAfter,
                                                    Map<UUID, Inventory> privateChests, List<UUID> activeChests) {

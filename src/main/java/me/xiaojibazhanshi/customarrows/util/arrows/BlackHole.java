@@ -19,7 +19,8 @@ import java.util.Map;
 
 public class BlackHole {
 
-    private BlackHole() {}
+    private BlackHole() {
+    }
 
     public static List<Location> generateSphere(Location center, double radius, double pointDensity) {
         List<Location> points = new ArrayList<>();

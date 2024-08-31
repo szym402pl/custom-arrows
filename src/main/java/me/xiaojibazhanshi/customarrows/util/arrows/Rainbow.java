@@ -11,7 +11,8 @@ import java.util.List;
 
 public class Rainbow {
 
-    private Rainbow() {}
+    private Rainbow() {
+    }
 
     public static void makeARainbow(Player shooter, Location hitLocation, List<Color> colorsOfRainbow) {
         World world = hitLocation.getWorld();

@@ -8,7 +8,8 @@ import java.util.List;
 
 public class Bridge {
 
-    private Bridge() {}
+    private Bridge() {
+    }
 
     public static List<Block> getALineOfAirBlocks(Block origin, BlockFace direction, int maxBridgeLength) {
         List<Block> line = new ArrayList<>();

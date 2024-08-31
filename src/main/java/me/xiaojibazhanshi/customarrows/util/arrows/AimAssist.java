@@ -8,7 +8,8 @@ import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.getDirectionFro
 
 public class AimAssist {
 
-    private AimAssist() {}
+    private AimAssist() {
+    }
 
     public static void provideAimAssist(Entity projectile, LivingEntity target) {
         Vector initialSpeed = projectile.getVelocity();

@@ -12,7 +12,8 @@ import static me.xiaojibazhanshi.customarrows.util.arrows.Homing.getDirectionFro
 
 public class Chained {
 
-    private Chained() {}
+    private Chained() {
+    }
 
     public static void chainTargets(List<LivingEntity> targetList, LivingEntity hitEntity) {
         long delay = 30L;

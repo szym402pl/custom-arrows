@@ -17,7 +17,8 @@ import javax.annotation.Nullable;
 
 public class Ghost {
 
-    private Ghost() {}
+    private Ghost() {
+    }
 
     public static void temporarilyConvertToDisplayItem(Block block, int delay, @Nullable Material replacement) {
         BlockData originalBlockData = block.getBlockData();

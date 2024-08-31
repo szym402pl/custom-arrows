@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 public class Scanner {
 
     private Scanner() {
-
     }
 
     public static boolean areEnemiesNearby(Entity entity, LivingEntity excluded) {

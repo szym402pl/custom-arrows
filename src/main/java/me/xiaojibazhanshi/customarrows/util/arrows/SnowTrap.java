@@ -10,7 +10,8 @@ import java.util.List;
 
 public class SnowTrap {
 
-    private SnowTrap() {}
+    private SnowTrap() {
+    }
 
     public static void setUpTrap(Block origin) {
         Location location = origin.getLocation();

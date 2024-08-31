@@ -12,7 +12,6 @@ import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.copyArrow;
 public class Bouncing {
 
     private Bouncing() {
-
     }
 
     public static void executeBounce(Arrow originalArrow, BlockFace hitBlockFace, List<UUID> bouncedAlready) {

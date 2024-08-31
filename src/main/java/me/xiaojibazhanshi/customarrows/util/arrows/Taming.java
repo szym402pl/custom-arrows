@@ -6,7 +6,8 @@ import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
 
 public class Taming {
 
-    private Taming() {}
+    private Taming() {
+    }
 
     public static boolean tameAnimal(Entity entity, Player player) {
         if (entity == null) return false;

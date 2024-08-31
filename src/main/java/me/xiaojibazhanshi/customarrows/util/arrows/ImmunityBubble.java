@@ -13,7 +13,8 @@ import java.util.UUID;
 
 public class ImmunityBubble {
 
-    private ImmunityBubble() {}
+    private ImmunityBubble() {
+    }
 
     public static List<Location> generateSpherePoints(Location center, double radius, double pointDensity) {
         List<Location> points = new ArrayList<>();
@@ -38,6 +39,7 @@ public class ImmunityBubble {
         BukkitTask task = Bukkit.getScheduler().runTaskTimer(CustomArrows.getInstance(), () -> {
             Particle.DustOptions dustOptions = new Particle.DustOptions(Color.BLUE, 0.5F);
             World world = points.getFirst().getWorld();
+            assert world != null;
 
             for (Location point : points) {
                 world.spawnParticle(Particle.DUST,

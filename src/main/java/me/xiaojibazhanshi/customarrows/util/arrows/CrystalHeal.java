@@ -11,7 +11,8 @@ import java.util.UUID;
 
 public class CrystalHeal {
 
-    private CrystalHeal() {}
+    private CrystalHeal() {
+    }
 
     private static final int DELAY = 20 * 30;
 

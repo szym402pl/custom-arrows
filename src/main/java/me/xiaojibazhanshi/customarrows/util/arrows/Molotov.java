@@ -8,7 +8,8 @@ import java.util.Random;
 
 public class Molotov {
 
-    private Molotov() {}
+    private Molotov() {
+    }
 
     public static void setFiresAround(Block centerBlock, int radius) {
         World world = centerBlock.getWorld();

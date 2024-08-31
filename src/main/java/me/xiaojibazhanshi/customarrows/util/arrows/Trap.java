@@ -7,7 +7,8 @@ import org.bukkit.block.BlockFace;
 
 public class Trap {
 
-    private Trap() {}
+    private Trap() {
+    }
 
     /**
      * @return true if block above isn't solid and there

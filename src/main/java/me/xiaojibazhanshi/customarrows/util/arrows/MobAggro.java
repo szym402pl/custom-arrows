@@ -5,7 +5,8 @@ import org.bukkit.entity.Monster;
 
 public class MobAggro {
 
-    private MobAggro() {}
+    private MobAggro() {
+    }
 
     public static void aggroMobsNearby(LivingEntity target, int radius) {
         target.getNearbyEntities(radius, radius, radius)

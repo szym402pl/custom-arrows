@@ -8,7 +8,8 @@ import org.bukkit.block.BlockFace;
 
 public class FrostWalker {
 
-    private FrostWalker() {}
+    private FrostWalker() {
+    }
 
     enum BlockFaces {
         NORTH(BlockFace.NORTH),

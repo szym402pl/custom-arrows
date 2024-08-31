@@ -10,11 +10,10 @@ import org.bukkit.potion.PotionEffect;
 public class PoisonCloud {
 
     private PoisonCloud() {
-
     }
 
     public static void applyPoisonEffectIfCloseTo(Arrow arrow, PotionEffect poison) {
-        arrow.getNearbyEntities(5, 5,5)
+        arrow.getNearbyEntities(5, 5, 5)
                 .stream()
                 .filter(entity -> entity instanceof LivingEntity)
                 .map(entity -> (LivingEntity) entity)

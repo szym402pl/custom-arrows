@@ -14,7 +14,8 @@ import static me.xiaojibazhanshi.customarrows.util.arrows.Thunder.randomizeLocat
 
 public class Dimension {
 
-    private Dimension() {}
+    private Dimension() {
+    }
 
     /**
      * @return false if it couldn't find a safe location in 10 attempts
@@ -57,7 +58,9 @@ public class Dimension {
         World world = location.getWorld();
         assert world != null;
 
-        for (int y = startY; y < maxY; y += 2) {
+        int step = 2;
+
+        for (int y = startY; y < maxY; y += step) {
             Block block = world.getBlockAt(x, y, z);
             Block below = block.getRelative(BlockFace.DOWN);
 

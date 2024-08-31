@@ -13,7 +13,8 @@ import java.util.List;
 
 public class Redstone {
 
-    private Redstone() {}
+    private Redstone() {
+    }
 
     public static List<Material> getRedstonePoweredDevices() {
         return Arrays.asList(

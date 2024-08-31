@@ -17,7 +17,8 @@ import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
 
 public class Fishing {
 
-    private Fishing() {}
+    private Fishing() {
+    }
 
     public enum FishingCategories {
         FISH(0, 8),

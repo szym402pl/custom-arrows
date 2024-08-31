@@ -5,7 +5,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class ArmorBreaker {
 
-    private ArmorBreaker() {}
+    private ArmorBreaker() {
+    }
 
     public static Material getBaseMaterialFromArmor(ItemStack armor) {
         String typeName = armor.getType().name()

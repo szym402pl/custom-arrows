@@ -5,21 +5,26 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.List;
+
 import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.removeEntityAfter;
 import static me.xiaojibazhanshi.customarrows.util.arrows.Repulsion.detonateFirework;
 
 public class Piglin {
 
     private Piglin() {
-
     }
 
     public static boolean arePiglinsNearby(Entity entity) {
-        return !(entity.getNearbyEntities(8, 6, 8)
+        return !(getPiglinsNearby(entity).isEmpty());
+    }
+
+    private static List<Piglin> getPiglinsNearby(Entity entity) {
+        return entity.getNearbyEntities(8, 6, 8)
                 .stream()
                 .filter(oneOfEntities -> oneOfEntities instanceof org.bukkit.entity.Piglin)
-                .toList()
-                .isEmpty());
+                .map(oneOfEntities -> (Piglin) oneOfEntities)
+                .toList();
     }
 
     public static void dropFakeGold(Location location, World world) {
