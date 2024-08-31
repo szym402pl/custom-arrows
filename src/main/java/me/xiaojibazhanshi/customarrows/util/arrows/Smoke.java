@@ -8,9 +8,7 @@ import org.bukkit.Location;
 
 public class Smoke {
 
-    private Smoke() {
-
-    }
+    private Smoke() {}
 
     public static void createProgressiveSmokeCloud(Location location, Color color) {
         // I KNOW THE CODE'S UGLY BUT HEY IT LOOKS AWESOME IN-GAME SO SHUT UP

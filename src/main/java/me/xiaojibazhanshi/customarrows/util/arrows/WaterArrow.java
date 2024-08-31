@@ -7,9 +7,7 @@ import static org.bukkit.block.BlockFace.UP;
 
 public class WaterArrow {
 
-    private WaterArrow() {
-
-    }
+    private WaterArrow() {}
 
     public static void spawnAWaterBlockAbove(Block origin) {
         Block above = origin.getRelative(UP);

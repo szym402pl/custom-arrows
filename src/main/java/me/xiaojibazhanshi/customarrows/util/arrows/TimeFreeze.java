@@ -8,9 +8,7 @@ import java.util.Map;
 
 public class TimeFreeze {
 
-    private TimeFreeze() {
-
-    }
+    private TimeFreeze() {}
 
     public static void freezeInPlace(Arrow arrow, Map<Arrow, Vector> frozenArrows) {
         frozenArrows.put(arrow, arrow.getVelocity());

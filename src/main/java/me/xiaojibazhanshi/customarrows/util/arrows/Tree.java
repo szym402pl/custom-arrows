@@ -9,9 +9,7 @@ import org.bukkit.block.BlockFace;
 
 public class Tree {
 
-    private Tree() {
-
-    }
+    private Tree() {}
 
     public static boolean isSaplingEligible(Block block) {
         return !(block == null

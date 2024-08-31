@@ -101,6 +101,7 @@ public class ArrowManager {
         registerCustomArrow("bouncing_arrow", new BouncingArrow());
         registerCustomArrow("poison_cloud_arrow", new PoisonCloudArrow());
         registerCustomArrow("displacement_arrow", new DisplacementArrow());
+        registerCustomArrow("torch_arrow", new TorchArrow());
     }
 
     public void registerCustomArrow(String id, CustomArrow customArrow) {

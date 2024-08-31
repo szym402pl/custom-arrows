@@ -10,9 +10,7 @@ import org.bukkit.util.Vector;
 
 public class Repulsion {
 
-    private Repulsion() {
-
-    }
+    private Repulsion() {}
 
     public static void repelEntitiesNearby(Location center) {
         World world = center.getWorld();

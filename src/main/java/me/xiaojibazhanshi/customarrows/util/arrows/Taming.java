@@ -6,28 +6,20 @@ import static me.xiaojibazhanshi.customarrows.util.GeneralUtil.color;
 
 public class Taming {
 
-    private Taming() {
-
-    }
+    private Taming() {}
 
     public static boolean tameAnimal(Entity entity, Player player) {
         if (entity == null) return false;
         EntityType type = entity.getType();
 
-        switch (type) {
-            case CAT:
-                return tameCat((Cat) entity, player);
-            case WOLF:
-                return tameWolf((Wolf) entity, player);
-            case OCELOT:
-                return tameOcelot((Ocelot) entity, player);
-            case HORSE:
-                return tameHorse((Horse) entity, player);
-            case PARROT:
-                return tameParrot((Parrot) entity, player);
-            default:
-                return false;
-        }
+        return switch (type) {
+            case CAT -> tameCat((Cat) entity, player);
+            case WOLF -> tameWolf((Wolf) entity, player);
+            case OCELOT -> tameOcelot((Ocelot) entity, player);
+            case HORSE -> tameHorse((Horse) entity, player);
+            case PARROT -> tameParrot((Parrot) entity, player);
+            default -> false;
+        };
     }
 
     private static boolean tameWolf(Wolf wolf, Player player) {

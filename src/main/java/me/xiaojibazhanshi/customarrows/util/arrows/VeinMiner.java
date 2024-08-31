@@ -7,9 +7,7 @@ import java.util.*;
 
 public class VeinMiner {
 
-    private VeinMiner() {
-
-    }
+    private VeinMiner() {}
 
     public static boolean isOre(Block block) {
         return block != null

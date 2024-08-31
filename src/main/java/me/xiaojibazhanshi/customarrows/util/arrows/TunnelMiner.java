@@ -8,6 +8,10 @@ import java.util.List;
 
 public class TunnelMiner {
 
+    private TunnelMiner() {
+
+    }
+
     public static List<Block> getTunnelOfBlocks(Block origin, BlockFace direction, int tunnelLength) {
         List<Block> tunnelBlocks = new ArrayList<>();
         tunnelBlocks.add(origin);

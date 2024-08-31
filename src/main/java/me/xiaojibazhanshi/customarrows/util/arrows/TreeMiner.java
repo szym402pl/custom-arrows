@@ -11,9 +11,7 @@ import java.util.Set;
 
 public class TreeMiner {
 
-    private TreeMiner() {
-
-    }
+    private TreeMiner() {}
 
     private static final Set<BlockFace> BLOCK_FACES = Set.of(
             BlockFace.NORTH, BlockFace.SOUTH,

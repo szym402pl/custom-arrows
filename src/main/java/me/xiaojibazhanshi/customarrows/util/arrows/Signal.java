@@ -9,9 +9,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
 
 public class Signal {
 
-    private Signal() {
-
-    }
+    private Signal() {}
 
     public static void detonateSilentFirework(Location location, FireworkEffect.Type type, Color color) {
         World world = location.getWorld();
