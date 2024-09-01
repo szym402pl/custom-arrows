@@ -4,4 +4,4 @@ You can then just launch the server and use /customarrows to retrieve any arrow 
 The plugin adds 70+! more unique arrows to Minecraft without the need to use mods. Each of them is different and may serve a cool purpose.
 
 Resource link: https://hangar.papermc.io/szym402pl/CustomArrows
-preview: https://prnt.sc/hZPczNfdsKbj , https://prnt.sc/2pSTUTlKNjIq (black hole arrow)
+preview: ![](ca1.png) , ![](ca2.png) (black hole arrow)
